@@ -1,8 +1,10 @@
 ///////////////////////////////////////////////////////
-// Commnon code for DLL-based Zorro strategies
+// Common code for DLL-based Zorro strategies
 ///////////////////////////////////////////////////////
 #define ZORRO_CPP
 #include "zorro.h"
+
+#ifdef ZORRO_DLLMAIN
 
 BOOL WINAPI DllMain(
 	_In_ HINSTANCE hinstDLL,
@@ -16,6 +18,8 @@ BOOL WINAPI DllMain(
 
 	return TRUE;
 }
+
+#endif // ZORRO_DLL
 
 ////////////////////////////////////////////////////////
 // Create a list of function pointers

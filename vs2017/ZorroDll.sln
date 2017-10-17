@@ -12,28 +12,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyStrategy", "MyStrategy.vc
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		DebugDLL|x86 = DebugDLL|x86
-		DebugLIB|x86 = DebugLIB|x86
-		ReleaseDLL|x86 = ReleaseDLL|x86
-		ReleaseLIB|x86 = ReleaseLIB|x86
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.DebugDLL|x86.ActiveCfg = DebugDLL|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.DebugDLL|x86.Build.0 = DebugDLL|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.DebugLIB|x86.ActiveCfg = DebugLIB|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.DebugLIB|x86.Build.0 = DebugLIB|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.ReleaseDLL|x86.ActiveCfg = ReleaseDLL|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.ReleaseDLL|x86.Build.0 = ReleaseDLL|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.ReleaseLIB|x86.ActiveCfg = ReleaseLIB|Win32
-		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.ReleaseLIB|x86.Build.0 = ReleaseLIB|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.DebugDLL|x86.ActiveCfg = DebugDLL|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.DebugDLL|x86.Build.0 = DebugDLL|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.DebugLIB|x86.ActiveCfg = DebugLIB|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.DebugLIB|x86.Build.0 = DebugLIB|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.ReleaseDLL|x86.ActiveCfg = ReleaseDLL|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.ReleaseDLL|x86.Build.0 = ReleaseDLL|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.ReleaseLIB|x86.ActiveCfg = ReleaseLIB|Win32
-		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.ReleaseLIB|x86.Build.0 = ReleaseLIB|Win32
+		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.Debug|x86.ActiveCfg = Debug|Win32
+		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.Debug|x86.Build.0 = Debug|Win32
+		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.Release|x86.ActiveCfg = Release|Win32
+		{1EACFEAD-9540-4897-9C49-550C35E03CC6}.Release|x86.Build.0 = Release|Win32
+		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.Debug|x86.ActiveCfg = Debug|Win32
+		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.Debug|x86.Build.0 = Debug|Win32
+		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.Release|x86.ActiveCfg = Release|Win32
+		{671AF709-5D44-416F-AA29-1DEA9D2C739F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

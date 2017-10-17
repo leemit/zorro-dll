@@ -3,6 +3,21 @@
 ///////////////////////////////////////////////////////
 #include "zorro.h"
 
+#pragma comment(lib, "ZorroDll.lib")
+
+BOOL WINAPI DllMain(
+	_In_ HINSTANCE hinstDLL,
+	_In_ DWORD     fdwReason,
+	_In_ LPVOID    lpvReserved
+)
+{
+	(void)hinstDLL;
+	(void)fdwReason;
+	(void)lpvReserved;
+
+	return TRUE;
+}
+
 #define WORKSHOP7
 
 #ifdef WORKSHOP4
