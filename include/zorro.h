@@ -69,7 +69,7 @@ inline var adviseShort(int Method=0,var Objective=0,var v0=NIL,var v1=NIL,var v2
 inline var adviseShort(int Method,var Objective,var *Signals,long NumSignals)
 { return adviseShort1(Method,Objective,Signals,NumSignals); }
 inline int dataParse(int Handle,const char* Format,const char* FileName)
-{ return dataParse1(Handle,Format,FileName,0,0,NULL); }
+{ return dataParse1(Handle,Format,FileName,0,0); }
 inline int dataParse(int Handle,const char* Format,const char* FileName,int Start=0,int Num=0)
 { return dataParse1(Handle,Format,FileName,Start,Num); }
 

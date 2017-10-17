@@ -50,7 +50,7 @@ C void F(plotBar)(string name,int num,var label,var val,int type,int color);
 C void F(plotGraph)(string name,var num,var val,int type,int color);
 C DATA* F(plotData)(string name);
 C DWORD F(color)(var Value,DWORD color1,DWORD color2,DWORD color3,DWORD color4,...);
-C DWORD colorScale(DWORD Color,var Factor);
+C DWORD F(colorScale)(DWORD Color,var Factor);
 
 // price
 C var F(price)(int offset,...);
@@ -529,8 +529,8 @@ C var F(move)(vars Data,int Length,int MovePeriod,var Percent);
 C var F(season)(vars Data,int TimePeriod,int Horizon,int Mode);
 
 // new functions at the end
-C int stridx(const char* Name);
-C char* strxid(int Index);
+C int F(stridx)(const char* Name);
+C char* F(strxid)(int Index);
 C int F1(dataParse)(int Handle,const char* Format,const char* FileName,int Start,int Num);
 C int F2(dataParse)(int Handle,const char* Format,const char* FileName,const char* Filter);
 
@@ -541,4 +541,3 @@ C int F2(dataParse)(int Handle,const char* Format,const char* FileName,const cha
 #undef F3
 #undef C
 #endif
- 
