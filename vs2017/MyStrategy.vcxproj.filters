@@ -4,13 +4,10 @@
     <Filter Include="src">
       <UniqueIdentifier>{daeb2cae-7796-460c-9f71-1a1fd5bfdf27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\example">
-      <UniqueIdentifier>{58e68a0b-d787-4e8c-9505-d5acf3991b55}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\example\MyStrategy.cpp">
-      <Filter>src\example</Filter>
+    <ClCompile Include="..\src\MyStrategy.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
