@@ -1,0 +1,5 @@
+.*
+!/.gitignore
+
+*.VC.db
+*.user
