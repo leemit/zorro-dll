@@ -534,10 +534,11 @@ C char* F(strxid)(int Index);
 C int F1(dataParse)(int Handle,const char* Format,const char* FileName,int Start,int Num);
 C int F2(dataParse)(int Handle,const char* Format,const char* FileName,const char* Filter);
 
+#endif // functions_h
+
 #undef F
 #undef F0
 #undef F1
 #undef F2
 #undef F3
 #undef C
-#endif

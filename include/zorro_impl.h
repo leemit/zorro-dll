@@ -1,11 +1,12 @@
 ///////////////////////////////////////////////////////
 // Common code for DLL-based Zorro strategies
+// Include this file once in a cpp file
 ///////////////////////////////////////////////////////
-#define ZORRO_CPP
-#include "zorro.h"
+#pragma once
+
+#include "zorro_common.h"
 
 #ifdef ZORRO_DLLMAIN
-
 BOOL WINAPI DllMain(
 	_In_ HINSTANCE hinstDLL,
 	_In_ DWORD     fdwReason,
@@ -18,7 +19,6 @@ BOOL WINAPI DllMain(
 
 	return TRUE;
 }
-
 #endif // ZORRO_DLL
 
 ////////////////////////////////////////////////////////

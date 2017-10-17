@@ -1,22 +1,9 @@
 ///////////////////////////////////////////////////////
 // Example for DLL-based Zorro strategies
 ///////////////////////////////////////////////////////
+#define ZORRO_DLLMAIN
+#include "zorro_impl.h"
 #include "zorro.h"
-
-#pragma comment(lib, "ZorroDll.lib")
-
-BOOL WINAPI DllMain(
-	_In_ HINSTANCE hinstDLL,
-	_In_ DWORD     fdwReason,
-	_In_ LPVOID    lpvReserved
-)
-{
-	(void)hinstDLL;
-	(void)fdwReason;
-	(void)lpvReserved;
-
-	return TRUE;
-}
 
 #define WORKSHOP7
 

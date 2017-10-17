@@ -4,9 +4,6 @@
     <Filter Include="include">
       <UniqueIdentifier>{a15a6d37-d3a0-412c-aceb-9fbb9fb74a85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{d4a96bd6-4b3b-45f3-b9b3-03fbc87441b3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\func_list.h">
@@ -24,10 +21,11 @@
     <ClInclude Include="..\include\zorro.h">
       <Filter>include</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\src\ZorroDLL.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClInclude Include="..\include\zorro_impl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro_common.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

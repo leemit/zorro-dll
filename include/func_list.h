@@ -517,3 +517,10 @@ F(stridx);
 F(strxid);
 F1(dataParse);
 F2(dataParse);
+
+#undef F
+#undef F0
+#undef F1
+#undef F2
+#undef F3
+#undef C

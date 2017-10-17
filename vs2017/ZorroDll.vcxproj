@@ -69,9 +69,8 @@
     <ClInclude Include="..\include\trading.h" />
     <ClInclude Include="..\include\variables.h" />
     <ClInclude Include="..\include\zorro.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\src\ZorroDLL.cpp" />
+    <ClInclude Include="..\include\zorro_common.h" />
+    <ClInclude Include="..\include\zorro_impl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

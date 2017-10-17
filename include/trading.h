@@ -876,4 +876,4 @@ typedef struct GLOBALS
 
 #endif // NO_DEFINES
 /////////////////////////////////////////////////////////
-#endif
+#endif // trading_h
