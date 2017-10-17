@@ -13,6 +13,15 @@
   <ItemGroup>
     <ClCompile Include="..\src\MyStrategy.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\functions.h" />
+    <ClInclude Include="..\include\func_list.h" />
+    <ClInclude Include="..\include\trading.h" />
+    <ClInclude Include="..\include\variables.h" />
+    <ClInclude Include="..\include\zorro.h" />
+    <ClInclude Include="..\include\zorro_common.h" />
+    <ClInclude Include="..\include\zorro_impl.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{671AF709-5D44-416F-AA29-1DEA9D2C739F}</ProjectGuid>

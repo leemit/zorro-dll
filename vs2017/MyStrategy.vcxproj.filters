@@ -4,10 +4,36 @@
     <Filter Include="src">
       <UniqueIdentifier>{daeb2cae-7796-460c-9f71-1a1fd5bfdf27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{3459c127-fe61-4fd5-8a4b-5b6225d8497d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\MyStrategy.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\func_list.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\functions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\trading.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\variables.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro_common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro_impl.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
