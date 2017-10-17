@@ -18,21 +18,25 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='DebugDLL'">
     <ClCompile>
       <PreprocessorDefinitions>ZORRO_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+	  <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='ReleaseDLL'">
     <ClCompile>
       <PreprocessorDefinitions>ZORRO_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+	  <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='DebugLIB'">
     <ClCompile>
       <ProgramDataBaseFileName>$(OutDir)\$(TargetName).pdb</ProgramDataBaseFileName>
+	  <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='ReleaseLIB'">
     <ClCompile>
       <ProgramDataBaseFileName>$(OutDir)\$(TargetName).pdb</ProgramDataBaseFileName>
+	  <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
