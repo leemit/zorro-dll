@@ -5,7 +5,7 @@
 #ifndef functions_h
 #define functions_h
 
-#ifndef F	// header for lite-C
+#ifndef F // header for lite-C
 #define F(x) x
 #define F0(x) x
 #define F1(x) x
@@ -65,12 +65,12 @@ C var F(marketVol)(int offset,...);
 // trading
 C TRADE* F0(enterLong)(function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7,...);
 C TRADE* F0(enterShort)(function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7,...);
-C void F0(exitLong)(string name,var Limit,int lots,...);	
+C void F0(exitLong)(string name,var Limit,int lots,...);
 C void F0(exitShort)(string name,var Limit,int lots,...); 
 C int F0(exitTrade)(TRADE* tr,var Limit,int lots,...); 
-C void F(cancelTrade)(int id);	
-C TRADE* F(forTrade)(int mode);	
-C TRADE* F(findTrade)(string name);	
+C void F(cancelTrade)(int id);
+C TRADE* F(forTrade)(int mode);
+C TRADE* F(findTrade)(string name);
 // options / futures
 C CONTRACT* F0(contract)(int Type,int Days,var Strike);
 C CONTRACT* F1(contract)(CONTRACT* c);
@@ -86,8 +86,8 @@ C int F1(contractPosition)(TRADE* tr);
 C int F(contractCheck)(TRADE* tr);
 C void F(contractExercise)(TRADE* tr,var Price,...);
 // algo / asset
-C int F(algo)(string Name);		
-C int F(asset)(string Name);		
+C int F(algo)(string Name);
+C int F(asset)(string Name);
 C int F(assetType)(string Name);
 C void F(assetAdd)(string Name,var vPrice,var vSpread,var vRollLong,var vRollShort,var vPip,var vPipCost,var vMarginCost,var vLeverage,var vLotAmount,var vCommission,string sSymbol);
 C int F(assetList)(string Filename);
@@ -102,24 +102,24 @@ C int F(panelSet)(int row,int col,string text,int color,int style,int type,...);
 C int F(panelSave)(string Filename);
 C int F(panelLoad)(string Filename);
 // date/time
-C int F(year)(int offset,...);	// current year of the simulation
-C int F(month)(int offset,...);	// current month of the simulation, 1 = January
-C int F(week)(int offset,...);	// current week number 
-C int F(day)(int offset,...);	// current day (1..31)
-C int F(dom)(int offset,...);	// number of days of the current month, 28..31
-C int F(tdm)(int offset,...);	// trading day of the current month, 1..23
-C int F(tom)(int offset,...);	// number of trading days of the current month, 20..23
-C int F(dow)(int offset,...);	// current day of the week: 1 = Monday, to 7 = Sunday.
+C int F(year)(int offset,...);           // current year of the simulation
+C int F(month)(int offset,...);          // current month of the simulation, 1 = January
+C int F(week)(int offset,...);           // current week number 
+C int F(day)(int offset,...);            // current day (1..31)
+C int F(dom)(int offset,...);            // number of days of the current month, 28..31
+C int F(tdm)(int offset,...);            // trading day of the current month, 1..23
+C int F(tom)(int offset,...);            // number of trading days of the current month, 20..23
+C int F(dow)(int offset,...);            // current day of the week: 1 = Monday, to 7 = Sunday.
 C int F(ldow)(int zone, int offset,...); // local day of the week
-C int F(hour)(int offset,...);	// current hour
-C int F(lhour)(int zone,int offset,...);	// local hour in the given time zone
-C int F(minute)(int offset,...);	// current minute
-C var F(second)();					// current second
-C int F(dst)(int zone,int offset,...);		// daylight saving (1 or 0)
+C int F(hour)(int offset,...);           // current hour
+C int F(lhour)(int zone,int offset,...); // local hour in the given time zone
+C int F(minute)(int offset,...);         // current minute
+C var F(second)();                       // current second
+C int F(dst)(int zone,int offset,...);   // daylight saving (1 or 0)
 C int F(workday)(int offset,...);
 C int F(minutesAgo)(int offset);
 C var F(minutesWithin)(int offset);
-C int F(timeOffset)(int zone,int days,int hour,int minute);	
+C int F(timeOffset)(int zone,int days,int hour,int minute);
 C int F(market)(int zone,int offset);
 C int F1(market)(int zone);
 C int F0(date)(int offset);
@@ -214,7 +214,7 @@ C void F(sortData)(var* Data,int length);
 C int* F(sortIdx)(var* Data,int length);
 C var F(randomize)(int Method,var *Out,var *In,int Length);
 // math
-C var F0(random)();	
+C var F0(random)();
 C var F1(random)(var limit);
 C void F(seed)(int s);
 C var F(roundto)(var val,var step);
