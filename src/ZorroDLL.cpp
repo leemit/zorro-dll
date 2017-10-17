@@ -4,12 +4,17 @@
 #define ZORRO_CPP
 #include "zorro.h"
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-					 )
+BOOL WINAPI DllMain(
+	_In_ HINSTANCE hinstDLL,
+	_In_ DWORD     fdwReason,
+	_In_ LPVOID    lpvReserved
+)
 {
-    return TRUE;
+	(void)hinstDLL;
+	(void)fdwReason;
+	(void)lpvReserved;
+
+	return TRUE;
 }
 
 ////////////////////////////////////////////////////////
