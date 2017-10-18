@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "types.h"
+
 #if ZORRO_CPP >= 11
 #define ZORRO_ENUM_OPEN(name) typedef enum class name {
 #define ZORRO_ENUM_CLOSE(name) } E##name;
@@ -9,13 +11,64 @@
 #define ZORRO_ENUM_CLOSE(name) }; } typedef name::name E##name;
 #endif
 
-typedef unsigned long TColor;
+const var PI  = 3.14159265359;
+const var NIL = 3e38;
+
+const int NAMESIZE    = 16;
+const int NAMESIZE2   = 40;
+const int NUM_SKILLS  = 8;
+const int NUM_RESULTS = 20;
+const int MAX_PARAMS  = 16;
+const int MAX_STEPS   = 1000;
 
 const char* const ALL    = "*";
 const int         NOW    = -999999;
 const int         UPDATE = (1<<5);
 
-ZORRO_ENUM_OPEN(ZorroMode)
+const int SCRIPT_VERSION = 255;
+
+#pragma push_macro("IGNORE")
+#undef IGNORE
+
+ZORRO_ENUM_OPEN(TradeFlag)
+	SHORT       = (1<<0),  // short position
+	BID         = (1<<0),
+	OPEN        = (1<<1),  // position is open
+	NOTFOUND    = (1<<2),  // trade disappeared from the broker list
+	EXPIRED     = (1<<3),  // option or future expired
+	WAITSELL    = (1<<4),  // close position at the next tick
+	WAITBUY     = (1<<5),  // open position at the next tick
+	DETREND     = (1<<6),  // detrend the trade result
+	SUSPEND     = (1<<7),  // suspend trade function
+	EVENT       = (1<<8),  // trade function was called by enter/exit event
+	IGNORE      = (1<<9),  // don't automatically enter/exit
+	MISSEDENTRY = (1<<10), // missed the entry limit or stop, or sell price in the last bar
+	MISSEDEXIT  = (1<<11), // missed the exit for some reason
+	NOSIZE      = (1<<12), // Trade not executed, not enough lots or balance
+	RECYCLE     = (1<<13), // Trade struct can be reused
+	NONET       = (1<<14), // Don't open a net trade yet
+	NET         = (1<<15), // Pool trade
+	PHANTOM     = (1<<16), // Phantom trade 
+	EXERCISE    = (1<<17), // exercise an option contract
+	STOPPED     = (1<<18), // closed due to stop loss in the last bar, or a margin call
+	PROFIT      = (1<<19), // closed due to profit target in the last bar
+	TIME        = (1<<20), // closed due to timeout in the last bar
+	SOLD        = (1<<21), // closed due to exit at market in the last bar
+	CANCELLED   = (1<<22), // removed from trade list
+	MISSEDOPEN  = (1<<23), // could not be opened by the broker
+	ACCOUNT     = (1<<24), // trade with the main account
+	ENTRYSTOP   = (1<<25), // entry stop, rather than limit
+	ENTER       = (1<<26), // entered by TMF return value
+	EXIT        = (1<<27), // exit by TMF return value
+	REMOVED     = (1<<28), // removed from the online trade list (f.i. margin call or manually closed)
+	BAR         = (1<<29), // run TMF on any bar only, not any tick
+	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
+	NEW         = (1<<31), // just created in a TMF 
+ZORRO_ENUM_CLOSE(TradeFlag)
+
+#pragma pop_macro("IGNORE")
+
+ZORRO_ENUM_OPEN(ZorroFlag)
 	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
 	SKIP2        = (1<<1),  // skip 2nd of every 3 weeks
 	SKIP3        = (1<<2),  // skip 3rd of every 3 weeks
@@ -45,9 +98,9 @@ ZORRO_ENUM_OPEN(ZorroMode)
 	BALANCE      = (1<<28), // store and display balance rather than equity curves
 	STEPWISE     = (1<<29), // stepwise debugging (Zorro S)
 	ALLCYCLES    = (1<<30), // sum up statistics over all sample cycles
-ZORRO_ENUM_CLOSE(ZorroMode)
+ZORRO_ENUM_CLOSE(ZorroFlag)
 
-ZORRO_ENUM_OPEN(Status)
+ZORRO_ENUM_OPEN(StatusFlag)
 	TRADING      = (1<<0),  // trades have been opened
 	CHANGED      = (1<<1),  // script or asset was changed -> init strategy sliders
 	INITRUN      = (1<<2),  // init run before the first bar, for initialization
@@ -77,7 +130,7 @@ ZORRO_ENUM_OPEN(Status)
 	RUNNING      = (1<<26), // Simulation is running
 	FIRSTINITRUN = (1<<27), // Really first run
 	SHORTING     = (1<<28), // Short trades have been opened
-ZORRO_ENUM_CLOSE(Status)
+ZORRO_ENUM_CLOSE(StatusFlag)
 
 ZORRO_ENUM_OPEN(OrderFillMode)
 	NAIVE        = 0,
@@ -94,7 +147,7 @@ ZORRO_ENUM_OPEN(Verbosity)
 	LEVEL_7      = 7,
 	DIAG         = (1<<3),
 	ALERT        = (1<<4),
-	LOGMSG       = static_cast<int>(EZorroMode::LOGMSG), // show log in message window
+	LOGMSG       = static_cast<int>(EZorroFlag::LOGMSG), // show log in message window
 ZORRO_ENUM_CLOSE(Verbosity)
 
 ZORRO_ENUM_OPEN(AdviseMode)
@@ -230,24 +283,24 @@ ZORRO_ENUM_OPEN(PlotMode)
 	PL_FINE   = (1<<8),
 ZORRO_ENUM_CLOSE(PlotMode)
 
-const TColor RED       = 0xff0000;
-const TColor GREEN     = 0x00ff00;
-const TColor BLUE      = 0x0000ff;
-const TColor CYAN      = 0x00ffff;
-const TColor DARKBLUE  = 0x0000a0;
-const TColor LIGHTBLUE = 0xadd8e6;
-const TColor PURPLE    = 0x800080;
-const TColor YELLOW    = 0xffff00;
-const TColor MAGENTA   = 0xff00ff;
-const TColor ORANGE    = 0xffa500;
-const TColor DARKGREEN = 0x008000;
-const TColor OLIVE     = 0x808000;
-const TColor MAROON    = 0x800000;
-const TColor SILVER    = 0xc0c0c0;
-const TColor GREY      = 0x808080;
-const TColor BLACK     = 0x010101;
-const TColor LIGHT     = 0x606060;
-const TColor TRANSP    = 0x80000000;
+const color_t RED       = 0xff0000;
+const color_t GREEN     = 0x00ff00;
+const color_t BLUE      = 0x0000ff;
+const color_t CYAN      = 0x00ffff;
+const color_t DARKBLUE  = 0x0000a0;
+const color_t LIGHTBLUE = 0xadd8e6;
+const color_t PURPLE    = 0x800080;
+const color_t YELLOW    = 0xffff00;
+const color_t MAGENTA   = 0xff00ff;
+const color_t ORANGE    = 0xffa500;
+const color_t DARKGREEN = 0x008000;
+const color_t OLIVE     = 0x808000;
+const color_t MAROON    = 0x800000;
+const color_t SILVER    = 0xc0c0c0;
+const color_t GREY      = 0x808080;
+const color_t BLACK     = 0x010101;
+const color_t LIGHT     = 0x606060;
+const color_t TRANSP    = 0x80000000;
 
 ZORRO_ENUM_OPEN(PrintMode)
 	TO_WINDOW =  1,
@@ -262,7 +315,7 @@ ZORRO_ENUM_OPEN(PrintMode)
 	TO_TITLE  = 16,
 	TO_INFO   = 17,
 	TO_PANEL  = 18,
-	TRAINMODE = static_cast<int>(EStatus::TRAINMODE),
+	TRAINMODE = static_cast<int>(EStatusFlag::TRAINMODE),
 	TO_ANY    = (TO_WINDOW + TRAINMODE),
 ZORRO_ENUM_CLOSE(PrintMode)
 
@@ -351,6 +404,20 @@ ZORRO_ENUM_OPEN(MovingAverageType)
 	MAMA      = 7,
 	T3        = 8,
 ZORRO_ENUM_CLOSE(MovingAverageType)
+
+#define NO_DEFINES
+#include "trading.h"
+#undef NO_DEFINES
+
+inline var me(mat M, int row, int col)
+{
+	return *(M->dat + row*M->cols + col);
+}
+
+inline var ve(mat M, int n)
+{
+	return *(M->dat + n);
+}
 
 #undef ZORRO_ENUM_OPEN
 #undef ZORRO_ENUM_CLOSE

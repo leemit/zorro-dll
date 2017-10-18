@@ -28,14 +28,9 @@
 #pragma pack(push, 4)
 
 #ifdef ZORRO_CPP
-#define NO_DEFINES
-#endif
-
-#include "trading.h"
-
-#ifdef ZORRO_CPP
 #include "trading_cpp.h"
-#undef NO_DEFINES
+#else
+#include "trading.h"
 #endif
 
 #include "variables.h"

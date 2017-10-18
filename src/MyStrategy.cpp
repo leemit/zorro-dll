@@ -128,7 +128,7 @@ ZORRO_EXPORT void ZORRO_CALL run()
 	LookBack = 3;	// only 3 bars needed
 	NumWFOCycles = 10;
 
-	set(static_cast<int>(EZorroMode::RULES)); //+TESTNOW);
+	set(static_cast<int>(EZorroFlag::RULES)); //+TESTNOW);
 
 	//if(Train) Hedge = 2;	// for training, allow long + short	
 	LifeTime = 5;  				// one week

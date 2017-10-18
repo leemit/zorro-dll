@@ -6,28 +6,28 @@
 #ifndef trading_h
 #define trading_h
 
-/////////////////////////////////////////////////////////////////////
-// convenience definitions C/C++ -> lite-C
-typedef double var;
-typedef var*   vars;
-typedef char*  string;
-typedef long   function;
+#include "types.h"
 
+/////////////////////////////////////////////////////////////////////
+#ifndef NO_DEFINES
 #define and &&
 #define or  ||
 #define not !
 #define as_int(x) *((int*)&(x))
 #define PI  3.14159265359
 #define NIL 3e38
+#endif // NO_DEFINES
 
 /////////////////////////////////////////////////////////////////////
 // constants (don't change!)
+#ifndef NO_DEFINES
 #define NAMESIZE    16
 #define NAMESIZE2   40
 #define NUM_SKILLS  8
 #define NUM_RESULTS 20
 #define MAX_PARAMS  16   // max optimize() calls
 #define MAX_STEPS   1000 // max optimize() steps
+#endif // NO_DEFINES
 
 /////////////////////////////////////////////////////////////////////
 // trading structs
@@ -101,9 +101,12 @@ typedef struct MATRIX
   var* dat;
 } MATRIX;
 
-typedef MATRIX*  mat;
-#define me(M,row,col) *(M->dat + row*M->cols + col) 
-#define ve(M,n)       *(M->dat+n) 
+typedef MATRIX* mat;
+
+#ifndef NO_DEFINES
+#define me(M,row,col) *(M->dat + row*M->cols + col)
+#define ve(M,n)       *(M->dat+n)
+#endif
 
 //////////////////////////////////////////////////////////////
 // objects
@@ -199,6 +202,7 @@ typedef struct TRADE
 	float fSimProfit;   // simulated profit, externally set 
 } TRADE;
 
+#ifndef NO_DEFINES
 #define TR_SHORT       (1<<0)  // short position
 #define TR_BID         (1<<0)
 #define TR_OPEN        (1<<1)  // position is open
@@ -232,6 +236,7 @@ typedef struct TRADE
 #define TR_BAR         (1<<29) // run TMF on any bar only, not any tick
 #define TR_REVERSED    (1<<30) // indicate exit by reversal (shared with TR_EXIT)
 #define TR_NEW         (1<<31) // just created in a TMF 
+#endif // NO_DEFINES
 
 ///////////////////////////////////////////////////////////////
 // trade specific performance statistics (per lot)
@@ -586,8 +591,8 @@ typedef struct GLOBALS
 } GLOBALS;
 
 //////////////////////////////////////////////////////////////////////
-#define SCRIPT_VERSION	255
 #ifndef NO_DEFINES
+#define SCRIPT_VERSION	255
 
 // mode switches
 #define SKIP1        (1<<0)  // skip 1st of every 3 weeks
