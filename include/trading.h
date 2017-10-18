@@ -716,10 +716,10 @@ typedef struct GLOBALS
 //#define PEAK    (1<<22)
 
 #define UTC  24 // Coordinated Universal Time
-#define WET  0 // Western European Time (London)
-#define CET  1 // European time zone (Frankfurt)
+#define WET  0  // Western European Time (London)
+#define CET  1  // European time zone (Frankfurt)
 #define ET   -5 // Eastern Time (New York)
-#define JST  9 // Japan Standard Time (Tokyo)
+#define JST  9  // Japan Standard Time (Tokyo)
 #define AEST 10 // Australian Eastern Standard Time (Sydney)
 
 #define MONDAY    1
@@ -730,17 +730,17 @@ typedef struct GLOBALS
 #define SATURDAY  6
 #define SUNDAY    7
 
-#define NEW       (1<<0) // begin new chart
-#define BARS      (1<<1) // bars instead of curves
-#define BAND1     (1<<2) // upper band
+#define NEW       (1<<0)  // begin new chart
+#define BARS      (1<<1)  // bars instead of curves
+#define BAND1     (1<<2)  // upper band
 #define BAND2     (BAND1+1) // lower band
-#define MAIN      (1<<3) // print in main window
-#define STATS     (1<<4) // print histogram
-#define AXIS2     (1<<5) // plot on 2nd axis
-#define SUM       (1<<6) // add values; fill skipped bars
-#define AVG       (1<<7) // calculate average
-#define LOG       (1<<8) // use logarithmic scale
-#define DEV       (1<<9) // calculate standard deviation
+#define MAIN      (1<<3)  // print in main window
+#define STATS     (1<<4)  // print histogram
+#define AXIS2     (1<<5)  // plot on 2nd axis
+#define SUM       (1<<6)  // add values; fill skipped bars
+#define AVG       (1<<7)  // calculate average
+#define LOG       (1<<8)  // use logarithmic scale
+#define DEV       (1<<9)  // calculate standard deviation
 #define NRM       (1<<10) // normalize to 1
 #define MINV      (1<<12) // plot the bar minimum
 #define MAXV      (1<<13) // plot the bar maximum

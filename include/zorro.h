@@ -56,14 +56,14 @@ inline vars series(var val=0,int size=0) { return series0(val,size); }
 inline int is(long Flag) { return is0(Flag); }
 inline int is(long Mode, long Flag) { return is1(Mode,Flag); }
 inline void set(long Flag) { return set0(Flag); }
-inline void set(long *Mode, long Flag) { return set1(Mode,Flag); }
+inline void set(long* Mode, long Flag) { return set1(Mode,Flag); }
 inline void reset(long Flag) { return reset0(Flag); }
-inline void reset(long *Mode, long Flag) { return reset1(Mode,Flag); }
+inline void reset(long* Mode, long Flag) { return reset1(Mode,Flag); }
 inline BOOL crossOver(vars a,var b) { return crossOver1(a,b); }
 inline BOOL crossUnder(vars a,var b) { return crossUnder1(a,b); }
 inline CONTRACT* contract(int Type,int Days,var Strike) { return contract0(Type,Days,Strike); }
-inline CONTRACT* contract(CONTRACT* C) { return contract1(C); }
-inline CONTRACT* contract(TRADE* T) { return contract2(T); }
+inline CONTRACT* contract(CONTRACT* c) { return contract1(c); }
+inline CONTRACT* contract(TRADE* tr) { return contract2(tr); }
 inline CONTRACT* contract(int N) { return contract3(N); }
 inline string strdate(string format,int offset) { return strdate0(format,offset); }
 inline string strdate(string format,var date) { return strdate1(format,date); }
