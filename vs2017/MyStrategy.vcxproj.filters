@@ -7,6 +7,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{3459c127-fe61-4fd5-8a4b-5b6225d8497d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\zorro">
+      <UniqueIdentifier>{152680ba-dd59-42e5-8cbc-7a09425cc594}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\MyStrategy.cpp">
@@ -14,32 +17,32 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\func_list.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\functions.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\trading.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\variables.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\zorro.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro_common.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\zorro_impl.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\trading_cpp.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\zorro\func_list.h">
+      <Filter>include\zorro</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\types.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\zorro\functions.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\trading.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\trading_cpp.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\types.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\variables.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\zorro_common.h">
+      <Filter>include\zorro</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

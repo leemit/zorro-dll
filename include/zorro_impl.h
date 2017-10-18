@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////
 #pragma once
 
-#include "zorro_common.h"
+#include "zorro/zorro_common.h"
 
 #ifdef ZORRO_DLLMAIN
 BOOL WINAPI DllMain(
@@ -29,7 +29,7 @@ BOOL WINAPI DllMain(
 #define F2(x) (*x##2)
 #define F3(x) (*x##3)
 #define C
-#include "functions.h"
+#include "zorro/functions.h"
 
 GLOBALS *g;
 
@@ -43,7 +43,7 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 #define F1(x) (DWORD&)x##1 = g->Functions[N++];
 #define F2(x) (DWORD&)x##2 = g->Functions[N++];
 #define F3(x) (DWORD&)x##3 = g->Functions[N++];
-#include "func_list.h"
+#include "zorro/func_list.h"
 
 	return SCRIPT_VERSION;
 }

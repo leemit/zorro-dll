@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////
 #pragma once
 
-#include "zorro_common.h"
+#include "zorro/zorro_common.h"
 
 extern GLOBALS *g;
 
@@ -14,7 +14,7 @@ extern GLOBALS *g;
 #define F2(x) (*x##2)
 #define F3(x) (*x##3)
 #define C extern
-#include "functions.h"
+#include "zorro/functions.h"
 
 // convenience definitions for overloaded functions ////////////////
 inline TRADE* enterLong(int lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0)
