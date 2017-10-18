@@ -22,4 +22,3 @@
 
 #define ZORRO_CALL __cdecl
 #define ZORRO_EXPORT extern "C" __declspec(dllexport)
-#pragma warning( disable: 4244 4800 4311 )
