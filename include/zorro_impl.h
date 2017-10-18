@@ -33,7 +33,7 @@ BOOL WINAPI DllMain(
 
 GLOBALS *g;
 
-DLLFUNC int zorro(GLOBALS* Globals)
+ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 {
 	g = Globals;
 	int N = 0;

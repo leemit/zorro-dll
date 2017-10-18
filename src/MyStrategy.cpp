@@ -8,7 +8,7 @@
 #define WORKSHOP7
 
 #ifdef WORKSHOP4
-DLLFUNC void run()
+ZORRO_EXPORT void ZORRO_CALL run()
 {
 //	print(1,"\nTest!");
 	vars Price = series(price(0));
@@ -78,7 +78,7 @@ void tradeTrend()
 	}
 }
 
-DLLFUNC void run()
+ZORRO_EXPORT void ZORRO_CALL run()
 {
 	set(PARAMETERS+FACTORS);  // generate and use optimized parameters and factors
 	//NumCores = -2;		// use multiple cores (Zorro S only)
@@ -118,7 +118,7 @@ DLLFUNC void run()
 #endif
 
 #ifdef WORKSHOP7
-DLLFUNC void run()
+ZORRO_EXPORT void ZORRO_CALL run()
 {
 	StartDate = 2005;
 	EndDate = 2016;
