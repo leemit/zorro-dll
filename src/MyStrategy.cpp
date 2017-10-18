@@ -123,18 +123,18 @@ ZORRO_EXPORT void ZORRO_CALL run()
 	StartDate = 2005;
 	EndDate = 2016;
 	BarPeriod = 1440; // 1 day
-	BarZone = WET; // Western European midnight
+	BarZone = static_cast<int>(ETimeZone::WET); // Western European midnight
 	Weekend = 1;	// don't merge Friday and Sunday bars
 	LookBack = 3;	// only 3 bars needed
 	NumWFOCycles = 10;
 
-	set(RULES); //+TESTNOW);
+	set(static_cast<int>(EZorroMode::RULES)); //+TESTNOW);
 
-	if(Train) Hedge = 2;	// for training, allow long + short	
+	//if(Train) Hedge = 2;	// for training, allow long + short	
 	LifeTime = 5;  				// one week
 	MaxLong = MaxShort = 1;
 	
-	if(adviseLong(PATTERN+2,0,
+	if(adviseLong(static_cast<int>(EAdviseMode::PATTERN)+2,0,
 		priceHigh(2),priceLow(2),priceClose(2),
 		priceHigh(1),priceLow(1),priceClose(1),
 		priceHigh(1),priceLow(1),priceClose(1),

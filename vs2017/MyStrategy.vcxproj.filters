@@ -35,5 +35,8 @@
     <ClInclude Include="..\include\zorro_impl.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\trading_cpp.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

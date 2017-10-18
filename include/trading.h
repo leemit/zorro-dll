@@ -703,11 +703,11 @@ typedef struct GLOBALS
 #define STOCK  4
 #define BOND   5
 
-#define TRADES    1 // Detrend + randomize + Optimize settings
-#define PRICES    2 
-#define CURVE     4
-#define DETREND   4
-#define INVERT    8
+#define TRADES    (1<<0) // Detrend + randomize + Optimize settings
+#define PRICES    (1<<1) 
+#define CURVE     (1<<2)
+#define DETREND   (1<<2)
+#define INVERT    (1<<3)
 #define NOPRICE   (1<<4)
 #define SHUFFLE   (1<<5)
 #define BOOTSTRAP (1<<6)
@@ -802,7 +802,7 @@ typedef struct GLOBALS
 #define SV_BACKUP   (1<<8)
 #define SV_HTML     (1<<9)
 
-#define GET_TIME           5 // brokerCommand, last incoming tick time
+#define GET_TIME            5 // brokerCommand, last incoming tick time
 #define GET_DIGITS         12 // Count of digits after decimal point 
 #define GET_STOPLEVEL      14 // Stop level in points.
 #define GET_STARTING       20 // Market starting date (usually used for futures).
@@ -831,29 +831,29 @@ typedef struct GLOBALS
 #define GET_FOP            66
 #define GET_UNDERLYING     67
 
-#define SET_PATCH       128 // Work around broker API bugs
-#define SET_SLIPPAGE    129 // Max adverse slippage for orders
-#define SET_MAGIC       130 // Magic number for trades
-#define SET_ORDERTEXT   131 // Order comment for trades
-#define SET_SYMBOL      132 // set asset symbol for subsequent commands
-#define SET_MULTIPLIER  133 // set option/future multiplier filter
-#define SET_CLASS       134 // set trading class filter
-#define SET_LIMIT       135 // set limit price for entry limit orders
-#define SET_HISTORY     136 // set file name for direct history download
-#define SET_COMBO_LEGS  137 // declare the next n trades as an option combo
-#define SET_DIAGNOSTICS 138 // activate plugin diagnostics output
-#define SET_DELAY       169
-#define SET_WAIT        170
-#define SET_LOCK        171
-#define SET_COMMENT     180 // Comment on the chart
-#define DO_EXERCISE     300 // exercise option
+#define SET_PATCH         128 // Work around broker API bugs
+#define SET_SLIPPAGE      129 // Max adverse slippage for orders
+#define SET_MAGIC         130 // Magic number for trades
+#define SET_ORDERTEXT     131 // Order comment for trades
+#define SET_SYMBOL        132 // set asset symbol for subsequent commands
+#define SET_MULTIPLIER    133 // set option/future multiplier filter
+#define SET_CLASS         134 // set trading class filter
+#define SET_LIMIT         135 // set limit price for entry limit orders
+#define SET_HISTORY       136 // set file name for direct history download
+#define SET_COMBO_LEGS    137 // declare the next n trades as an option combo
+#define SET_DIAGNOSTICS   138 // activate plugin diagnostics output
+#define SET_DELAY         169
+#define SET_WAIT          170
+#define SET_LOCK          171
+#define SET_COMMENT       180 // Comment on the chart
+#define DO_EXERCISE       300 // exercise option
 
-#define PLOT_STRING     188 // send a string to a plot object
-#define PLOT_REMOVE     260
-#define PLOT_REMOVEALL  261
-#define PLOT_HLINE      280 // plot to the MT4 chart window
-#define PLOT_TEXT       281
-#define PLOT_MOVE       282
+#define PLOT_STRING       188 // send a string to a plot object
+#define PLOT_REMOVE       260
+#define PLOT_REMOVEALL    261
+#define PLOT_HLINE        280 // plot to the MT4 chart window
+#define PLOT_TEXT         281
+#define PLOT_MOVE         282
 
 #define CALL       (1<<0) // options
 #define PUT        (1<<1)

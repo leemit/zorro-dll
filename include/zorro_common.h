@@ -14,11 +14,30 @@
 #include <stdio.h>
 #include <math.h>
 
-// Zorro specific header files
-#pragma pack(push,4)
-#include "trading.h"
-#include "variables.h"
-#pragma pack(pop)
-
 #define ZORRO_CALL __cdecl
 #define ZORRO_EXPORT extern "C" __declspec(dllexport)
+#define ZORRO_NAMESPACE z
+
+#if __cplusplus >= 201103L || _MSVC_LANG >= 201103L
+#define ZORRO_CPP 11
+#elif __cplusplus >= 199711L || _MSVC_LANG >= 199711L
+#define ZORRO_CPP 03
+#endif
+
+// Zorro specific header files
+#pragma pack(push, 4)
+
+#ifdef ZORRO_CPP
+#define NO_DEFINES
+#endif
+
+#include "trading.h"
+
+#ifdef ZORRO_CPP
+#include "trading_cpp.h"
+#undef NO_DEFINES
+#endif
+
+#include "variables.h"
+
+#pragma pack(pop)

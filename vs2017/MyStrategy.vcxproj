@@ -17,6 +17,7 @@
     <ClInclude Include="..\include\functions.h" />
     <ClInclude Include="..\include\func_list.h" />
     <ClInclude Include="..\include\trading.h" />
+    <ClInclude Include="..\include\trading_cpp.h" />
     <ClInclude Include="..\include\variables.h" />
     <ClInclude Include="..\include\zorro.h" />
     <ClInclude Include="..\include\zorro_common.h" />
