@@ -46,10 +46,10 @@
 #define Fill         g->nFill
 #define Now          g->tNow
 
-#define TrainMode    g->nOptimize
-#define TradeMode    g->nTradeMode
+#define TrainMode    &g->nOptimize
+#define TradeMode    &g->nTradeMode
 #define PlotMode     g->nPlotMode
-#define ChartMode    g->nPlotMode
+#define ChartMode    &g->nPlotMode
 
 #define Lots         g->vLots
 #define Margin       g->vMargin
