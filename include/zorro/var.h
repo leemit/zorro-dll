@@ -1,6 +1,8 @@
 
 #pragma once
 
+ZORRO_NAMESPACE_OPEN
+
 template <typename VariableDef>
 class CVariable : public VariableDef
 {
@@ -40,3 +42,5 @@ struct SVariableBaseDef
 {
 	typedef T TType;
 };
+
+ZORRO_NAMESPACE_CLOSE

@@ -8,6 +8,8 @@
 #define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename enumType::TUnderlyingType
 #endif
 
+ZORRO_NAMESPACE_OPEN
+
 template <typename EnumType, typename UnderlyingType = ZORRO_ENUM_UNDERLYING_TYPE(EnumType)>
 class CBitfield
 {
@@ -57,6 +59,8 @@ private:
 
 	TUnderlyingType m_value;
 };
+
+ZORRO_NAMESPACE_CLOSE
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \
 	inline intType operator & ( intType left, enumType right )  { return left & static_cast<intType>( right ); } \

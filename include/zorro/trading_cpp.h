@@ -1,9 +1,12 @@
 
 #pragma once
 
-#include "types.h"
 #include "bitfield.h"
 #include "enum.h"
+
+ZORRO_NAMESPACE_OPEN
+
+#include "types.h"
 
 const var PI  = 3.14159265359;
 const var NIL = 3e38;
@@ -22,7 +25,7 @@ const int         UPDATE = (1<<5);
 const int SCRIPT_VERSION = 255;
 
 #pragma push_macro("IGNORE")
-#undef IGNORE
+#undef IGNORE // A windows symbol
 
 ZORRO_OPEN_ENUM_TYPE(ETradeFlag, DWORD)
 	SHORT       = (1u<<0),  // short position
@@ -457,6 +460,8 @@ inline var ve(mat M, int n)
 {
 	return *(M->dat + n);
 }
+
+ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_OPEN_ENUM
 #undef ZORRO_OPEN_ENUM_TYPE

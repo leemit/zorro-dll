@@ -1,6 +1,8 @@
 
 #pragma once
 
+ZORRO_NAMESPACE_OPEN
+
 template<typename EnumDef, typename UnderlyingType = typename EnumDef::TUnderlyingType>
 class CEnum : public EnumDef
 {
@@ -29,6 +31,8 @@ struct SEnumBaseDef
 {
 	typedef UnderlyingType TUnderlyingType;
 };
+
+ZORRO_NAMESPACE_CLOSE
 
 #if ZORRO_CPP >= 11
 #define ZORRO_OPEN_ENUM(name) \

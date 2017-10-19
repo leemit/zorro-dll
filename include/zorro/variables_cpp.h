@@ -30,6 +30,8 @@ struct S##name##Expression : SVariableBaseDef<type> { \
 	extern CExpression<S##name##Expression>& name;
 #endif
 
+ZORRO_NAMESPACE_OPEN
+
 ZORRO_BUILD_VARIABLE(var, Slider1, g->vSlider[1])
 ZORRO_BUILD_VARIABLE(var, Slider2, g->vSlider[2])
 ZORRO_BUILD_VARIABLE(var, Slider3, g->vSlider[3])
@@ -425,6 +427,8 @@ ZORRO_BUILD_VARIABLE(var, rSenkouB       , g->vSenkouB)
 ZORRO_BUILD_EXPRESSION(const char*, YMDHMS, "%y%m%d %H:%M:%S")
 ZORRO_BUILD_EXPRESSION(const char*, HMS   , "%H:%M:%S")
 ZORRO_BUILD_EXPRESSION(const char*, YMD   , "%Y%m%d")
+
+ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_BUILD_VARIABLE
 #undef ZORRO_BUILD_VARIABLE_TYPE

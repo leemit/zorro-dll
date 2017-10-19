@@ -2,7 +2,9 @@
 // Example for DLL-based Zorro strategies
 ///////////////////////////////////////////////////////
 #define ZORRO_DLLMAIN
+#define ZORRO_NAMESPACE z
 #include "zorro_impl.h"
+using namespace z;
 
 #define WORKSHOP7
 

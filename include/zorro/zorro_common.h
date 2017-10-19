@@ -8,7 +8,6 @@
 #define _WIN32_WINDOWS 0x0410 // Change this to the appropriate value to target Windows Me or later.
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
-// Windows Header Files:
 #include <windows.h>
 #include <wtypes.h>
 #include <stdio.h>
@@ -16,7 +15,6 @@
 
 #define ZORRO_CALL __cdecl
 #define ZORRO_EXPORT extern "C" __declspec(dllexport)
-#define ZORRO_NAMESPACE z
 
 #if __cplusplus >= 201103L || _MSVC_LANG >= 201103L
 #define ZORRO_CPP 11
@@ -24,7 +22,15 @@
 #define ZORRO_CPP 03
 #endif
 
-// Zorro specific header files
+#ifdef ZORRO_NAMESPACE
+#define ZORRO_NAMESPACE_OPEN namespace ZORRO_NAMESPACE {
+#define ZORRO_NAMESPACE_CLOSE };
+#else
+#define ZORRO_NAMESPACE
+#define ZORRO_NAMESPACE_OPEN
+#define ZORRO_NAMESPACE_CLOSE
+#endif
+
 #pragma pack(push, 4)
 
 #ifdef ZORRO_CPP
@@ -36,9 +42,9 @@
 #pragma pack(pop)
 
 #ifdef ZORRO_IMPL
-GLOBALS* g;
+ZORRO_NAMESPACE::GLOBALS* g;
 #else
-extern GLOBALS* g;
+extern ZORRO_NAMESPACE::GLOBALS* g;
 #endif
 
 #include "zorro/functions_cpp.h"

@@ -23,9 +23,11 @@ BOOL WINAPI DllMain(
 
 	return TRUE;
 }
-#endif // ZORRO_DLL
+#endif
 
 ////////////////////////////////////////////////////////
+
+ZORRO_NAMESPACE_OPEN
 
 ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 {
@@ -41,5 +43,7 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 
 	return SCRIPT_VERSION;
 }
+
+ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_IMPL
