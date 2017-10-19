@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "bitfield.h"
-#include "enumtype.h"
+#include "enum.h"
 
 #if ZORRO_CPP >= 11
 #define ZORRO_OPEN_ENUM(name) \
@@ -22,7 +22,7 @@
 #define ZORRO_CLOSE_ENUM(name) \
 		}; \
 	}; \
-	typedef CEnumType<S##name##Def> name;
+	typedef CEnum<S##name##Def> name;
 #endif
 
 const var PI  = 3.14159265359;

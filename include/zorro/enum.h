@@ -2,14 +2,14 @@
 #pragma once
 
 template<typename EnumDef, typename UnderlyingType = typename EnumDef::TUnderlyingType>
-class CEnumType : public EnumDef
+class CEnum : public EnumDef
 {
 public:
 	typedef UnderlyingType TUnderlyingType;
-	typedef CEnumType<EnumDef, UnderlyingType> TThis;
+	typedef CEnum<EnumDef, UnderlyingType> TThis;
 
-	CEnumType() {}
-	CEnumType(TUnderlyingType v) : m_value(v) {}
+	CEnum() {}
+	CEnum(TUnderlyingType value) : m_value(value) {}
 
 	explicit operator TUnderlyingType() const { return m_value; }
 
