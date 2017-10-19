@@ -7,7 +7,8 @@
 
 extern GLOBALS *g;
 
-// function prototypes
+///////////////////////////////////////////////////////
+// Declare function pointers
 #define F(x) (*x)
 #define F0(x) (*x##0)
 #define F1(x) (*x##1)
@@ -16,7 +17,8 @@ extern GLOBALS *g;
 #define C extern
 #include "zorro/functions.h"
 
-// convenience definitions for overloaded functions ////////////////
+///////////////////////////////////////////////////////
+// convenience definitions for overloaded functions
 inline TRADE* enterLong(int lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0)
 { return enterLong0(lots,entry,stop,takeprofit,trail,trailslope,traillock,trailstep,0); }
 inline TRADE* enterShort(int lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0)
@@ -110,8 +112,22 @@ inline var AGC(vars Data, int Period) { return AGC1(Data,Period); }
 inline var ALMA(vars Data, int TimePeriod, int sigma, var offset) { return ALMA0(Data,TimePeriod,sigma,offset); }
 inline var ALMA(vars Data, int TimePeriod) { return ALMA1(Data,TimePeriod); }
 
-#ifdef ZORRO_CPP
+///////////////////////////////////////////////////////
+// Declare variables
+
+#include "zorro/var.h"
+
+#define ZORRO_BUILD_VARIABLE(type, name, link) \
+struct S##name##Variable : SVariableBaseDef<type> { \
+	inline type& get() const { return (link); } \
+	inline void set(const type& value) { (link) = value; } \
+}; \
+extern CVariable<S##name##Variable>& name;
+
+#define ZORRO_BUILD_EXPRESSION(type, name, link) \
+struct S##name##Expression : SVariableBaseDef<type> { \
+	inline TType get() const { return (link); } \
+}; \
+extern CExpression<S##name##Expression>& name;
+
 #include "zorro/variables_cpp.h"
-#else
-#include "zorro/variables.h"
-#endif

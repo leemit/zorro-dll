@@ -40,16 +40,3 @@ struct SVariableBaseDef
 {
 	typedef T TType;
 };
-
-#define ZORRO_BUILD_VARIABLE(type, name, link) \
-struct S##name##Variable : SVariableBaseDef<type> { \
-	inline type& get() const { return (link); } \
-	inline void set(const type& value) { (link) = value; } \
-}; \
-CVariable<S##name##Variable>& name = CVariable<S##name##Variable>::getInstance();
-
-#define ZORRO_BUILD_EXPRESSION(type, name, link) \
-struct S##name##Expression : SVariableBaseDef<type> { \
-	inline TType get() const { return (link); } \
-}; \
-CExpression<S##name##Expression>& name = CExpression<S##name##Expression>::getInstance();

@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include "var.h"
-
 ZORRO_BUILD_VARIABLE(var, Slider1, g->vSlider[1])
 ZORRO_BUILD_VARIABLE(var, Slider2, g->vSlider[2])
 ZORRO_BUILD_VARIABLE(var, Slider3, g->vSlider[3])
@@ -148,10 +146,10 @@ ZORRO_BUILD_VARIABLE  (int  , TickSmooth, g->nTickAvg)
 ZORRO_BUILD_VARIABLE  (int  , TickFix   , g->nTimeFix)
 ZORRO_BUILD_VARIABLE  (var  , Outlier   , g->vOutlier)
 ZORRO_BUILD_VARIABLE  (var  , DDScale   , g->vCBIScale)
-ZORRO_BUILD_EXPRESSION(bool , Train     , is(static_cast<long>(EStatusFlag::TRAINMODE)) != 0)
-ZORRO_BUILD_EXPRESSION(bool , Test      , is(static_cast<long>(EStatusFlag::TESTMODE)) != 0)
-ZORRO_BUILD_EXPRESSION(bool , ReTrain   , is(static_cast<long>(EStatusFlag::PROCESS)) != 0 && is(static_cast<long>(EStatusFlag::TRAINMODE)) != 0 && Core != 0)
-ZORRO_BUILD_EXPRESSION(bool , ReTest    , is(static_cast<long>(EStatusFlag::PROCESS)) != 0 && is(static_cast<long>(EStatusFlag::TESTMODE)) != 0 && Core != 0)
+ZORRO_BUILD_EXPRESSION(bool , Train     , is0(static_cast<long>(EStatusFlag::TRAINMODE)) != 0)
+ZORRO_BUILD_EXPRESSION(bool , Test      , is0(static_cast<long>(EStatusFlag::TESTMODE)) != 0)
+ZORRO_BUILD_EXPRESSION(bool , ReTrain   , is0(static_cast<long>(EStatusFlag::PROCESS)) != 0 && is0(static_cast<long>(EStatusFlag::TRAINMODE)) != 0 && Core != 0)
+ZORRO_BUILD_EXPRESSION(bool , ReTest    , is0(static_cast<long>(EStatusFlag::PROCESS)) != 0 && is0(static_cast<long>(EStatusFlag::TESTMODE)) != 0 && Core != 0)
 
 ZORRO_BUILD_VARIABLE  (var, Capital    , g->vCapital)
 ZORRO_BUILD_VARIABLE  (var, Balance    , g->vBalance)
