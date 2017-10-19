@@ -34,3 +34,14 @@
 #endif
 
 #pragma pack(pop)
+
+#define ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+struct S##name##Variable : SVariableBaseDef<type> { \
+	inline type& get() const { return (link); } \
+	inline void set(const type& value) { (link) = value; } \
+};
+
+#define ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+struct S##name##Expression : SVariableBaseDef<type> { \
+	inline TType get() const { return (link); } \
+};

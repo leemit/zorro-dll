@@ -114,20 +114,14 @@ inline var ALMA(vars Data, int TimePeriod) { return ALMA1(Data,TimePeriod); }
 
 ///////////////////////////////////////////////////////
 // Declare variables
-
 #include "zorro/var.h"
-
 #define ZORRO_BUILD_VARIABLE(type, name, link) \
-struct S##name##Variable : SVariableBaseDef<type> { \
-	inline type& get() const { return (link); } \
-	inline void set(const type& value) { (link) = value; } \
-}; \
-extern CVariable<S##name##Variable>& name;
-
+	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+	extern CVariable<S##name##Variable>& name;
 #define ZORRO_BUILD_EXPRESSION(type, name, link) \
-struct S##name##Expression : SVariableBaseDef<type> { \
-	inline TType get() const { return (link); } \
-}; \
-extern CExpression<S##name##Expression>& name;
-
+	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+	extern CExpression<S##name##Expression>& name;
 #include "zorro/variables_cpp.h"
+
+#undef ZORRO_BUILD_VARIABLE_TYPE
+#undef ZORRO_BUILD_EXPRESSION_TYPE

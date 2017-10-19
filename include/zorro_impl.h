@@ -26,8 +26,6 @@ BOOL WINAPI DllMain(
 }
 #endif // ZORRO_DLL
 
-
-
 ////////////////////////////////////////////////////////
 // Define function pointers
 #define F(x) (*x)
@@ -55,20 +53,14 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 
 ////////////////////////////////////////////////////////
 // Define variables
-
 #include "zorro/var.h"
-
 #define ZORRO_BUILD_VARIABLE(type, name, link) \
-struct S##name##Variable : SVariableBaseDef<type> { \
-	inline type& get() const { return (link); } \
-	inline void set(const type& value) { (link) = value; } \
-}; \
-CVariable<S##name##Variable>& name = CVariable<S##name##Variable>::getInstance();
-
+	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+	CVariable<S##name##Variable>& name = CVariable<S##name##Variable>::getInstance();
 #define ZORRO_BUILD_EXPRESSION(type, name, link) \
-struct S##name##Expression : SVariableBaseDef<type> { \
-	inline TType get() const { return (link); } \
-}; \
-CExpression<S##name##Expression>& name = CExpression<S##name##Expression>::getInstance();
-
+	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+	CExpression<S##name##Expression>& name = CExpression<S##name##Expression>::getInstance();
 #include "zorro/variables_cpp.h"
+
+#undef ZORRO_BUILD_VARIABLE_TYPE
+#undef ZORRO_BUILD_EXPRESSION_TYPE
