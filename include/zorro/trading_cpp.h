@@ -5,10 +5,10 @@
 
 #if ZORRO_CPP >= 11
 #define ZORRO_ENUM_OPEN(name) typedef enum class name {
-#define ZORRO_ENUM_CLOSE(name) } E##name;
+#define ZORRO_ENUM_CLOSE(name) } name;
 #else
-#define ZORRO_ENUM_OPEN(name) namespace name { enum name {
-#define ZORRO_ENUM_CLOSE(name) }; } typedef name::name E##name;
+#define ZORRO_ENUM_OPEN(name) namespace N##name { enum name {
+#define ZORRO_ENUM_CLOSE(name) }; } typedef N##name::name name;
 #endif
 
 const var PI  = 3.14159265359;
@@ -30,7 +30,7 @@ const int SCRIPT_VERSION = 255;
 #pragma push_macro("IGNORE")
 #undef IGNORE
 
-ZORRO_ENUM_OPEN(TradeFlag)
+ZORRO_ENUM_OPEN(ETradeFlag)
 	SHORT       = (1<<0),  // short position
 	BID         = (1<<0),
 	OPEN        = (1<<1),  // position is open
@@ -64,11 +64,11 @@ ZORRO_ENUM_OPEN(TradeFlag)
 	BAR         = (1<<29), // run TMF on any bar only, not any tick
 	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
 	NEW         = (1<<31), // just created in a TMF 
-ZORRO_ENUM_CLOSE(TradeFlag)
+ZORRO_ENUM_CLOSE(ETradeFlag)
 
 #pragma pop_macro("IGNORE")
 
-ZORRO_ENUM_OPEN(ZorroFlag)
+ZORRO_ENUM_OPEN(EZorroFlag)
 	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
 	SKIP2        = (1<<1),  // skip 2nd of every 3 weeks
 	SKIP3        = (1<<2),  // skip 3rd of every 3 weeks
@@ -98,9 +98,9 @@ ZORRO_ENUM_OPEN(ZorroFlag)
 	BALANCE      = (1<<28), // store and display balance rather than equity curves
 	STEPWISE     = (1<<29), // stepwise debugging (Zorro S)
 	ALLCYCLES    = (1<<30), // sum up statistics over all sample cycles
-ZORRO_ENUM_CLOSE(ZorroFlag)
+ZORRO_ENUM_CLOSE(EZorroFlag)
 
-ZORRO_ENUM_OPEN(StatusFlag)
+ZORRO_ENUM_OPEN(EStatusFlag)
 	TRADING      = (1<<0),  // trades have been opened
 	CHANGED      = (1<<1),  // script or asset was changed -> init strategy sliders
 	INITRUN      = (1<<2),  // init run before the first bar, for initialization
@@ -130,16 +130,16 @@ ZORRO_ENUM_OPEN(StatusFlag)
 	RUNNING      = (1<<26), // Simulation is running
 	FIRSTINITRUN = (1<<27), // Really first run
 	SHORTING     = (1<<28), // Short trades have been opened
-ZORRO_ENUM_CLOSE(StatusFlag)
+ZORRO_ENUM_CLOSE(EStatusFlag)
 
-ZORRO_ENUM_OPEN(OrderFillMode)
+ZORRO_ENUM_OPEN(EOrderFillMode)
 	NAIVE        = 0,
 	ATCLOSE      = 1,
 	DELAYED      = 3,
 	HFT          = 8,
-ZORRO_ENUM_CLOSE(OrderFillMode)
+ZORRO_ENUM_CLOSE(EOrderFillMode)
 
-ZORRO_ENUM_OPEN(Verbosity)
+ZORRO_ENUM_OPEN(EVerbosity)
 	LEVEL_0      = 0,
 	LEVEL_1      = 1,
 	LEVEL_2      = 2,
@@ -148,9 +148,9 @@ ZORRO_ENUM_OPEN(Verbosity)
 	DIAG         = (1<<3),
 	ALERT        = (1<<4),
 	LOGMSG       = static_cast<int>(EZorroFlag::LOGMSG), // show log in message window
-ZORRO_ENUM_CLOSE(Verbosity)
+ZORRO_ENUM_CLOSE(EVerbosity)
 
-ZORRO_ENUM_OPEN(AdviseMode)
+ZORRO_ENUM_OPEN(EAdviseMode)
 	PREVIOUS     = 0,       // use the method and signals of the last advise call
 	PATTERNS_2   = 2,       // number of pattern groups
 	PATTERNS_3   = 3,
@@ -165,9 +165,9 @@ ZORRO_ENUM_OPEN(AdviseMode)
 	FUZZY        = (1<<25), // match fuzzy
 	SIGNALS      = (1<<26), // export signals + objective to .csv
 	BALANCED     = (1<<28), // balance positive and negative results
-ZORRO_ENUM_CLOSE(AdviseMode)
+ZORRO_ENUM_CLOSE(EAdviseMode)
 
-ZORRO_ENUM_OPEN(NeuralMode)
+ZORRO_ENUM_OPEN(ENeuralMode)
 	NEURAL_INIT    = (1<<20),
 	NEURAL_EXIT    = (2<<20),
 	NEURAL_LEARN   = (4<<20),
@@ -175,16 +175,16 @@ ZORRO_ENUM_OPEN(NeuralMode)
 	NEURAL_PREDICT = (8<<20),
 	NEURAL_SAVE    = (16<<20),
 	NEURAL_LOAD    = (17<<20),
-ZORRO_ENUM_CLOSE(NeuralMode)
+ZORRO_ENUM_CLOSE(ENeuralMode)
 
-ZORRO_ENUM_OPEN(PredictionType)
+ZORRO_ENUM_OPEN(EPredictionType)
 	CROSSOVER  = (1<<21),
 	PEAK       = (1<<22),
 	VALLEY     = (1<<23),
 	PARABOLIC  = (1<<20),
-ZORRO_ENUM_CLOSE(PredictionType)
+ZORRO_ENUM_CLOSE(EPredictionType)
 
-ZORRO_ENUM_OPEN(HistoryMode)
+ZORRO_ENUM_OPEN(EHistoryMode)
 	UNADJUSTED_BROKER_T1 = 0,
 	UNADJUSTED_BROKER_M1 = 1,
 	UNADJUSTED  = (1<<9),
@@ -196,46 +196,46 @@ ZORRO_ENUM_OPEN(HistoryMode)
 	FROM_AV     = (1<<15),
 	FROM_STOOQ  = (1<<16),
 	FROM_QTABLE = (1<<17),
-ZORRO_ENUM_CLOSE(HistoryMode)
+ZORRO_ENUM_CLOSE(EHistoryMode)
 
-ZORRO_ENUM_OPEN(AssetType)
+ZORRO_ENUM_OPEN(EAssetType)
 	FOREX     = 1,
 	INDEX     = 2,
 	CMDTY     = 3,
 	STOCK     = 4,
 	BOND      = 5,
-ZORRO_ENUM_CLOSE(AssetType)
+ZORRO_ENUM_CLOSE(EAssetType)
 
-ZORRO_ENUM_OPEN(DetrendMode)
+ZORRO_ENUM_OPEN(EDetrendMode)
 	TRADES    = (1<<0),
 	PRICES    = (1<<1),
 	CURVE     = (1<<2),
 	INVERT    = (1<<3),
 	NOPRICE   = (1<<4),
 	SHUFFLE   = (1<<5),
-ZORRO_ENUM_CLOSE(DetrendMode)
+ZORRO_ENUM_CLOSE(EDetrendMode)
 
-ZORRO_ENUM_OPEN(RandomizeMode)
+ZORRO_ENUM_OPEN(ERandomizeMode)
 	DETREND   = (1<<2),
 	BOOTSTRAP = (1<<6),
-ZORRO_ENUM_CLOSE(RandomizeMode)
+ZORRO_ENUM_CLOSE(ERandomizeMode)
 
-ZORRO_ENUM_OPEN(OptimizeMode)
+ZORRO_ENUM_OPEN(EOptimizeMode)
 	LUCKY     = (1<<8),
 	PHANTOM   = (1<<16),
 	PEAK      = (1<<22),
-ZORRO_ENUM_CLOSE(OptimizeMode)
+ZORRO_ENUM_CLOSE(EOptimizeMode)
 
-ZORRO_ENUM_OPEN(TimeZone)
+ZORRO_ENUM_OPEN(ETimeZone)
 	UTC       = 24, // Coordinated Universal Time
 	WET       =  0, // Western European Time (London)
 	CET       =  1, // European time zone (Frankfurt)
 	ET        = -5, // Eastern Time (New York)
 	JST       =  9, // Japan Standard Time (Tokyo)
 	AEST      = 10, // Australian Eastern Standard Time (Sydney)
-ZORRO_ENUM_CLOSE(TimeZone)
+ZORRO_ENUM_CLOSE(ETimeZone)
 
-ZORRO_ENUM_OPEN(Weekday)
+ZORRO_ENUM_OPEN(EWeekday)
 	MONDAY    = 1,
 	TUESDAY   = 2,
 	WEDNESDAY = 3,
@@ -243,9 +243,9 @@ ZORRO_ENUM_OPEN(Weekday)
 	FRIDAY    = 5,
 	SATURDAY  = 6,
 	SUNDAY    = 7,
-ZORRO_ENUM_CLOSE(Weekday)
+ZORRO_ENUM_CLOSE(EWeekday)
 
-ZORRO_ENUM_OPEN(PlotType)
+ZORRO_ENUM_OPEN(EPlotType)
 	REGULAR   = 0,
 	NEW       = (1<<0),  // begin new chart
 	BARS      = (1<<1),  // bars instead of curves
@@ -275,13 +275,13 @@ ZORRO_ENUM_OPEN(PlotType)
 	TRIANGLE4 = (DOT+(6<<20)),
 	CROSS     = (DOT+(8<<20)),
 	CROSS2    = (DOT+(9<<20)),
-ZORRO_ENUM_CLOSE(PlotType)
+ZORRO_ENUM_CLOSE(EPlotType)
 
-ZORRO_ENUM_OPEN(PlotMode)
+ZORRO_ENUM_OPEN(EPlotMode)
 	PL_ALL    = (1<<6),
 	PL_LONG   = (1<<7),
 	PL_FINE   = (1<<8),
-ZORRO_ENUM_CLOSE(PlotMode)
+ZORRO_ENUM_CLOSE(EPlotMode)
 
 const color_t RED       = 0xff0000;
 const color_t GREEN     = 0x00ff00;
@@ -302,7 +302,7 @@ const color_t BLACK     = 0x010101;
 const color_t LIGHT     = 0x606060;
 const color_t TRANSP    = 0x80000000;
 
-ZORRO_ENUM_OPEN(PrintMode)
+ZORRO_ENUM_OPEN(EPrintMode)
 	TO_WINDOW =  1,
 	TO_LOG    =  2,
 	TO_DIAG   =  3,
@@ -317,17 +317,17 @@ ZORRO_ENUM_OPEN(PrintMode)
 	TO_PANEL  = 18,
 	TRAINMODE = static_cast<int>(EStatusFlag::TRAINMODE),
 	TO_ANY    = (TO_WINDOW + TRAINMODE),
-ZORRO_ENUM_CLOSE(PrintMode)
+ZORRO_ENUM_CLOSE(EPrintMode)
 
-ZORRO_ENUM_OPEN(SaveMode)
+ZORRO_ENUM_OPEN(ESaveMode)
 	TRADES    = (1<<0),
 	SLIDERS   = (1<<1),
 	ALGOVARS  = (1<<2),
 	BACKUP    = (1<<8),
 	HTML      = (1<<9),
-ZORRO_ENUM_CLOSE(SaveMode)
+ZORRO_ENUM_CLOSE(ESaveMode)
 
-ZORRO_ENUM_OPEN(BrokerCmd)
+ZORRO_ENUM_OPEN(EBrokerCmd)
 	GET_TIME           =  5,  // brokerCommand, last incoming tick time
 	GET_DIGITS         = 12, // Count of digits after decimal point 
 	GET_STOPLEVEL      = 14, // Stop level in points.
@@ -380,9 +380,9 @@ ZORRO_ENUM_OPEN(BrokerCmd)
 	PLOT_HLINE         = 280, // plot to the MT4 chart window
 	PLOT_TEXT          = 281,
 	PLOT_MOVE          = 282,
-ZORRO_ENUM_CLOSE(BrokerCmd)
+ZORRO_ENUM_CLOSE(EBrokerCmd)
 
-ZORRO_ENUM_OPEN(ContractType)
+ZORRO_ENUM_OPEN(EContractType)
 	CALL      = (1<<0),
 	PUT       = (1<<1),
 	EUROPEAN  = (1<<2),
@@ -391,9 +391,9 @@ ZORRO_ENUM_OPEN(ContractType)
 	ONLYMATCH = (1<<6), // select only contracts that exactly match the parameters 
 	ONLYW3    = (1<<7), // select only contracts in 3rd week
 	OPTION    = (CALL | PUT | EUROPEAN),
-ZORRO_ENUM_CLOSE(ContractType)
+ZORRO_ENUM_CLOSE(EContractType)
 
-ZORRO_ENUM_OPEN(MovingAverageType)
+ZORRO_ENUM_OPEN(EMovingAverageType)
 	SMA       = 0,
 	EMA       = 1,
 	WMA       = 2,
@@ -403,7 +403,7 @@ ZORRO_ENUM_OPEN(MovingAverageType)
 	KAMA      = 6,
 	MAMA      = 7,
 	T3        = 8,
-ZORRO_ENUM_CLOSE(MovingAverageType)
+ZORRO_ENUM_CLOSE(EMovingAverageType)
 
 #define NO_DEFINES
 #include "trading.h"
