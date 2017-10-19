@@ -109,7 +109,7 @@ typedef MATRIX* mat;
 #endif
 
 //////////////////////////////////////////////////////////////
-// objects
+
 typedef struct ASSET
 {
 	var  vPrice;                 // last ask price
@@ -157,6 +157,49 @@ typedef struct ASSET
 	int  nContractRow,nContractOffs; // dataset numbers of the found contract
 } ASSET;
 
+// trade specific performance statistics (per lot)
+typedef struct STATUS { 
+	var    vSkippedMargin;   // margin accumulation of skipped trades
+	var    vWin,vLoss;       // gross wins and losses
+	var    vWinVal,vLossVal; // value of open trades, test/trade mode only
+	var    vReturn2;         // sum of squared returns
+	var    vWinMax,vLossMax; // largest win and loss
+	var    vLossLotMax;      // largest loss per lot
+	var    vWinStreakVal,vLossStreakVal; // size of current win/loss streak
+	int    numWin,numLoss;         // number of won and lost trades 
+	int    nWinStreak,nLossStreak; // length of current win and loss streak
+	int    numWinning,numLosing;   // number of winning and losing open trades, test/trade mode only
+	DWORD  dwWin,dwLoss;           // WFO win/loss flags 
+	DWORD  dwColorWin,dwColorLoss; // trade colors in chart
+								   // clear statistics until here
+	DWORD  flags;
+	int    nModel;        // model number for prediction
+	int    nComponent;    // component number
+	DWORD  pad[1];
+	var    vPad[4];
+	var    Skill[NUM_SKILLS];   // general purpose variables for money managemement
+	var    Result[NUM_RESULTS]; // last 20 trade results
+	char   sAlgo[NAMESIZE];     // algo identifier
+								// save until here
+	var    vTrainPF;      // training profit factor
+	var    vOptimalF;     // component reinvestment factor, long/short
+	var    vOptimalF2;    // OptimalF (short), R2 (long)
+	var    vWFOProfit;    // profit of the current WFO cycle
+	int    numPending;    // number of pending trades
+	int    nBalance;      // net sign sum of advise objective
+	int    numSignals;    // signals per rule
+	void*  History;       // signal history for rule learning
+	void*  Rule;          // pointer to tree or perceptron function
+						  // clear again until here
+	struct STATUS *other; // other status (short<->long)
+	ASSET* asset;         // asset pointer
+	int    nCycles;       // number of optimize cycles
+	int    nSteps[MAX_PARAMS]; // list of optimize steps
+	float  fParam[MAX_PARAMS]; // list of optimal parameters
+	float* fStat;         // matrix of optimize results
+	var*   pCurve;        // component equity/balance curve
+} STATUS;
+
 typedef struct TRADE
 {
 	float fEntryPrice;  // buy price, or premium without multiplicator
@@ -194,7 +237,7 @@ typedef struct TRADE
 	char  sInfo[8];     // contract class
 	float fMarginCost;  // used margin cost by the trade
 // saved until this element
-	void  *status;      // trade STATUS 
+	STATUS *status;     // trade STATUS 
 	function manage;    // trade management function pointer
 	var	*dSignals;      // pointer to advise parameters
 	int	nCounter;       // for reducing BrokerTrade calls
@@ -237,50 +280,6 @@ typedef struct TRADE
 #define TR_REVERSED    (1<<30) // indicate exit by reversal (shared with TR_EXIT)
 #define TR_NEW         (1<<31) // just created in a TMF 
 #endif // NO_DEFINES
-
-///////////////////////////////////////////////////////////////
-// trade specific performance statistics (per lot)
-typedef struct STATUS { 
-	var    vSkippedMargin;   // margin accumulation of skipped trades
-	var    vWin,vLoss;       // gross wins and losses
-	var    vWinVal,vLossVal; // value of open trades, test/trade mode only
-	var    vReturn2;         // sum of squared returns
-	var    vWinMax,vLossMax; // largest win and loss
-	var    vLossLotMax;      // largest loss per lot
-	var    vWinStreakVal,vLossStreakVal; // size of current win/loss streak
-	int    numWin,numLoss;         // number of won and lost trades 
-	int    nWinStreak,nLossStreak; // length of current win and loss streak
-	int    numWinning,numLosing;   // number of winning and losing open trades, test/trade mode only
-	DWORD  dwWin,dwLoss;           // WFO win/loss flags 
-	DWORD  dwColorWin,dwColorLoss; // trade colors in chart
-// clear statistics until here
-	DWORD  flags;
-	int    nModel;        // model number for prediction
-	int    nComponent;    // component number
-	DWORD  pad[1];
-	var    vPad[4];
-	var    Skill[NUM_SKILLS];   // general purpose variables for money managemement
-	var    Result[NUM_RESULTS]; // last 20 trade results
-	char   sAlgo[NAMESIZE];     // algo identifier
-// save until here
-	var    vTrainPF;      // training profit factor
-	var    vOptimalF;     // component reinvestment factor, long/short
-	var    vOptimalF2;    // OptimalF (short), R2 (long)
-	var    vWFOProfit;    // profit of the current WFO cycle
-	int    numPending;    // number of pending trades
-	int    nBalance;      // net sign sum of advise objective
-	int    numSignals;    // signals per rule
-	void*  History;       // signal history for rule learning
-	void*  Rule;          // pointer to tree or perceptron function
-// clear again until here
-	struct STATUS *other; // other status (short<->long)
-	ASSET* asset;         // asset pointer
-	int    nCycles;       // number of optimize cycles
-	int    nSteps[MAX_PARAMS]; // list of optimize steps
-	float  fParam[MAX_PARAMS]; // list of optimal parameters
-	float* fStat;         // matrix of optimize results
-	var*   pCurve;        // component equity/balance curve
-} STATUS;
 
 // overall performance statistics
 typedef struct PERFORMANCE
