@@ -44,110 +44,110 @@ const int SCRIPT_VERSION = 255;
 #pragma push_macro("IGNORE")
 #undef IGNORE
 
-ZORRO_OPEN_ENUM(ETradeFlag)
-	SHORT       = (1<<0),  // short position
-	BID         = (1<<0),
-	OPEN        = (1<<1),  // position is open
-	NOTFOUND    = (1<<2),  // trade disappeared from the broker list
-	EXPIRED     = (1<<3),  // option or future expired
-	WAITSELL    = (1<<4),  // close position at the next tick
-	WAITBUY     = (1<<5),  // open position at the next tick
-	DETREND     = (1<<6),  // detrend the trade result
-	SUSPEND     = (1<<7),  // suspend trade function
-	EVENT       = (1<<8),  // trade function was called by enter/exit event
-	IGNORE      = (1<<9),  // don't automatically enter/exit
-	MISSEDENTRY = (1<<10), // missed the entry limit or stop, or sell price in the last bar
-	MISSEDEXIT  = (1<<11), // missed the exit for some reason
-	NOSIZE      = (1<<12), // Trade not executed, not enough lots or balance
-	RECYCLE     = (1<<13), // Trade struct can be reused
-	NONET       = (1<<14), // Don't open a net trade yet
-	NET         = (1<<15), // Pool trade
-	PHANTOM     = (1<<16), // Phantom trade 
-	EXERCISE    = (1<<17), // exercise an option contract
-	STOPPED     = (1<<18), // closed due to stop loss in the last bar, or a margin call
-	PROFIT      = (1<<19), // closed due to profit target in the last bar
-	TIME        = (1<<20), // closed due to timeout in the last bar
-	SOLD        = (1<<21), // closed due to exit at market in the last bar
-	CANCELLED   = (1<<22), // removed from trade list
-	MISSEDOPEN  = (1<<23), // could not be opened by the broker
-	ACCOUNT     = (1<<24), // trade with the main account
-	ENTRYSTOP   = (1<<25), // entry stop, rather than limit
-	ENTER       = (1<<26), // entered by TMF return value
-	EXIT        = (1<<27), // exit by TMF return value
-	REMOVED     = (1<<28), // removed from the online trade list (f.i. margin call or manually closed)
-	BAR         = (1<<29), // run TMF on any bar only, not any tick
-	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
-	NEW         = (1<<31), // just created in a TMF 
+ZORRO_OPEN_ENUM_TYPE(ETradeFlag, DWORD)
+	SHORT       = (1u<<0),  // short position
+	BID         = (1u<<0),
+	OPEN        = (1u<<1),  // position is open
+	NOTFOUND    = (1u<<2),  // trade disappeared from the broker list
+	EXPIRED     = (1u<<3),  // option or future expired
+	WAITSELL    = (1u<<4),  // close position at the next tick
+	WAITBUY     = (1u<<5),  // open position at the next tick
+	DETREND     = (1u<<6),  // detrend the trade result
+	SUSPEND     = (1u<<7),  // suspend trade function
+	EVENT       = (1u<<8),  // trade function was called by enter/exit event
+	IGNORE      = (1u<<9),  // don't automatically enter/exit
+	MISSEDENTRY = (1u<<10), // missed the entry limit or stop, or sell price in the last bar
+	MISSEDEXIT  = (1u<<11), // missed the exit for some reason
+	NOSIZE      = (1u<<12), // Trade not executed, not enough lots or balance
+	RECYCLE     = (1u<<13), // Trade struct can be reused
+	NONET       = (1u<<14), // Don't open a net trade yet
+	NET         = (1u<<15), // Pool trade
+	PHANTOM     = (1u<<16), // Phantom trade 
+	EXERCISE    = (1u<<17), // exercise an option contract
+	STOPPED     = (1u<<18), // closed due to stop loss in the last bar, or a margin call
+	PROFIT      = (1u<<19), // closed due to profit target in the last bar
+	TIME        = (1u<<20), // closed due to timeout in the last bar
+	SOLD        = (1u<<21), // closed due to exit at market in the last bar
+	CANCELLED   = (1u<<22), // removed from trade list
+	MISSEDOPEN  = (1u<<23), // could not be opened by the broker
+	ACCOUNT     = (1u<<24), // trade with the main account
+	ENTRYSTOP   = (1u<<25), // entry stop, rather than limit
+	ENTER       = (1u<<26), // entered by TMF return value
+	EXIT        = (1u<<27), // exit by TMF return value
+	REMOVED     = (1u<<28), // removed from the online trade list (f.i. margin call or manually closed)
+	BAR         = (1u<<29), // run TMF on any bar only, not any tick
+	REVERSED    = (1u<<30), // indicate exit by reversal (shared with TR_EXIT)
+	NEW         = (1u<<31), // just created in a TMF 
 ZORRO_CLOSE_ENUM(ETradeFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ETradeFlag)
 typedef CBitfield<ETradeFlag> TTradeBitfield;
 
 #pragma pop_macro("IGNORE")
 
-ZORRO_OPEN_ENUM(EZorroFlag)
-	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
-	SKIP2        = (1<<1),  // skip 2nd of every 3 weeks
-	SKIP3        = (1<<2),  // skip 3rd of every 3 weeks
-	BINARY       = (1<<3),  // trade binary options - also for optionVal
-	PRELOAD      = (1<<4),  // load prices from historical data
-	PLOTNOW      = (1<<5),  // create a chart automatically after test
-	PLOTLONG     = (1<<7),  // moved to PlotMode
-	LOGFILE      = (1<<8),  // store log file - also for assetHistory
-	LOGMSG       = (1<<9),  // moved to Verbose
-	LEAN         = (1<<10), // don't use historical volume & spread data
-	EXE          = (1<<11), // generate EXE (Zorro S)
-	RULES        = (1<<12), // generate/use advise rules
-	FACTORS      = (1<<13), // generate reinvestment factors
-	PARAMETERS   = (1<<14), // generate/use strategy parameters
-	OPENEND      = (1<<15), // ignore open trades at the end of the test
-	PEEK         = (1<<16), // allow peeking into the future
-	RISKLIMIT    = (1<<17), // don't trade when trade risk > 2*Risk
-	MARGINLIMIT  = (1<<18), // don't trade when real margin > 2*calculated margin, or when total margin left < 1000
-	ACCUMULATE   = (1<<19), // accumulate Margin for skipped trades
-	TESTNOW      = (1<<20), // run a test automatically after training
-	RECALCULATE  = (1<<21), // recreate series after parameter loading
-	NOLOCK       = (1<<23), // don't sychronize API access
-	FAST         = (1<<24), // ticks in FAST mode - also for advise()
-	NFA          = (1<<25), // NFA compliant account: no "hard" stop loss, no hedging, no position closing
-	SCREENSAVER  = (1<<26), // don't suspend power management 
-	TICKS        = (1<<27), // simulate trades every tick (slow)
-	BALANCE      = (1<<28), // store and display balance rather than equity curves
-	STEPWISE     = (1<<29), // stepwise debugging (Zorro S)
-	ALLCYCLES    = (1<<30), // sum up statistics over all sample cycles
+ZORRO_OPEN_ENUM_TYPE(EZorroFlag, DWORD)
+	SKIP1        = (1u<<0),  // skip 1st of every 3 weeks
+	SKIP2        = (1u<<1),  // skip 2nd of every 3 weeks
+	SKIP3        = (1u<<2),  // skip 3rd of every 3 weeks
+	BINARY       = (1u<<3),  // trade binary options - also for optionVal
+	PRELOAD      = (1u<<4),  // load prices from historical data
+	PLOTNOW      = (1u<<5),  // create a chart automatically after test
+	PLOTLONG     = (1u<<7),  // moved to PlotMode
+	LOGFILE      = (1u<<8),  // store log file - also for assetHistory
+	LOGMSG       = (1u<<9),  // moved to Verbose
+	LEAN         = (1u<<10), // don't use historical volume & spread data
+	EXE          = (1u<<11), // generate EXE (Zorro S)
+	RULES        = (1u<<12), // generate/use advise rules
+	FACTORS      = (1u<<13), // generate reinvestment factors
+	PARAMETERS   = (1u<<14), // generate/use strategy parameters
+	OPENEND      = (1u<<15), // ignore open trades at the end of the test
+	PEEK         = (1u<<16), // allow peeking into the future
+	RISKLIMIT    = (1u<<17), // don't trade when trade risk > 2*Risk
+	MARGINLIMIT  = (1u<<18), // don't trade when real margin > 2*calculated margin, or when total margin left < 1000
+	ACCUMULATE   = (1u<<19), // accumulate Margin for skipped trades
+	TESTNOW      = (1u<<20), // run a test automatically after training
+	RECALCULATE  = (1u<<21), // recreate series after parameter loading
+	NOLOCK       = (1u<<23), // don't sychronize API access
+	FAST         = (1u<<24), // ticks in FAST mode - also for advise()
+	NFA          = (1u<<25), // NFA compliant account: no "hard" stop loss, no hedging, no position closing
+	SCREENSAVER  = (1u<<26), // don't suspend power management 
+	TICKS        = (1u<<27), // simulate trades every tick (slow)
+	BALANCE      = (1u<<28), // store and display balance rather than equity curves
+	STEPWISE     = (1u<<29), // stepwise debugging (Zorro S)
+	ALLCYCLES    = (1u<<30), // sum up statistics over all sample cycles
 ZORRO_CLOSE_ENUM(EZorroFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EZorroFlag)
 typedef CBitfield<EZorroFlag> TZorroBitfield;
 
-ZORRO_OPEN_ENUM(EStatusFlag)
-	TRADING      = (1<<0),  // trades have been opened
-	CHANGED      = (1<<1),  // script or asset was changed -> init strategy sliders
-	INITRUN      = (1<<2),  // init run before the first bar, for initialization
-	EXITRUN      = (1<<3),  // last bar, all trades are closed, for result calculation
-	TESTMODE     = (1<<4),  // [Test] mode
-	TRAINMODE    = (1<<5),  // [Train] mode, for optimizing
-	TRADEMODE    = (1<<6),  // [Trade] mode
-	DEMO         = (1<<7),  // Running on demo account
-	LOOKBACK     = (1<<8),  // Lookback period, no trading
-	FIRSTRUN     = (1<<9),  // First run with valid price data, usually on bar 1
-	COMMAND      = (1<<10), // Zorro started from the command line
-	EXE          = (1<<11), // see above, script is executable (*.x)
-	RULES        = (1<<12), // generate/use advise rules
-	FACTORS      = (1<<13), // generate reinvestment factors
-	PARAMETERS   = (1<<14), // generate/use strategy parameters
-	CONTRACTS    = (1<<15), // contracts are traded
-	PORTFOLIO    = (1<<16), // assetList() or loop() function called
-	ASSETS       = (1<<17), // asset() function called
-	SELECTED     = (1<<18), // asset is same as [Asset] Scrollbox (not in loops)
-	PLOTSTATS    = (1<<19), // plot histogram rather than price chart
-	AFFIRMED     = (1<<20), // [Ok] clicked on nonmodal message box
-	SPECIALBAR   = (1<<21), // user-defined bar length
-	MARGINCALL   = (1<<22), // Margin + Loss exceeds Capital
-	NEWDAY       = (1<<23), // Day change after last bar 
-	PROCESS      = (1<<24), // ReTrain or ReTest
-	SPONSORED    = (1<<25), // Zorro S version
-	RUNNING      = (1<<26), // Simulation is running
-	FIRSTINITRUN = (1<<27), // Really first run
-	SHORTING     = (1<<28), // Short trades have been opened
+ZORRO_OPEN_ENUM_TYPE(EStatusFlag, DWORD)
+	TRADING      = (1u<<0),  // trades have been opened
+	CHANGED      = (1u<<1),  // script or asset was changed -> init strategy sliders
+	INITRUN      = (1u<<2),  // init run before the first bar, for initialization
+	EXITRUN      = (1u<<3),  // last bar, all trades are closed, for result calculation
+	TESTMODE     = (1u<<4),  // [Test] mode
+	TRAINMODE    = (1u<<5),  // [Train] mode, for optimizing
+	TRADEMODE    = (1u<<6),  // [Trade] mode
+	DEMO         = (1u<<7),  // Running on demo account
+	LOOKBACK     = (1u<<8),  // Lookback period, no trading
+	FIRSTRUN     = (1u<<9),  // First run with valid price data, usually on bar 1
+	COMMAND      = (1u<<10), // Zorro started from the command line
+	EXE          = (1u<<11), // see above, script is executable (*.x)
+	RULES        = (1u<<12), // generate/use advise rules
+	FACTORS      = (1u<<13), // generate reinvestment factors
+	PARAMETERS   = (1u<<14), // generate/use strategy parameters
+	CONTRACTS    = (1u<<15), // contracts are traded
+	PORTFOLIO    = (1u<<16), // assetList() or loop() function called
+	ASSETS       = (1u<<17), // asset() function called
+	SELECTED     = (1u<<18), // asset is same as [Asset] Scrollbox (not in loops)
+	PLOTSTATS    = (1u<<19), // plot histogram rather than price chart
+	AFFIRMED     = (1u<<20), // [Ok] clicked on nonmodal message box
+	SPECIALBAR   = (1u<<21), // user-defined bar length
+	MARGINCALL   = (1u<<22), // Margin + Loss exceeds Capital
+	NEWDAY       = (1u<<23), // Day change after last bar 
+	PROCESS      = (1u<<24), // ReTrain or ReTest
+	SPONSORED    = (1u<<25), // Zorro S version
+	RUNNING      = (1u<<26), // Simulation is running
+	FIRSTINITRUN = (1u<<27), // Really first run
+	SHORTING     = (1u<<28), // Short trades have been opened
 ZORRO_CLOSE_ENUM(EStatusFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EStatusFlag)
 typedef CBitfield<EStatusFlag> TStatusBitfield;
