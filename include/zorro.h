@@ -4,5 +4,3 @@
 #pragma once
 
 #include "zorro/zorro_common.h"
-#include "zorro/functions_cpp.h"
-#include "zorro/variables_cpp.h"

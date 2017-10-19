@@ -3,7 +3,6 @@
 ///////////////////////////////////////////////////////
 #define ZORRO_DLLMAIN
 #include "zorro_impl.h"
-#include "zorro.h"
 
 #define WORKSHOP7
 

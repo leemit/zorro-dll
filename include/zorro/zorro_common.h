@@ -40,3 +40,11 @@ GLOBALS* g;
 #else
 extern GLOBALS* g;
 #endif
+
+#include "zorro/functions_cpp.h"
+
+#ifdef ZORRO_CPP
+#include "zorro/variables_cpp.h"
+#else
+#include "zorro/variables.h"
+#endif

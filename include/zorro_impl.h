@@ -26,7 +26,6 @@ BOOL WINAPI DllMain(
 #endif // ZORRO_DLL
 
 ////////////////////////////////////////////////////////
-#include "zorro/functions_cpp.h"
 
 ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 {
@@ -42,9 +41,5 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 
 	return SCRIPT_VERSION;
 }
-
-////////////////////////////////////////////////////////
-// Define variables
-#include "zorro/variables_cpp.h"
 
 #undef ZORRO_IMPL
