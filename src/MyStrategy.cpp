@@ -134,7 +134,7 @@ ZORRO_EXPORT void ZORRO_CALL run()
 	LifeTime = 5;  				// one week
 	MaxLong = MaxShort = 1;
 	
-	if(adviseLong(static_cast<int>(EAdviseMode::PATTERN)+2,0,
+	if(adviseLong(static_cast<int>(EAdviseMode::PATTERN | EAdviseMode::PATTERNS_2),0,
 		priceHigh(2),priceLow(2),priceClose(2),
 		priceHigh(1),priceLow(1),priceClose(1),
 		priceHigh(1),priceLow(1),priceClose(1),
