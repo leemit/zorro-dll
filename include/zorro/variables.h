@@ -161,8 +161,6 @@
 #define MarginTotal g->vMarginSum
 #define RiskVal     g->vRiskSum
 #define RiskTotal   g->vRiskSum
-#define MarginMax   g->w.vMarginMax
-#define RiskMax     g->w.vRiskMax
 #define TradeVal    (g->vWinVal-g->vLossVal)
 
 #define Assets      (g->pAssets)
@@ -285,7 +283,7 @@
 #define DrawDownBars     g->w.numDrawDownBars
 #define DrawDownBarsMax  g->w.numDrawDownMax
 #define LossStreakMax    g->w.numLossStreakMax
-#define NumOpenMax       g->w.numTradesMax
+#define NumOpenMax       g->numTradesMax
 #define InMarketBars     g->w.numMarketBars
 #define InMarketSum      g->w.numMarketTotal
 #define Results          (g->pResults)
