@@ -16,10 +16,12 @@
 #define ZORRO_CALL __cdecl
 #define ZORRO_EXPORT extern "C" __declspec(dllexport)
 
+#ifndef ZORRO_FORCE_LITEC
 #if __cplusplus >= 201103L || _MSVC_LANG >= 201103L
 #define ZORRO_CPP 11
 #elif __cplusplus >= 199711L || _MSVC_LANG >= 199711L
 #define ZORRO_CPP 03
+#endif
 #endif
 
 #if defined(ZORRO_NAMESPACE) && defined(ZORRO_CPP)
