@@ -1,6 +1,35 @@
 
 #pragma once
 
+#include "zorro/var.h"
+
+#define ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+struct S##name##Variable : SVariableBaseDef<type> { \
+	inline type& get() const { return (link); } \
+	inline void set(const type& value) { (link) = value; } \
+};
+
+#define ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+struct S##name##Expression : SVariableBaseDef<type> { \
+	inline TType get() const { return (link); } \
+};
+
+#ifdef ZORRO_IMPL
+#define ZORRO_BUILD_VARIABLE(type, name, link) \
+	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+	CVariable<S##name##Variable>& name = CVariable<S##name##Variable>::getInstance();
+#define ZORRO_BUILD_EXPRESSION(type, name, link) \
+	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+	CExpression<S##name##Expression>& name = CExpression<S##name##Expression>::getInstance();
+#else
+#define ZORRO_BUILD_VARIABLE(type, name, link) \
+	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
+	extern CVariable<S##name##Variable>& name;
+#define ZORRO_BUILD_EXPRESSION(type, name, link) \
+	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
+	extern CExpression<S##name##Expression>& name;
+#endif
+
 ZORRO_BUILD_VARIABLE(var, Slider1, g->vSlider[1])
 ZORRO_BUILD_VARIABLE(var, Slider2, g->vSlider[2])
 ZORRO_BUILD_VARIABLE(var, Slider3, g->vSlider[3])
@@ -398,4 +427,6 @@ ZORRO_BUILD_EXPRESSION(const char*, HMS   , "%H:%M:%S")
 ZORRO_BUILD_EXPRESSION(const char*, YMD   , "%Y%m%d")
 
 #undef ZORRO_BUILD_VARIABLE
+#undef ZORRO_BUILD_VARIABLE_TYPE
 #undef ZORRO_BUILD_EXPRESSION
+#undef ZORRO_BUILD_EXPRESSION_TYPE

@@ -45,15 +45,6 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 
 ////////////////////////////////////////////////////////
 // Define variables
-#include "zorro/var.h"
-#define ZORRO_BUILD_VARIABLE(type, name, link) \
-	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
-	CVariable<S##name##Variable>& name = CVariable<S##name##Variable>::getInstance();
-#define ZORRO_BUILD_EXPRESSION(type, name, link) \
-	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-	CExpression<S##name##Expression>& name = CExpression<S##name##Expression>::getInstance();
 #include "zorro/variables_cpp.h"
 
-#undef ZORRO_BUILD_VARIABLE_TYPE
-#undef ZORRO_BUILD_EXPRESSION_TYPE
 #undef ZORRO_IMPL
