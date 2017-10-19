@@ -6,7 +6,7 @@
 
 ZORRO_NAMESPACE_OPEN
 
-#include "types.h"
+#include "litec/types.h"
 
 const var PI  = 3.14159265359;
 const var NIL = 3e38;
@@ -448,7 +448,7 @@ ZORRO_OPEN_ENUM(EMovingAverageType)
 ZORRO_CLOSE_ENUM(EMovingAverageType)
 
 #define NO_DEFINES
-#include "trading.h"
+#include "litec/trading.h"
 #undef NO_DEFINES
 
 inline var me(mat M, int row, int col)

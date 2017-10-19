@@ -36,7 +36,7 @@
 #ifdef ZORRO_CPP
 #include "trading_cpp.h"
 #else
-#include "trading.h"
+#include "litec/trading.h"
 #endif
 
 #pragma pack(pop)
@@ -47,10 +47,10 @@ ZORRO_NAMESPACE::GLOBALS* g;
 extern ZORRO_NAMESPACE::GLOBALS* g;
 #endif
 
-#include "zorro/functions_cpp.h"
+#include "functions_cpp.h"
 
 #ifdef ZORRO_CPP
-#include "zorro/variables_cpp.h"
+#include "variables_cpp.h"
 #else
-#include "zorro/variables.h"
+#include "litec/variables.h"
 #endif

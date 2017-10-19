@@ -15,7 +15,7 @@ ZORRO_NAMESPACE_OPEN
 #else
 #define C extern
 #endif
-#include "zorro/functions.h"
+#include "litec/functions.h"
 
 ///////////////////////////////////////////////////////
 // convenience definitions for overloaded functions
