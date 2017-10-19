@@ -22,11 +22,10 @@
 #define ZORRO_CPP 03
 #endif
 
-#ifdef ZORRO_NAMESPACE
+#if defined(ZORRO_NAMESPACE) && defined(ZORRO_CPP)
 #define ZORRO_NAMESPACE_OPEN namespace ZORRO_NAMESPACE {
 #define ZORRO_NAMESPACE_CLOSE };
 #else
-#define ZORRO_NAMESPACE
 #define ZORRO_NAMESPACE_OPEN
 #define ZORRO_NAMESPACE_CLOSE
 #endif
@@ -41,11 +40,13 @@
 
 #pragma pack(pop)
 
+ZORRO_NAMESPACE_OPEN
 #ifdef ZORRO_IMPL
-ZORRO_NAMESPACE::GLOBALS* g;
+GLOBALS* g;
 #else
-extern ZORRO_NAMESPACE::GLOBALS* g;
+extern GLOBALS* g;
 #endif
+ZORRO_NAMESPACE_CLOSE
 
 #include "functions_cpp.h"
 
