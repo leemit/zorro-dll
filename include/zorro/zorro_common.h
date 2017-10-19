@@ -33,6 +33,4 @@
 #include "trading.h"
 #endif
 
-#include "variables.h"
-
 #pragma pack(pop)

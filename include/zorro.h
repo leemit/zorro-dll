@@ -109,3 +109,9 @@ inline var AGC(vars Data, var alpha) { return AGC0(Data,alpha); }
 inline var AGC(vars Data, int Period) { return AGC1(Data,Period); }
 inline var ALMA(vars Data, int TimePeriod, int sigma, var offset) { return ALMA0(Data,TimePeriod,sigma,offset); }
 inline var ALMA(vars Data, int TimePeriod) { return ALMA1(Data,TimePeriod); }
+
+#ifdef ZORRO_CPP
+#include "zorro/variables_cpp.h"
+#else
+#include "zorro/variables.h"
+#endif
