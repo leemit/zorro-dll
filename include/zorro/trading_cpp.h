@@ -316,24 +316,24 @@ ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
 typedef CBitfield<EPlotMode> TPlotModeBitfield;
 
-const color_t RED       = 0xff0000;
-const color_t GREEN     = 0x00ff00;
-const color_t BLUE      = 0x0000ff;
-const color_t CYAN      = 0x00ffff;
-const color_t DARKBLUE  = 0x0000a0;
-const color_t LIGHTBLUE = 0xadd8e6;
-const color_t PURPLE    = 0x800080;
-const color_t YELLOW    = 0xffff00;
-const color_t MAGENTA   = 0xff00ff;
-const color_t ORANGE    = 0xffa500;
-const color_t DARKGREEN = 0x008000;
-const color_t OLIVE     = 0x808000;
-const color_t MAROON    = 0x800000;
-const color_t SILVER    = 0xc0c0c0;
-const color_t GREY      = 0x808080;
-const color_t BLACK     = 0x010101;
-const color_t LIGHT     = 0x606060;
-const color_t TRANSP    = 0x80000000;
+const zcolor RED       = 0xff0000ul;
+const zcolor GREEN     = 0x00ff00ul;
+const zcolor BLUE      = 0x0000fful;
+const zcolor CYAN      = 0x00fffful;
+const zcolor DARKBLUE  = 0x0000a0ul;
+const zcolor LIGHTBLUE = 0xadd8e6ul;
+const zcolor PURPLE    = 0x800080ul;
+const zcolor YELLOW    = 0xffff00ul;
+const zcolor MAGENTA   = 0xff00fful;
+const zcolor ORANGE    = 0xffa500ul;
+const zcolor DARKGREEN = 0x008000ul;
+const zcolor OLIVE     = 0x808000ul;
+const zcolor MAROON    = 0x800000ul;
+const zcolor SILVER    = 0xc0c0c0ul;
+const zcolor GREY      = 0x808080ul;
+const zcolor BLACK     = 0x010101ul;
+const zcolor LIGHT     = 0x606060ul;
+const zcolor TRANSP    = 0x80000000ul;
 
 ZORRO_OPEN_ENUM(EPrintMode)
 	TO_WINDOW =  1,

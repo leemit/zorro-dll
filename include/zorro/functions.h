@@ -45,12 +45,12 @@ C var F(xtest)(var value);
 C void* F(ytest)(void* ptr,int mode);
 C long F(checkLookBack)(long num);
 // chart
-C void F(plot)(string name,var val,int type,int color);
-C void F(plotBar)(string name,int num,var label,var val,int type,int color);
-C void F(plotGraph)(string name,var num,var val,int type,int color);
+C void F(plot)(string name,var val,int type,zcolor color);
+C void F(plotBar)(string name,int num,var label,var val,int type,zcolor color);
+C void F(plotGraph)(string name,var num,var val,int type,zcolor color);
 C DATA* F(plotData)(string name);
-C DWORD F(color)(var Value,DWORD color1,DWORD color2,DWORD color3,DWORD color4,...);
-C DWORD F(colorScale)(DWORD Color,var Factor);
+C zcolor F(color)(var Value,zcolor color1,zcolor color2,zcolor color3,zcolor color4,...);
+C zcolor F(colorScale)(zcolor Color,var Factor);
 
 // price
 C var F(price)(int offset,...);
@@ -95,10 +95,10 @@ C int F(assetHistory)(string Name,int Mode);
 C int F(brokerAsset)(string AssetSymbol,var *pPrice,var *pSpread,var *pVol);
 C var F(brokerCommand)(int command,DWORD Parameter);
 // panel
-C int F0(panel)(int rows,int cols,int color,int size);
-C int F1(panel)(string Filename,int color,int size);
+C int F0(panel)(int rows,int cols,zcolor color,int size);
+C int F1(panel)(string Filename,zcolor color,int size);
 C string F(panelGet)(int row,int col);
-C int F(panelSet)(int row,int col,string text,int color,int style,int type,...);
+C int F(panelSet)(int row,int col,string text,zcolor color,int style,int type,...);
 C int F(panelSave)(string Filename);
 C int F(panelLoad)(string Filename);
 // date/time
@@ -510,7 +510,7 @@ C var F(Volatility)(vars Data,int Period);
 C var F(VolatilityC)(int TimePeriod,int EMAPeriod);
 C var F(VolatilityMM)(vars Data,int TimePeriod,int EMAPeriod);
 C var F(ZMA)(vars Data,int Period);
-C var F(ZigZag)(vars Data,var Depth,int Length,long Color);
+C var F(ZigZag)(vars Data,var Depth,int Length,zcolor Color);
  
 C var F(ccyStrength)(char* Currency);
 C void F(ccySet)(var Strength);

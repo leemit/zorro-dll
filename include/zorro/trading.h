@@ -170,7 +170,7 @@ typedef struct STATUS {
 	int    nWinStreak,nLossStreak; // length of current win and loss streak
 	int    numWinning,numLosing;   // number of winning and losing open trades, test/trade mode only
 	DWORD  dwWin,dwLoss;           // WFO win/loss flags 
-	DWORD  dwColorWin,dwColorLoss; // trade colors in chart
+	zcolor dwColorWin,dwColorLoss; // trade colors in chart
 								   // clear statistics until here
 	DWORD  flags;
 	int    nModel;        // model number for prediction
@@ -541,14 +541,14 @@ typedef struct GLOBALS
 	int nPlotHeight1,nPlotHeight2; // Main chart and additional chart height in pixels
 	int nPlotDate;       // start date of the plot (default = 0 = plot all)
 	int nPlotBars;       // number of bars to plot (default = 0 = all)
-	DWORD dwColorCandle;
-	DWORD dwColorUp,dwColorDn; // color of white / black candles
-	DWORD dwColorEquity,dwColorDD;
-	DWORD dwColorWin,dwColorLoss;
+	zcolor dwColorCandle;
+	zcolor dwColorUp,dwColorDn; // color of white / black candles
+	zcolor dwColorEquity,dwColorDD;
+	zcolor dwColorWin,dwColorLoss;
 	string sPlotLabelFormat;
 	int nPlotTrade;
-	DWORD dwColorBars[3];
-	DWORD dwColorPanel[6];
+	zcolor dwColorBars[3];
+	zcolor dwColorPanel[6];
 	int nPlotPeriod;     // Chart update period in minutes
 	int nPlotMode;
 
@@ -767,24 +767,24 @@ typedef struct GLOBALS
 #define PL_LONG (1<<7)
 #define PL_FINE (1<<8)
 
-#define RED       0xff0000
-#define GREEN     0x00ff00
-#define BLUE      0x0000ff
-#define CYAN      0x00ffff
-#define DARKBLUE  0x0000a0
-#define LIGHTBLUE 0xadd8e6
-#define PURPLE    0x800080
-#define YELLOW    0xffff00
-#define MAGENTA   0xff00ff
-#define ORANGE    0xffa500
-#define DARKGREEN 0x008000
-#define OLIVE     0x808000
-#define MAROON    0x800000
-#define SILVER    0xc0c0c0
-#define GREY      0x808080
-#define BLACK     0x010101
-#define LIGHT     0x606060
-#define TRANSP    0x80000000
+#define RED       0xff0000ul
+#define GREEN     0x00ff00ul
+#define BLUE      0x0000fful
+#define CYAN      0x00fffful
+#define DARKBLUE  0x0000a0ul
+#define LIGHTBLUE 0xadd8e6ul
+#define PURPLE    0x800080ul
+#define YELLOW    0xffff00ul
+#define MAGENTA   0xff00fful
+#define ORANGE    0xffa500ul
+#define DARKGREEN 0x008000ul
+#define OLIVE     0x808000ul
+#define MAROON    0x800000ul
+#define SILVER    0xc0c0c0ul
+#define GREY      0x808080ul
+#define BLACK     0x010101ul
+#define LIGHT     0x606060ul
+#define TRANSP    0x80000000ul
 
 #define TO_WINDOW 1 // print channels
 #define TO_LOG    2
