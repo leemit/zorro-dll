@@ -1,34 +1,41 @@
 
 #pragma once
 
-template <typename EnumType, typename UnderlyingType>
+#if ZORRO_CPP >= 11
+#include <type_traits>
+#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename ::std::underlying_type<enumType>::type
+#else
+#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename enumType::TUnderlyingType
+#endif
+
+template <typename EnumType, typename UnderlyingType = ZORRO_ENUM_UNDERLYING_TYPE(EnumType)>
 class CBitfield
 {
 public:
 	typedef CBitfield<EnumType, UnderlyingType> TThis;
 	typedef EnumType TEnum;
-	typedef UnderlyingType TInt;
+	typedef UnderlyingType TUnderlyingType;
 
 	CBitfield() : m_value() {}
 	~CBitfield() {}
 
-	CBitfield(TEnum value) : m_value( static_cast<TInt>( value ) ) {}
+	CBitfield(TEnum value) : m_value( static_cast<TUnderlyingType>( value ) ) {}
 
 	const TThis operator | ( const TThis& other ) const { return TThis( m_value | other.m_value ); }
 	const TThis operator & ( const TThis& other ) const { return TThis( m_value & other.m_value ); }
-	const TThis operator | ( const TEnum& other ) const { return TThis( m_value | static_cast<TInt>( other ) ); }
-	const TThis operator & ( const TEnum& other ) const { return TThis( m_value & static_cast<TInt>( other ) ); }
+	const TThis operator | ( const TEnum& other ) const { return TThis( m_value | static_cast<TUnderlyingType>( other ) ); }
+	const TThis operator & ( const TEnum& other ) const { return TThis( m_value & static_cast<TUnderlyingType>( other ) ); }
 	const TThis operator ~ () const                     { return TThis( ~m_value ); }
 
 	const TThis& operator =  ( const TThis& other ) { m_value =  other.m_value; return *this; }
 	const TThis& operator |= ( const TThis& other ) { m_value |= other.m_value; return *this; }
 	const TThis& operator &= ( const TThis& other ) { m_value &= other.m_value; return *this; }
 
-	const TThis& operator =  ( const TEnum& other ) { m_value =  static_cast<TInt>( other ); return *this; }
-	const TThis& operator |= ( const TEnum& other ) { m_value |= static_cast<TInt>( other ); return *this; }
-	const TThis& operator &= ( const TEnum& other ) { m_value &= static_cast<TInt>( other ); return *this; }
+	const TThis& operator =  ( const TEnum& other ) { m_value =  static_cast<TUnderlyingType>( other ); return *this; }
+	const TThis& operator |= ( const TEnum& other ) { m_value |= static_cast<TUnderlyingType>( other ); return *this; }
+	const TThis& operator &= ( const TEnum& other ) { m_value &= static_cast<TUnderlyingType>( other ); return *this; }
 
-	operator TInt() const { return m_value; }
+	operator TUnderlyingType() const { return m_value; }
 	operator bool() const { return m_value != 0; }
 
 	const bool operator == ( const TThis& other ) const { return m_value == other.m_value; }
@@ -38,17 +45,17 @@ public:
 	const bool operator >  ( const TThis& other ) const { return m_value >  other.m_value; }
 	const bool operator >= ( const TThis& other ) const { return m_value >= other.m_value; }
 
-	const bool operator == ( const TEnum& other ) const { return m_value == static_cast<TInt>( other ); }
-	const bool operator != ( const TEnum& other ) const { return m_value != static_cast<TInt>( other ); }
-	const bool operator <  ( const TEnum& other ) const { return m_value <  static_cast<TInt>( other ); }
-	const bool operator <= ( const TEnum& other ) const { return m_value <= static_cast<TInt>( other ); }
-	const bool operator >  ( const TEnum& other ) const { return m_value >  static_cast<TInt>( other ); }
-	const bool operator >= ( const TEnum& other ) const { return m_value >= static_cast<TInt>( other ); }
+	const bool operator == ( const TEnum& other ) const { return m_value == static_cast<TUnderlyingType>( other ); }
+	const bool operator != ( const TEnum& other ) const { return m_value != static_cast<TUnderlyingType>( other ); }
+	const bool operator <  ( const TEnum& other ) const { return m_value <  static_cast<TUnderlyingType>( other ); }
+	const bool operator <= ( const TEnum& other ) const { return m_value <= static_cast<TUnderlyingType>( other ); }
+	const bool operator >  ( const TEnum& other ) const { return m_value >  static_cast<TUnderlyingType>( other ); }
+	const bool operator >= ( const TEnum& other ) const { return m_value >= static_cast<TUnderlyingType>( other ); }
 
 private:
-	CBitfield(TInt value) : m_value( value ) {}
+	CBitfield(TUnderlyingType value) : m_value( value ) {}
 
-	TInt m_value;
+	TUnderlyingType m_value;
 };
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \
@@ -61,4 +68,4 @@ private:
 	inline intType operator ~ ( enumType value )                { return ~static_cast<intType>( value ); } \
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS(enumType) \
-        ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, int)
+        ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, ZORRO_ENUM_UNDERLYING_TYPE(enumType))

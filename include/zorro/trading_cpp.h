@@ -3,13 +3,26 @@
 
 #include "types.h"
 #include "bitfield.h"
+#include "enumtype.h"
 
 #if ZORRO_CPP >= 11
-#define ZORRO_ENUM_OPEN(name) typedef enum class name {
-#define ZORRO_ENUM_CLOSE(name) } name;
+#define ZORRO_OPEN_ENUM(name) \
+	typedef enum class name {
+#define ZORRO_OPEN_ENUM_TYPE(name, type) \
+	typedef enum class name : type {
+#define ZORRO_CLOSE_ENUM(name) \
+	} name;
 #else
-#define ZORRO_ENUM_OPEN(name) namespace N##name { enum name {
-#define ZORRO_ENUM_CLOSE(name) }; } typedef N##name::name name;
+#define ZORRO_OPEN_ENUM(name) \
+	struct S##name##Def : public SEnumBaseDef<int> { \
+		enum EnumType {
+#define ZORRO_OPEN_ENUM_TYPE(name, type) \
+	struct S##name##Def : public SEnumBaseDef<type> { \
+		enum EnumType {
+#define ZORRO_CLOSE_ENUM(name) \
+		}; \
+	}; \
+	typedef CEnumType<S##name##Def> name;
 #endif
 
 const var PI  = 3.14159265359;
@@ -31,7 +44,7 @@ const int SCRIPT_VERSION = 255;
 #pragma push_macro("IGNORE")
 #undef IGNORE
 
-ZORRO_ENUM_OPEN(ETradeFlag)
+ZORRO_OPEN_ENUM(ETradeFlag)
 	SHORT       = (1<<0),  // short position
 	BID         = (1<<0),
 	OPEN        = (1<<1),  // position is open
@@ -65,13 +78,13 @@ ZORRO_ENUM_OPEN(ETradeFlag)
 	BAR         = (1<<29), // run TMF on any bar only, not any tick
 	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
 	NEW         = (1<<31), // just created in a TMF 
-ZORRO_ENUM_CLOSE(ETradeFlag)
+ZORRO_CLOSE_ENUM(ETradeFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ETradeFlag)
-typedef CBitfield<ETradeFlag, int> TTradeBitfield;
+typedef CBitfield<ETradeFlag> TTradeBitfield;
 
 #pragma pop_macro("IGNORE")
 
-ZORRO_ENUM_OPEN(EZorroFlag)
+ZORRO_OPEN_ENUM(EZorroFlag)
 	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
 	SKIP2        = (1<<1),  // skip 2nd of every 3 weeks
 	SKIP3        = (1<<2),  // skip 3rd of every 3 weeks
@@ -101,11 +114,11 @@ ZORRO_ENUM_OPEN(EZorroFlag)
 	BALANCE      = (1<<28), // store and display balance rather than equity curves
 	STEPWISE     = (1<<29), // stepwise debugging (Zorro S)
 	ALLCYCLES    = (1<<30), // sum up statistics over all sample cycles
-ZORRO_ENUM_CLOSE(EZorroFlag)
+ZORRO_CLOSE_ENUM(EZorroFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EZorroFlag)
-typedef CBitfield<EZorroFlag, int> TZorroBitfield;
+typedef CBitfield<EZorroFlag> TZorroBitfield;
 
-ZORRO_ENUM_OPEN(EStatusFlag)
+ZORRO_OPEN_ENUM(EStatusFlag)
 	TRADING      = (1<<0),  // trades have been opened
 	CHANGED      = (1<<1),  // script or asset was changed -> init strategy sliders
 	INITRUN      = (1<<2),  // init run before the first bar, for initialization
@@ -135,18 +148,18 @@ ZORRO_ENUM_OPEN(EStatusFlag)
 	RUNNING      = (1<<26), // Simulation is running
 	FIRSTINITRUN = (1<<27), // Really first run
 	SHORTING     = (1<<28), // Short trades have been opened
-ZORRO_ENUM_CLOSE(EStatusFlag)
+ZORRO_CLOSE_ENUM(EStatusFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EStatusFlag)
-typedef CBitfield<EStatusFlag, int> TStatusBitfield;
+typedef CBitfield<EStatusFlag> TStatusBitfield;
 
-ZORRO_ENUM_OPEN(EOrderFillMode)
+ZORRO_OPEN_ENUM(EOrderFillMode)
 	NAIVE        = 0,
 	ATCLOSE      = 1,
 	DELAYED      = 3,
 	HFT          = 8,
-ZORRO_ENUM_CLOSE(EOrderFillMode)
+ZORRO_CLOSE_ENUM(EOrderFillMode)
 
-ZORRO_ENUM_OPEN(EVerbosity)
+ZORRO_OPEN_ENUM(EVerbosity)
 	LEVEL_0      = 0,
 	LEVEL_1      = 1,
 	LEVEL_2      = 2,
@@ -155,11 +168,11 @@ ZORRO_ENUM_OPEN(EVerbosity)
 	DIAG         = (1<<3),
 	ALERT        = (1<<4),
 	LOGMSG       = static_cast<int>(EZorroFlag::LOGMSG), // show log in message window
-ZORRO_ENUM_CLOSE(EVerbosity)
+ZORRO_CLOSE_ENUM(EVerbosity)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EVerbosity)
-typedef CBitfield<EVerbosity, int> TVerbosityBitfield;
+typedef CBitfield<EVerbosity> TVerbosityBitfield;
 
-ZORRO_ENUM_OPEN(EAdviseMode)
+ZORRO_OPEN_ENUM(EAdviseMode)
 	PREVIOUS     = 0,       // use the method and signals of the last advise call
 	PATTERNS_2   = 2,       // number of pattern groups
 	PATTERNS_3   = 3,
@@ -174,11 +187,11 @@ ZORRO_ENUM_OPEN(EAdviseMode)
 	FUZZY        = (1<<25), // match fuzzy
 	SIGNALS      = (1<<26), // export signals + objective to .csv
 	BALANCED     = (1<<28), // balance positive and negative results
-ZORRO_ENUM_CLOSE(EAdviseMode)
+ZORRO_CLOSE_ENUM(EAdviseMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EAdviseMode)
-typedef CBitfield<EAdviseMode, int> TAdviseModeBitfield;
+typedef CBitfield<EAdviseMode> TAdviseModeBitfield;
 
-ZORRO_ENUM_OPEN(ENeuralMode)
+ZORRO_OPEN_ENUM(ENeuralMode)
 	NEURAL_INIT    = (1<<20),
 	NEURAL_EXIT    = (2<<20),
 	NEURAL_LEARN   = (4<<20),
@@ -186,20 +199,20 @@ ZORRO_ENUM_OPEN(ENeuralMode)
 	NEURAL_PREDICT = (8<<20),
 	NEURAL_SAVE    = (16<<20),
 	NEURAL_LOAD    = (17<<20),
-ZORRO_ENUM_CLOSE(ENeuralMode)
+ZORRO_CLOSE_ENUM(ENeuralMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ENeuralMode)
-typedef CBitfield<ENeuralMode, int> TNeuralModeBitfield;
+typedef CBitfield<ENeuralMode> TNeuralModeBitfield;
 
-ZORRO_ENUM_OPEN(EPredictionType)
+ZORRO_OPEN_ENUM(EPredictionType)
 	CROSSOVER  = (1<<21),
 	PEAK       = (1<<22),
 	VALLEY     = (1<<23),
 	PARABOLIC  = (1<<20),
-ZORRO_ENUM_CLOSE(EPredictionType)
+ZORRO_CLOSE_ENUM(EPredictionType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPredictionType)
-typedef CBitfield<EPredictionType, int> TPredictionTypeBitfield;
+typedef CBitfield<EPredictionType> TPredictionTypeBitfield;
 
-ZORRO_ENUM_OPEN(EHistoryMode)
+ZORRO_OPEN_ENUM(EHistoryMode)
 	UNADJUSTED_BROKER_T1 = 0,
 	UNADJUSTED_BROKER_M1 = 1,
 	UNADJUSTED  = (1<<9),
@@ -211,54 +224,54 @@ ZORRO_ENUM_OPEN(EHistoryMode)
 	FROM_AV     = (1<<15),
 	FROM_STOOQ  = (1<<16),
 	FROM_QTABLE = (1<<17),
-ZORRO_ENUM_CLOSE(EHistoryMode)
+ZORRO_CLOSE_ENUM(EHistoryMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EHistoryMode)
-typedef CBitfield<EHistoryMode, int> THistoryModeBitfield;
+typedef CBitfield<EHistoryMode> THistoryModeBitfield;
 
-ZORRO_ENUM_OPEN(EAssetType)
+ZORRO_OPEN_ENUM(EAssetType)
 	FOREX     = 1,
 	INDEX     = 2,
 	CMDTY     = 3,
 	STOCK     = 4,
 	BOND      = 5,
-ZORRO_ENUM_CLOSE(EAssetType)
+ZORRO_CLOSE_ENUM(EAssetType)
 
-ZORRO_ENUM_OPEN(EDetrendMode)
+ZORRO_OPEN_ENUM(EDetrendMode)
 	TRADES    = (1<<0),
 	PRICES    = (1<<1),
 	CURVE     = (1<<2),
 	INVERT    = (1<<3),
 	NOPRICE   = (1<<4),
 	SHUFFLE   = (1<<5),
-ZORRO_ENUM_CLOSE(EDetrendMode)
+ZORRO_CLOSE_ENUM(EDetrendMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EDetrendMode)
-typedef CBitfield<EDetrendMode, int> TDetrendModeBitfield;
+typedef CBitfield<EDetrendMode> TDetrendModeBitfield;
 
-ZORRO_ENUM_OPEN(ERandomizeMode)
+ZORRO_OPEN_ENUM(ERandomizeMode)
 	DETREND   = (1<<2),
 	BOOTSTRAP = (1<<6),
-ZORRO_ENUM_CLOSE(ERandomizeMode)
+ZORRO_CLOSE_ENUM(ERandomizeMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ERandomizeMode)
-typedef CBitfield<ERandomizeMode, int> TRandomizeModeBitfield;
+typedef CBitfield<ERandomizeMode> TRandomizeModeBitfield;
 
-ZORRO_ENUM_OPEN(EOptimizeMode)
+ZORRO_OPEN_ENUM(EOptimizeMode)
 	LUCKY     = (1<<8),
 	PHANTOM   = (1<<16),
 	PEAK      = (1<<22),
-ZORRO_ENUM_CLOSE(EOptimizeMode)
+ZORRO_CLOSE_ENUM(EOptimizeMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EOptimizeMode)
-typedef CBitfield<EOptimizeMode, int> TOptimizeModeBitfield;
+typedef CBitfield<EOptimizeMode> TOptimizeModeBitfield;
 
-ZORRO_ENUM_OPEN(ETimeZone)
+ZORRO_OPEN_ENUM(ETimeZone)
 	UTC       = 24, // Coordinated Universal Time
 	WET       =  0, // Western European Time (London)
 	CET       =  1, // European time zone (Frankfurt)
 	ET        = -5, // Eastern Time (New York)
 	JST       =  9, // Japan Standard Time (Tokyo)
 	AEST      = 10, // Australian Eastern Standard Time (Sydney)
-ZORRO_ENUM_CLOSE(ETimeZone)
+ZORRO_CLOSE_ENUM(ETimeZone)
 
-ZORRO_ENUM_OPEN(EWeekday)
+ZORRO_OPEN_ENUM(EWeekday)
 	MONDAY    = 1,
 	TUESDAY   = 2,
 	WEDNESDAY = 3,
@@ -266,9 +279,9 @@ ZORRO_ENUM_OPEN(EWeekday)
 	FRIDAY    = 5,
 	SATURDAY  = 6,
 	SUNDAY    = 7,
-ZORRO_ENUM_CLOSE(EWeekday)
+ZORRO_CLOSE_ENUM(EWeekday)
 
-ZORRO_ENUM_OPEN(EPlotType)
+ZORRO_OPEN_ENUM(EPlotType)
 	REGULAR   = 0,
 	NEW       = (1<<0),  // begin new chart
 	BARS      = (1<<1),  // bars instead of curves
@@ -298,17 +311,17 @@ ZORRO_ENUM_OPEN(EPlotType)
 	TRIANGLE4 = (DOT+(6<<20)),
 	CROSS     = (DOT+(8<<20)),
 	CROSS2    = (DOT+(9<<20)),
-ZORRO_ENUM_CLOSE(EPlotType)
+ZORRO_CLOSE_ENUM(EPlotType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotType)
-typedef CBitfield<EPlotType, int> TPlotTypeBitfield;
+typedef CBitfield<EPlotType> TPlotTypeBitfield;
 
-ZORRO_ENUM_OPEN(EPlotMode)
+ZORRO_OPEN_ENUM(EPlotMode)
 	PL_ALL    = (1<<6),
 	PL_LONG   = (1<<7),
 	PL_FINE   = (1<<8),
-ZORRO_ENUM_CLOSE(EPlotMode)
+ZORRO_CLOSE_ENUM(EPlotMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
-typedef CBitfield<EPlotMode, int> TPlotModeBitfield;
+typedef CBitfield<EPlotMode> TPlotModeBitfield;
 
 const color_t RED       = 0xff0000;
 const color_t GREEN     = 0x00ff00;
@@ -329,7 +342,7 @@ const color_t BLACK     = 0x010101;
 const color_t LIGHT     = 0x606060;
 const color_t TRANSP    = 0x80000000;
 
-ZORRO_ENUM_OPEN(EPrintMode)
+ZORRO_OPEN_ENUM(EPrintMode)
 	TO_WINDOW =  1,
 	TO_LOG    =  2,
 	TO_DIAG   =  3,
@@ -344,19 +357,19 @@ ZORRO_ENUM_OPEN(EPrintMode)
 	TO_PANEL  = 18,
 	TRAINMODE = static_cast<int>(EStatusFlag::TRAINMODE),
 	TO_ANY    = (TO_WINDOW + TRAINMODE),
-ZORRO_ENUM_CLOSE(EPrintMode)
+ZORRO_CLOSE_ENUM(EPrintMode)
 
-ZORRO_ENUM_OPEN(ESaveMode)
+ZORRO_OPEN_ENUM(ESaveMode)
 	TRADES    = (1<<0),
 	SLIDERS   = (1<<1),
 	ALGOVARS  = (1<<2),
 	BACKUP    = (1<<8),
 	HTML      = (1<<9),
-ZORRO_ENUM_CLOSE(ESaveMode)
+ZORRO_CLOSE_ENUM(ESaveMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ESaveMode)
-typedef CBitfield<ESaveMode, int> TSaveModeBitfield;
+typedef CBitfield<ESaveMode> TSaveModeBitfield;
 
-ZORRO_ENUM_OPEN(EBrokerCmd)
+ZORRO_OPEN_ENUM(EBrokerCmd)
 	GET_TIME           =  5,  // brokerCommand, last incoming tick time
 	GET_DIGITS         = 12, // Count of digits after decimal point 
 	GET_STOPLEVEL      = 14, // Stop level in points.
@@ -409,9 +422,9 @@ ZORRO_ENUM_OPEN(EBrokerCmd)
 	PLOT_HLINE         = 280, // plot to the MT4 chart window
 	PLOT_TEXT          = 281,
 	PLOT_MOVE          = 282,
-ZORRO_ENUM_CLOSE(EBrokerCmd)
+ZORRO_CLOSE_ENUM(EBrokerCmd)
 
-ZORRO_ENUM_OPEN(EContractType)
+ZORRO_OPEN_ENUM(EContractType)
 	CALL      = (1<<0),
 	PUT       = (1<<1),
 	EUROPEAN  = (1<<2),
@@ -420,11 +433,11 @@ ZORRO_ENUM_OPEN(EContractType)
 	ONLYMATCH = (1<<6), // select only contracts that exactly match the parameters 
 	ONLYW3    = (1<<7), // select only contracts in 3rd week
 	OPTION    = (CALL | PUT | EUROPEAN),
-ZORRO_ENUM_CLOSE(EContractType)
+ZORRO_CLOSE_ENUM(EContractType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EContractType)
-typedef CBitfield<EContractType, int> TContractTypeBitfield;
+typedef CBitfield<EContractType> TContractTypeBitfield;
 
-ZORRO_ENUM_OPEN(EMovingAverageType)
+ZORRO_OPEN_ENUM(EMovingAverageType)
 	SMA       = 0,
 	EMA       = 1,
 	WMA       = 2,
@@ -434,7 +447,7 @@ ZORRO_ENUM_OPEN(EMovingAverageType)
 	KAMA      = 6,
 	MAMA      = 7,
 	T3        = 8,
-ZORRO_ENUM_CLOSE(EMovingAverageType)
+ZORRO_CLOSE_ENUM(EMovingAverageType)
 
 #define NO_DEFINES
 #include "trading.h"
@@ -450,5 +463,6 @@ inline var ve(mat M, int n)
 	return *(M->dat + n);
 }
 
-#undef ZORRO_ENUM_OPEN
-#undef ZORRO_ENUM_CLOSE
+#undef ZORRO_OPEN_ENUM
+#undef ZORRO_OPEN_ENUM_TYPE
+#undef ZORRO_CLOSE_ENUM
