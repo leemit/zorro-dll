@@ -18,6 +18,7 @@
     <ClInclude Include="..\include\zorro\bitfield.h" />
     <ClInclude Include="..\include\zorro\enum.h" />
     <ClInclude Include="..\include\zorro\functions.h" />
+    <ClInclude Include="..\include\zorro\functions_cpp.h" />
     <ClInclude Include="..\include\zorro\func_list.h" />
     <ClInclude Include="..\include\zorro\trading.h" />
     <ClInclude Include="..\include\zorro\trading_cpp.h" />

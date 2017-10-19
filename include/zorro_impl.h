@@ -4,9 +4,8 @@
 ///////////////////////////////////////////////////////
 #pragma once
 
+#define ZORRO_IMPL
 #include "zorro/zorro_common.h"
-
-GLOBALS* g;
 
 ////////////////////////////////////////////////////////
 // Default DllMain
@@ -27,14 +26,7 @@ BOOL WINAPI DllMain(
 #endif // ZORRO_DLL
 
 ////////////////////////////////////////////////////////
-// Define function pointers
-#define F(x) (*x)
-#define F0(x) (*x##0)
-#define F1(x) (*x##1)
-#define F2(x) (*x##2)
-#define F3(x) (*x##3)
-#define C
-#include "zorro/functions.h"
+#include "zorro/functions_cpp.h"
 
 ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 {
@@ -64,3 +56,4 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 
 #undef ZORRO_BUILD_VARIABLE_TYPE
 #undef ZORRO_BUILD_EXPRESSION_TYPE
+#undef ZORRO_IMPL

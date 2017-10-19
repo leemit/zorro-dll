@@ -56,5 +56,8 @@
     <ClInclude Include="..\include\zorro\enum.h">
       <Filter>include\zorro</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\zorro\functions_cpp.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

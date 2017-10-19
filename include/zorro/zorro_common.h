@@ -35,6 +35,12 @@
 
 #pragma pack(pop)
 
+#ifdef ZORRO_IMPL
+GLOBALS* g;
+#else
+extern GLOBALS* g;
+#endif
+
 #define ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
 struct S##name##Variable : SVariableBaseDef<type> { \
 	inline type& get() const { return (link); } \
