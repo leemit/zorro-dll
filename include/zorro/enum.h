@@ -29,3 +29,23 @@ struct SEnumBaseDef
 {
 	typedef UnderlyingType TUnderlyingType;
 };
+
+#if ZORRO_CPP >= 11
+#define ZORRO_OPEN_ENUM(name) \
+typedef enum class name {
+#define ZORRO_OPEN_ENUM_TYPE(name, type) \
+typedef enum class name : type {
+#define ZORRO_CLOSE_ENUM(name) \
+} name;
+#else
+#define ZORRO_OPEN_ENUM(name) \
+struct S##name##Def : public SEnumBaseDef<int> { \
+	enum EnumType {
+#define ZORRO_OPEN_ENUM_TYPE(name, type) \
+struct S##name##Def : public SEnumBaseDef<type> { \
+	enum EnumType {
+#define ZORRO_CLOSE_ENUM(name) \
+	}; \
+}; \
+typedef CEnum<S##name##Def> name;
+#endif
