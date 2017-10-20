@@ -26,9 +26,6 @@
     <ClInclude Include="..\include\zorro_impl.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\zorro\func_list.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\zorro\trading_cpp.h">
       <Filter>include\zorro</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
     <ClInclude Include="..\include\zorro\litec\variables.h">
+      <Filter>include\zorro\litec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\litec\functions_list.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
   </ItemGroup>

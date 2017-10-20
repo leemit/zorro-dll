@@ -10,12 +10,14 @@ ZORRO_NAMESPACE_OPEN
 #define F1(x) (*x##1)
 #define F2(x) (*x##2)
 #define F3(x) (*x##3)
+#define R(x) x
+#define A(x) x
 #ifdef ZORRO_IMPL
 #define C
 #else
 #define C extern
 #endif
-#include "litec/functions.h"
+#include "litec/functions_list.h"
 
 ///////////////////////////////////////////////////////
 // convenience definitions for overloaded functions

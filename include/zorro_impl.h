@@ -39,7 +39,10 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 #define F1(x) (DWORD&)x##1 = g->Functions[N++];
 #define F2(x) (DWORD&)x##2 = g->Functions[N++];
 #define F3(x) (DWORD&)x##3 = g->Functions[N++];
-#include "zorro/func_list.h"
+#define C
+#define R(x)
+#define A(x)
+#include "zorro/litec/functions_list.h"
 
 	return SCRIPT_VERSION;
 }
