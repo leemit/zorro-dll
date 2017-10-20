@@ -5,11 +5,11 @@ ZORRO_NAMESPACE_OPEN
 
 ///////////////////////////////////////////////////////
 // Declare function pointers
-#define F(x) (*x)
-#define F0(x) (*x##0)
-#define F1(x) (*x##1)
-#define F2(x) (*x##2)
-#define F3(x) (*x##3)
+#define F(x) (ZORRO_CALL* x)
+#define F0(x) (ZORRO_CALL* x##0)
+#define F1(x) (ZORRO_CALL* x##1)
+#define F2(x) (ZORRO_CALL* x##2)
+#define F3(x) (ZORRO_CALL* x##3)
 #define R(x) x
 #define A(x) x
 #define VA ,...
