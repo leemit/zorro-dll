@@ -34,14 +34,16 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 	g = Globals;
 	int N = 0;
 // Populate the list of function pointers
-#define F(x) (DWORD&)x = g->Functions[N++];
-#define F0(x) (DWORD&)x##0 = g->Functions[N++];
-#define F1(x) (DWORD&)x##1 = g->Functions[N++];
-#define F2(x) (DWORD&)x##2 = g->Functions[N++];
-#define F3(x) (DWORD&)x##3 = g->Functions[N++];
+#define F(x)  (DWORD&)x##_ptr  = g->Functions[N++];
+#define F0(x) (DWORD&)x##0_ptr = g->Functions[N++];
+#define F1(x) (DWORD&)x##1_ptr = g->Functions[N++];
+#define F2(x) (DWORD&)x##2_ptr = g->Functions[N++];
+#define F3(x) (DWORD&)x##3_ptr = g->Functions[N++];
 #define C
 #define R(x)
 #define A(x)
+#define D(x)
+#define I(x)
 #define VA ,...
 #include "zorro/litec/functions_list.h"
 
