@@ -2,19 +2,19 @@
 // Add new functions to the end
 
 // system functions
-C R(int) F(print) A((int to,const char* format,...));
-C R(int) F(msg) A((const char* format,...));
+C R(int) F(print) A((int to,const char* format VA));
+C R(int) F(msg) A((const char* format VA));
 C R(HWND) F(window) A((const char* title));
-C R(void) F(keys) A((const char* format,...));
+C R(void) F(keys) A((const char* format VA));
 C R(int) F(mouse) A((int* x,int* y,HWND hwnd));
 C R(int) F(hit) A((int key));
 C R(int) F(progress) A((int n1,int n2));
-C R(var) F0(slider) A((int N,int Pos,int Lower,int Upper,string Name,string Tooltip,...));
+C R(var) F0(slider) A((int N,int Pos,int Lower,int Upper,string Name,string Tooltip VA));
 C R(void) F(sound) A((const char* filename));
 
 C R(int) F(login) A((int mode));
 C R(int) F(exec) A((const char* name,const char* args,int mode));
-C R(void) F(quit) A((string text,...));
+C R(void) F(quit) A((string text VA));
 C R(int) F(memory) A((int mode));
 C R(int) F(wait) A((int ms));
 C R(var) F(timer) A(());
@@ -37,26 +37,26 @@ C R(void) F(plot) A((string name,var val,int type,zcolor color));
 C R(void) F(plotBar) A((string name,int num,var label,var val,int type,zcolor color));
 C R(void) F(plotGraph) A((string name,var num,var val,int type,zcolor color));
 C R(DATA*) F(plotData) A((string name));
-C R(zcolor) F(color) A((var Value,zcolor color1,zcolor color2,zcolor color3,zcolor color4,...));
+C R(zcolor) F(color) A((var Value,zcolor color1,zcolor color2,zcolor color3,zcolor color4 VA));
 C R(zcolor) F(colorScale) A((zcolor Color,var Factor));
 
 // price
-C R(var) F(price) A((int offset,...));
-C R(var) F(priceOpen) A((int offset,...));
-C R(var) F(priceClose) A((int offset,...));
-C R(var) F(priceHigh) A((int offset,...));
-C R(var) F(priceLow) A((int offset,...));
+C R(var) F(price) A((int offset VA));
+C R(var) F(priceOpen) A((int offset VA));
+C R(var) F(priceClose) A((int offset VA));
+C R(var) F(priceHigh) A((int offset VA));
+C R(var) F(priceLow) A((int offset VA));
 C R(int) F(priceSet) A((int offset,var Open, var High, var Low, var Close));
 C R(int) F(priceQuote) A((var Timestamp,var Quote));
-C R(var) F(marketVal) A((int offset,...));
-C R(var) F(marketVol) A((int offset,...));
+C R(var) F(marketVal) A((int offset VA));
+C R(var) F(marketVol) A((int offset VA));
 
 // trading
-C R(TRADE*) F0(enterLong) A((function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7,...));
-C R(TRADE*) F0(enterShort) A((function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7,...));
-C R(void) F0(exitLong) A((string name,var Limit,int lots,...));
-C R(void) F0(exitShort) A((string name,var Limit,int lots,...)); 
-C R(int) F0(exitTrade) A((TRADE* tr,var Limit,int lots,...)); 
+C R(TRADE*) F0(enterLong) A((function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7 VA));
+C R(TRADE*) F0(enterShort) A((function f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7 VA));
+C R(void) F0(exitLong) A((string name,var Limit,int lots VA));
+C R(void) F0(exitShort) A((string name,var Limit,int lots VA)); 
+C R(int) F0(exitTrade) A((TRADE* tr,var Limit,int lots VA)); 
 C R(void) F(cancelTrade) A((int id));
 C R(TRADE*) F(forTrade) A((int mode));
 C R(TRADE*) F(findTrade) A((string name));
@@ -74,7 +74,7 @@ C R(var) F1(contractPrice) A((TRADE* tr));
 C R(int) F0(contractPosition) A((CONTRACT* c));
 C R(int) F1(contractPosition) A((TRADE* tr));
 C R(int) F(contractCheck) A((TRADE* tr));
-C R(void) F(contractExercise) A((TRADE* tr,var Price,...));
+C R(void) F(contractExercise) A((TRADE* tr,var Price VA));
 
 // algo / asset
 C R(int) F(algo) A((string Name));
@@ -90,26 +90,26 @@ C R(var) F(brokerCommand) A((int command,DWORD Parameter));
 C R(int) F0(panel) A((int rows,int cols,zcolor color,int size));
 C R(int) F1(panel) A((string Filename,zcolor color,int size));
 C R(string) F(panelGet) A((int row,int col));
-C R(int) F(panelSet) A((int row,int col,string text,zcolor color,int style,int type,...));
+C R(int) F(panelSet) A((int row,int col,string text,zcolor color,int style,int type VA));
 C R(int) F(panelSave) A((string Filename));
 C R(int) F(panelLoad) A((string Filename));
 
 // date/time
-C R(int) F(year) A((int offset,...));           // current year of the simulation
-C R(int) F(month) A((int offset,...));          // current month of the simulation, 1 = January
-C R(int) F(week) A((int offset,...));           // current week number 
-C R(int) F(day) A((int offset,...));            // current day (1..31)
-C R(int) F(dom) A((int offset,...));            // number of days of the current month, 28..31
-C R(int) F(tdm) A((int offset,...));            // trading day of the current month, 1..23
-C R(int) F(tom) A((int offset,...));            // number of trading days of the current month, 20..23
-C R(int) F(dow) A((int offset,...));            // current day of the week: 1 = Monday, to 7 = Sunday.
-C R(int) F(ldow) A((int zone, int offset,...)); // local day of the week
-C R(int) F(hour) A((int offset,...));           // current hour
-C R(int) F(lhour) A((int zone,int offset,...)); // local hour in the given time zone
-C R(int) F(minute) A((int offset,...));         // current minute
+C R(int) F(year) A((int offset VA));           // current year of the simulation
+C R(int) F(month) A((int offset VA));          // current month of the simulation, 1 = January
+C R(int) F(week) A((int offset VA));           // current week number 
+C R(int) F(day) A((int offset VA));            // current day (1..31)
+C R(int) F(dom) A((int offset VA));            // number of days of the current month, 28..31
+C R(int) F(tdm) A((int offset VA));            // trading day of the current month, 1..23
+C R(int) F(tom) A((int offset VA));            // number of trading days of the current month, 20..23
+C R(int) F(dow) A((int offset VA));            // current day of the week: 1 = Monday, to 7 = Sunday.
+C R(int) F(ldow) A((int zone, int offset VA)); // local day of the week
+C R(int) F(hour) A((int offset VA));           // current hour
+C R(int) F(lhour) A((int zone,int offset VA)); // local hour in the given time zone
+C R(int) F(minute) A((int offset VA));         // current minute
 C R(var) F(second) A(());                       // current second
-C R(int) F(dst) A((int zone,int offset,...));   // daylight saving (1 or 0)
-C R(int) F(workday) A((int offset,...));
+C R(int) F(dst) A((int zone,int offset VA));   // daylight saving (1 or 0)
+C R(int) F(workday) A((int offset VA));
 C R(int) F(minutesAgo) A((int offset));
 C R(var) F(minutesWithin) A((int offset));
 C R(int) F(timeOffset) A((int zone,int days,int hour,int minute));
@@ -144,7 +144,7 @@ C R(var) F(strvar) A((string str,string name,var val));
 C R(string) F(strtext) A((string str,string name,string text));
 C R(string) F0(strdate) A((string format,int offset));
 C R(string) F1(strdate) A((string format,var date));
-C R(string) F(strf) A((const char* format,...));
+C R(string) F(strf) A((const char* format VA));
 C R(string) F(strx) A((char* str,const char* orig,const char* repl));
 C R(string) F(strxc) A((char* str,char orig,char repl));
 C R(string) F(strmid) A((string str,int first,int count));
@@ -184,13 +184,13 @@ C R(int) F(ftp_log) A((int mode));
 // dataset
 C R(int) F(dataDownload) A((const char* Code,int Mode,int Period));
 C R(int) F0(dataParse) A((int Handle,const char* Format,const char* FileName));
-C R(void) F(dataSave) A((int Handle,string FileName,int Start,int Num,...));
-C R(void) F(dataSaveCSV) A((int Handle,char* Format,char* Name,int Start,int Num,...));
+C R(void) F(dataSave) A((int Handle,string FileName,int Start,int Num VA));
+C R(void) F(dataSaveCSV) A((int Handle,char* Format,char* Name,int Start,int Num VA));
 C R(int) F(dataLoad) A((int Handle,string FileName,int Fields));
 C R(float*) F(dataNew) A((int Handle,int Records,int Fields));
 C R(void) F(dataSort) A((int Handle));
 C R(int) F(dataMerge) A((int Handle1,int Handle2));
-C R(int) F(dataAppend) A((int Handle1,int Handle2,int Start,int Num,...));
+C R(int) F(dataAppend) A((int Handle1,int Handle2,int Start,int Num VA));
 C R(int) F(dataFind) A((int Handle,var Date));
 C R(void) F0(dataSet) A((int Handle,int Row,int Col,var Value));
 C R(void) F1(dataSet) A((int Handle,int Row,int Col,int Value));
@@ -200,16 +200,16 @@ C R(string) F(dataStr) A((int Handle,int Row,int Col));
 
 // optimize
 C R(var) F(optimize) A((var val,var start,var end,var step,var tolerance));
-C R(char*) F0(loop) A((void* p1,...));
-C R(var) F0(adviseLong) A((int Method,var Objective,var s0,var s1,var s2,var s3,var s4,var s5,var s6,var s7,var s8,var s9,var s10,var s11,var s12,var s13,var s14,var s15,var s16,var s17,var s18,var s19,...));
+C R(char*) F0(loop) A((void* p1 VA));
+C R(var) F0(adviseLong) A((int Method,var Objective,var s0,var s1,var s2,var s3,var s4,var s5,var s6,var s7,var s8,var s9,var s10,var s11,var s12,var s13,var s14,var s15,var s16,var s17,var s18,var s19 VA));
 C R(var) F1(adviseLong) A((int Method,var Objective,var* Signals,long NumSignals));
-C R(var) F0(adviseShort) A((int Method,var Objective,var s0,var s1,var s2,var s3,var s4,var s5,var s6,var s7,var s8,var s9,var s10,var s11,var s12,var s13,var s14,var s15,var s16,var s17,var s18,var s19,...));
+C R(var) F0(adviseShort) A((int Method,var Objective,var s0,var s1,var s2,var s3,var s4,var s5,var s6,var s7,var s8,var s9,var s10,var s11,var s12,var s13,var s14,var s15,var s16,var s17,var s18,var s19 VA));
 C R(var) F1(adviseShort) A((int Method,var Objective,var* Signals,long NumSignals));
 
 // series
-C R(var*) F0(series) A((var value,int length,...));
+C R(var*) F0(series) A((var value,int length VA));
 C R(void) F(shift) A((var* Data,var value,int length));
-C R(var*) F(rev) A((var* Data,int length,...));
+C R(var*) F(rev) A((var* Data,int length VA));
 C R(void) F(sortData) A((var* Data,int length));
 C R(int*) F(sortIdx) A((var* Data,int length));
 C R(var) F(randomize) A((int Method,var *Out,var *In,int Length));
@@ -262,7 +262,7 @@ C R(var) F0(crossUnderF) A((var* a,var* b));
 C R(var) F1(crossUnderF) A((var* a,var b));
 
 // matrix
-C R(mat) F(matrix) A((int rows,int cols,...));
+C R(mat) F(matrix) A((int rows,int cols VA));
 C R(mat) F(matTrans) A((mat M,mat A));
 C R(mat) F0(matSet) A((mat M,mat A));
 C R(mat) F1(matSet) A((mat M,int row,int col,mat A));

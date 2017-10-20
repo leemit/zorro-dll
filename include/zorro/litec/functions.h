@@ -13,6 +13,7 @@
 #define C
 #define R(x) x
 #define A(x) x
+#define VA ,...
 
 #include "functions_list.h"
 

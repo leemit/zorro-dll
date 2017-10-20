@@ -42,6 +42,7 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 #define C
 #define R(x)
 #define A(x)
+#define VA ,...
 #include "zorro/litec/functions_list.h"
 
 	return SCRIPT_VERSION;

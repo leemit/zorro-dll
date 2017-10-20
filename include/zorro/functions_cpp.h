@@ -12,6 +12,7 @@ ZORRO_NAMESPACE_OPEN
 #define F3(x) (*x##3)
 #define R(x) x
 #define A(x) x
+#define VA ,...
 #ifdef ZORRO_IMPL
 #define C
 #else
@@ -21,19 +22,19 @@ ZORRO_NAMESPACE_OPEN
 
 ///////////////////////////////////////////////////////
 // convenience definitions for overloaded functions
-inline TRADE* enterLong(int lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0) {
+inline TRADE* enterLong(long lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0) {
 	return enterLong0(lots,entry,stop,takeprofit,trail,trailslope,traillock,trailstep,0);
 }
-inline TRADE* enterShort(int lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0) {
+inline TRADE* enterShort(long lots=0,var entry=0, var stop=0, var takeprofit=0, var trail=0, var trailslope=0, var traillock=0, var trailstep=0) {
 	return enterShort0(lots,entry,stop,takeprofit,trail,trailslope,traillock,trailstep,0);
 }
 template <typename FUNCTION> 
 inline TRADE* enterLong(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
-	return enterLong0(reinterpret_cast<DWORD>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+	return enterLong0(reinterpret_cast<function>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
 template <typename FUNCTION> 
 inline TRADE* enterShort(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
-	return enterShort0(reinterpret_cast<DWORD>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+	return enterShort0(reinterpret_cast<function>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
 inline void exitLong(string Name=0,var Limit=0,int nLots=0) {
 	exitLong0(Name,Limit,nLots);
