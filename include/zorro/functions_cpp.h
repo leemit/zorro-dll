@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <stdarg.h>
+
 ZORRO_NAMESPACE_OPEN
 
 ///////////////////////////////////////////////////////

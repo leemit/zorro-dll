@@ -3,11 +3,21 @@
 // Function Format:
 // C R(ReturnType) F(FunctionName) A((Arguments)) D({ return DF(FunctionName)(Arguments); });
 
+#ifdef D
+#define ZORRO_VA_CALL(valist, start, call) \
+	va_list valist; va_start(valist, start); \
+	call; va_end(valist);
+#define ZORRO_VA_RET_CALL(valist, start, ret, call) \
+	va_list valist; va_start(valist, start); \
+	ret _ret = call; va_end(valist); \
+	return _ret;
+#endif
+
 // system functions
-C R(int)  F(print)    A((int to,string format,...))         D({ return DF(print)   (to, format); });
-C R(int)  F(msg)      A((string format,...))                D({ return DF(msg)     (format); });
+C R(int)  F(print)    A((int to,string format,...))         D({ ZORRO_VA_RET_CALL(valist, format, int, DF(print)(to, format,valist)) });
+C R(int)  F(msg)      A((string format,...))                D({ ZORRO_VA_RET_CALL(valist, format, int, DF(msg)  (format,valist)) });
 C R(HWND) F(window)   A((string title))                     D({ return DF(window)  (title); });
-C R(void) F(keys)     A((string format,...))                D({ return DF(keys)    (format); });
+C R(void) F(keys)     A((string format,...))                D({ ZORRO_VA_CALL(valist, format, DF(keys) (format,valist)) });
 C R(int)  F(mouse)    A((int* x,int* y,HWND hwnd))          D({ return DF(mouse)   (x,y,hwnd); });
 C R(int)  F(hit)      A((int key))                          D({ return DF(hit)     (key); });
 C R(int)  F(progress) A((int n1,int n2))                    D({ return DF(progress)(n1,n2); });
@@ -17,7 +27,7 @@ C R(void) F(sound)    A((string filename))                  D({        DF(sound)
 
 C R(int)   F(login)   A((int mode))                         D({ return DF(login)        (mode); });
 C R(int)   F(exec)    A((string name,string args,int mode)) D({ return DF(exec)         (name,args,mode); });
-C R(void)  F(quit)    A((string text,...))                  D({        DF(quit)         (text); });
+C R(void)  F(quit)    A((string text,...))                  D({ ZORRO_VA_CALL(valist, text, DF(quit)(text,valist)) });
 C R(int)   F(memory)  A((int mode))                         D({ return DF(memory)       (mode); });
 C R(int)   F(wait)    A((int ms))                           D({ return DF(wait)         (ms); });
 C R(var)   F(timer)   A(())                                 D({ return DF(timer)        (); });
@@ -155,7 +165,7 @@ C R(var)     F(strvar)   A((string str,string name,var val))     D({ return DF(s
 C R(string)  F(strtext)  A((string str,string name,string text)) D({ return DF(strtext) (str,name,text); });
 C R(string)  F0(strdate) A((string format,int offset))           D({ return DF0(strdate)(format,offset); });
 C R(string)  F1(strdate) A((string format,var date))             D({ return DF1(strdate)(format,date); });
-C R(string)  F(strf)     A((string format,...))                  D({ return DF(strf)    (format); });
+C R(string)  F(strf)     A((string format,...))                  D({ ZORRO_VA_RET_CALL(valist, format, string, DF(strf)(format,valist)) });
 C R(string)  F(strx)     A((string str,string orig,string repl)) D({ return DF(strx)    (str,orig,repl); });
 C R(string)  F(strxc)    A((string str,char orig,char repl))     D({ return DF(strxc)   (str,orig,repl); });
 C R(string)  F(strmid)   A((string str,int first,int count))     D({ return DF(strmid)  (str,first,count); });
@@ -589,3 +599,5 @@ C R(int)    F2(dataParse)  A((int handle,string format,string fileName,string fi
 #undef DF3
 #undef I
 #undef VA
+#undef ZORRO_VA_CALL
+#undef ZORRO_VA_RET_CALL
