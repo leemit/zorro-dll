@@ -17,8 +17,8 @@
 #define PI  3.14159265359
 #define NIL 3e38
 
-#define me(M,row,col) *(M->dat + row*M->cols + col)
-#define ve(M,n)       *(M->dat+n)
+#define me(pMatrix,row,col) *(pMatrix->dat + row*pMatrix->cols + col)
+#define ve(pMatrix,n)       *(pMatrix->dat+n)
 
 #define TR_SHORT       (1<<0)  // short position
 #define TR_BID         (1<<0)

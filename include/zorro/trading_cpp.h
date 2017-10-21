@@ -28,14 +28,14 @@ const var PERIOD_D1  = 1440.0;
 const var PERIOD_W1  = 10080.0;
 const var PERIOD_MN1 = 43200.0;
 
-inline var me(mat M, int row, int col)
+inline var me(mat pMatrix, int row, int col)
 {
-	return *(M->dat + row*M->cols + col);
+	return *(pMatrix->dat + row*pMatrix->cols + col);
 }
 
-inline var ve(mat M, int n)
+inline var ve(mat pMatrix, int n)
 {
-	return *(M->dat + n);
+	return *(pMatrix->dat + n);
 }
 
 #pragma push_macro("IGNORE")
