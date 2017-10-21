@@ -4,10 +4,10 @@
 // C R(ReturnType) F(FunctionName) A((Arguments)) D({ return DF(FunctionName)(Arguments); });
 
 // system functions
-C R(int)  F(print)    A((int to,string format VA))          D({ return DF(print)   (to, format); });
-C R(int)  F(msg)      A((string format VA))                 D({ return DF(msg)     (format); });
+C R(int)  F(print)    A((int to,string format,...))         D({ return DF(print)   (to, format); });
+C R(int)  F(msg)      A((string format,...))                D({ return DF(msg)     (format); });
 C R(HWND) F(window)   A((string title))                     D({ return DF(window)  (title); });
-C R(void) F(keys)     A((string format VA))                 D({ return DF(keys)    (format); });
+C R(void) F(keys)     A((string format,...))                D({ return DF(keys)    (format); });
 C R(int)  F(mouse)    A((int* x,int* y,HWND hwnd))          D({ return DF(mouse)   (x,y,hwnd); });
 C R(int)  F(hit)      A((int key))                          D({ return DF(hit)     (key); });
 C R(int)  F(progress) A((int n1,int n2))                    D({ return DF(progress)(n1,n2); });
@@ -17,7 +17,7 @@ C R(void) F(sound)    A((string filename))                  D({        DF(sound)
 
 C R(int)   F(login)   A((int mode))                         D({ return DF(login)        (mode); });
 C R(int)   F(exec)    A((string name,string args,int mode)) D({ return DF(exec)         (name,args,mode); });
-C R(void)  F(quit)    A((string text VA))                   D({        DF(quit)         (text); });
+C R(void)  F(quit)    A((string text,...))                  D({        DF(quit)         (text); });
 C R(int)   F(memory)  A((int mode))                         D({ return DF(memory)       (mode); });
 C R(int)   F(wait)    A((int ms))                           D({ return DF(wait)         (ms); });
 C R(var)   F(timer)   A(())                                 D({ return DF(timer)        (); });
@@ -155,7 +155,7 @@ C R(var)     F(strvar)   A((string str,string name,var val))     D({ return DF(s
 C R(string)  F(strtext)  A((string str,string name,string text)) D({ return DF(strtext) (str,name,text); });
 C R(string)  F0(strdate) A((string format,int offset))           D({ return DF0(strdate)(format,offset); });
 C R(string)  F1(strdate) A((string format,var date))             D({ return DF1(strdate)(format,date); });
-C R(string)  F(strf)     A((string format VA))                   D({ return DF(strf)    (format); });
+C R(string)  F(strf)     A((string format,...))                  D({ return DF(strf)    (format); });
 C R(string)  F(strx)     A((string str,string orig,string repl)) D({ return DF(strx)    (str,orig,repl); });
 C R(string)  F(strxc)    A((string str,char orig,char repl))     D({ return DF(strxc)   (str,orig,repl); });
 C R(string)  F(strmid)   A((string str,int first,int count))     D({ return DF(strmid)  (str,first,count); });
