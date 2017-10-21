@@ -6,15 +6,6 @@
 #ifndef trading_h
 #define trading_h
 
-/////////////////////////////////////////////////////////////////////
-// constants (don't change!)
-#define NAMESIZE    16
-#define NAMESIZE2   40
-#define NUM_SKILLS  8
-#define NUM_RESULTS 20
-#define MAX_PARAMS  16   // max optimize() calls
-#define MAX_STEPS   1000 // max optimize() steps
-
 #include "trading_types.h"
 
 #define SCRIPT_VERSION	255

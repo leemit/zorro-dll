@@ -6,13 +6,6 @@
 
 ZORRO_NAMESPACE_OPEN
 
-const int NAMESIZE    = 16;
-const int NAMESIZE2   = 40;
-const int NUM_SKILLS  = 8;
-const int NUM_RESULTS = 20;
-const int MAX_PARAMS  = 16;
-const int MAX_STEPS   = 1000;
-
 #include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;
