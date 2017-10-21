@@ -52,5 +52,32 @@ template <typename FUNCTION>
 inline TRADE* enterShort(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
 	return enterShort0_ptr(reinterpret_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
+inline int is(ETrainFlag* mode,int flag) {
+	return is1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETrainFlag)*>(mode),flag);
+}
+inline int is(ETradeFlag* mode,int flag) {
+	return is1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETradeFlag)*>(mode),flag);
+}
+inline int is(EPlotMode* mode,int flag) {
+	return is1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
+}
+inline void set(ETrainFlag* mode,int flag) {
+	set1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETrainFlag)*>(mode),flag);
+}
+inline void set(ETradeFlag* mode,int flag) {
+	set1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETradeFlag)*>(mode),flag);
+}
+inline void set(EPlotMode* mode,int flag) {
+	set1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
+}
+inline void reset(ETrainFlag* mode,int flag) {
+	reset1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETrainFlag)*>(mode),flag);
+}
+inline void reset(ETradeFlag* mode,int flag) {
+	reset1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETradeFlag)*>(mode),flag);
+}
+inline void reset(EPlotMode* mode,int flag) {
+	reset1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
+}
 
 ZORRO_NAMESPACE_CLOSE

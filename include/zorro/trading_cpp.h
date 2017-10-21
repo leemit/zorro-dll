@@ -6,75 +6,43 @@
 
 ZORRO_NAMESPACE_OPEN
 
-#include "litec/trading_types.h"
-
-const var PI  = 3.14159265359;
-const var NIL = 3e38;
-
-const char* const ALL = "*";
-const int NOW = -999999;
-const int UPDATE = (1<<5);
-const int SCRIPT_VERSION = 255;
-
-const var PERIOD_MS1 = 0.001/60.0;
-const var PERIOD_S1  = 1.0/60.0;
-const var PERIOD_M1  = 1.0;
-const var PERIOD_M5  = 5.0;
-const var PERIOD_M15 = 15.0;
-const var PERIOD_M30 = 30.0;
-const var PERIOD_H1  = 60.0;
-const var PERIOD_H4  = 240.0;
-const var PERIOD_D1  = 1440.0;
-const var PERIOD_W1  = 10080.0;
-const var PERIOD_MN1 = 43200.0;
-
-inline var me(mat pMatrix, int row, int col)
-{
-	return *(pMatrix->dat + row*pMatrix->cols + col);
-}
-
-inline var ve(mat pMatrix, int n)
-{
-	return *(pMatrix->dat + n);
-}
-
 #pragma push_macro("IGNORE")
 #undef IGNORE // A windows symbol
 
-ZORRO_OPEN_ENUM_TYPE(ETradeFlag, DWORD)
-	SHORT       = (1u<<0),  // short position
-	BID         = (1u<<0),
-	OPEN        = (1u<<1),  // position is open
-	NOTFOUND    = (1u<<2),  // trade disappeared from the broker list
-	EXPIRED     = (1u<<3),  // option or future expired
-	WAITSELL    = (1u<<4),  // close position at the next tick
-	WAITBUY     = (1u<<5),  // open position at the next tick
-	DETREND     = (1u<<6),  // detrend the trade result
-	SUSPEND     = (1u<<7),  // suspend trade function
-	EVENT       = (1u<<8),  // trade function was called by enter/exit event
-	IGNORE      = (1u<<9),  // don't automatically enter/exit
-	MISSEDENTRY = (1u<<10), // missed the entry limit or stop, or sell price in the last bar
-	MISSEDEXIT  = (1u<<11), // missed the exit for some reason
-	NOSIZE      = (1u<<12), // Trade not executed, not enough lots or balance
-	RECYCLE     = (1u<<13), // Trade struct can be reused
-	NONET       = (1u<<14), // Don't open a net trade yet
-	NET         = (1u<<15), // Pool trade
-	PHANTOM     = (1u<<16), // Phantom trade 
-	EXERCISE    = (1u<<17), // exercise an option contract
-	STOPPED     = (1u<<18), // closed due to stop loss in the last bar, or a margin call
-	PROFIT      = (1u<<19), // closed due to profit target in the last bar
-	TIME        = (1u<<20), // closed due to timeout in the last bar
-	SOLD        = (1u<<21), // closed due to exit at market in the last bar
-	CANCELLED   = (1u<<22), // removed from trade list
-	MISSEDOPEN  = (1u<<23), // could not be opened by the broker
-	ACCOUNT     = (1u<<24), // trade with the main account
-	ENTRYSTOP   = (1u<<25), // entry stop, rather than limit
-	ENTER       = (1u<<26), // entered by TMF return value
-	EXIT        = (1u<<27), // exit by TMF return value
-	REMOVED     = (1u<<28), // removed from the online trade list (f.i. margin call or manually closed)
-	BAR         = (1u<<29), // run TMF on any bar only, not any tick
-	REVERSED    = (1u<<30), // indicate exit by reversal (shared with TR_EXIT)
-	NEW         = (1u<<31), // just created in a TMF 
+ZORRO_OPEN_ENUM(ETradeFlag)
+	SHORT       = (1<<0),  // short position
+	BID         = (1<<0),
+	OPEN        = (1<<1),  // position is open
+	NOTFOUND    = (1<<2),  // trade disappeared from the broker list
+	EXPIRED     = (1<<3),  // option or future expired
+	WAITSELL    = (1<<4),  // close position at the next tick
+	WAITBUY     = (1<<5),  // open position at the next tick
+	DETREND     = (1<<6),  // detrend the trade result
+	SUSPEND     = (1<<7),  // suspend trade function
+	EVENT       = (1<<8),  // trade function was called by enter/exit event
+	IGNORE      = (1<<9),  // don't automatically enter/exit
+	MISSEDENTRY = (1<<10), // missed the entry limit or stop, or sell price in the last bar
+	MISSEDEXIT  = (1<<11), // missed the exit for some reason
+	NOSIZE      = (1<<12), // Trade not executed, not enough lots or balance
+	RECYCLE     = (1<<13), // Trade struct can be reused
+	NONET       = (1<<14), // Don't open a net trade yet
+	NET         = (1<<15), // Pool trade
+	PHANTOM     = (1<<16), // Phantom trade 
+	EXERCISE    = (1<<17), // exercise an option contract
+	STOPPED     = (1<<18), // closed due to stop loss in the last bar, or a margin call
+	PROFIT      = (1<<19), // closed due to profit target in the last bar
+	TIME        = (1<<20), // closed due to timeout in the last bar
+	SOLD        = (1<<21), // closed due to exit at market in the last bar
+	CANCELLED   = (1<<22), // removed from trade list
+	MISSEDOPEN  = (1<<23), // could not be opened by the broker
+	ACCOUNT     = (1<<24), // trade with the main account
+	ENTRYSTOP   = (1<<25), // entry stop, rather than limit
+	ENTER       = (1<<26), // entered by TMF return value
+	EXIT        = (1<<27), // exit by TMF return value
+	REMOVED     = (1<<28), // removed from the online trade list (f.i. margin call or manually closed)
+	BAR         = (1<<29), // run TMF on any bar only, not any tick
+	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
+	NEW         = (1<<31), // just created in a TMF 
 ZORRO_CLOSE_ENUM(ETradeFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ETradeFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ETradeFlag)
@@ -82,71 +50,71 @@ typedef ::z::CBitfield<ETradeFlag> TTradeBitfield;
 
 #pragma pop_macro("IGNORE")
 
-ZORRO_OPEN_ENUM_TYPE(EZorroFlag, DWORD)
-	SKIP1        = (1u<<0),  // skip 1st of every 3 weeks
-	SKIP2        = (1u<<1),  // skip 2nd of every 3 weeks
-	SKIP3        = (1u<<2),  // skip 3rd of every 3 weeks
-	BINARY       = (1u<<3),  // trade binary options - also for optionVal
-	PRELOAD      = (1u<<4),  // load prices from historical data
-	PLOTNOW      = (1u<<5),  // create a chart automatically after test
-	PLOTLONG     = (1u<<7),  // moved to PlotMode
-	LOGFILE      = (1u<<8),  // store log file - also for assetHistory
-	LOGMSG       = (1u<<9),  // moved to Verbose
-	LEAN         = (1u<<10), // don't use historical volume & spread data
-	EXE          = (1u<<11), // generate EXE (Zorro S)
-	RULES        = (1u<<12), // generate/use advise rules
-	FACTORS      = (1u<<13), // generate reinvestment factors
-	PARAMETERS   = (1u<<14), // generate/use strategy parameters
-	OPENEND      = (1u<<15), // ignore open trades at the end of the test
-	PEEK         = (1u<<16), // allow peeking into the future
-	RISKLIMIT    = (1u<<17), // don't trade when trade risk > 2*Risk
-	MARGINLIMIT  = (1u<<18), // don't trade when real margin > 2*calculated margin, or when total margin left < 1000
-	ACCUMULATE   = (1u<<19), // accumulate Margin for skipped trades
-	TESTNOW      = (1u<<20), // run a test automatically after training
-	RECALCULATE  = (1u<<21), // recreate series after parameter loading
-	NOLOCK       = (1u<<23), // don't sychronize API access
-	FAST         = (1u<<24), // ticks in FAST mode - also for advise()
-	NFA          = (1u<<25), // NFA compliant account: no "hard" stop loss, no hedging, no position closing
-	SCREENSAVER  = (1u<<26), // don't suspend power management 
-	TICKS        = (1u<<27), // simulate trades every tick (slow)
-	BALANCE      = (1u<<28), // store and display balance rather than equity curves
-	STEPWISE     = (1u<<29), // stepwise debugging (Zorro S)
-	ALLCYCLES    = (1u<<30), // sum up statistics over all sample cycles
+ZORRO_OPEN_ENUM(EZorroFlag)
+	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
+	SKIP2        = (1<<1),  // skip 2nd of every 3 weeks
+	SKIP3        = (1<<2),  // skip 3rd of every 3 weeks
+	BINARY       = (1<<3),  // trade binary options - also for optionVal
+	PRELOAD      = (1<<4),  // load prices from historical data
+	PLOTNOW      = (1<<5),  // create a chart automatically after test
+	PLOTLONG     = (1<<7),  // moved to PlotMode
+	LOGFILE      = (1<<8),  // store log file - also for assetHistory
+	LOGMSG       = (1<<9),  // moved to Verbose
+	LEAN         = (1<<10), // don't use historical volume & spread data
+	EXE          = (1<<11), // generate EXE (Zorro S)
+	RULES        = (1<<12), // generate/use advise rules
+	FACTORS      = (1<<13), // generate reinvestment factors
+	PARAMETERS   = (1<<14), // generate/use strategy parameters
+	OPENEND      = (1<<15), // ignore open trades at the end of the test
+	PEEK         = (1<<16), // allow peeking into the future
+	RISKLIMIT    = (1<<17), // don't trade when trade risk > 2*Risk
+	MARGINLIMIT  = (1<<18), // don't trade when real margin > 2*calculated margin, or when total margin left < 1000
+	ACCUMULATE   = (1<<19), // accumulate Margin for skipped trades
+	TESTNOW      = (1<<20), // run a test automatically after training
+	RECALCULATE  = (1<<21), // recreate series after parameter loading
+	NOLOCK       = (1<<23), // don't sychronize API access
+	FAST         = (1<<24), // ticks in FAST mode - also for advise()
+	NFA          = (1<<25), // NFA compliant account: no "hard" stop loss, no hedging, no position closing
+	SCREENSAVER  = (1<<26), // don't suspend power management 
+	TICKS        = (1<<27), // simulate trades every tick (slow)
+	BALANCE      = (1<<28), // store and display balance rather than equity curves
+	STEPWISE     = (1<<29), // stepwise debugging (Zorro S)
+	ALLCYCLES    = (1<<30), // sum up statistics over all sample cycles
 ZORRO_CLOSE_ENUM(EZorroFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EZorroFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EZorroFlag)
 typedef ::z::CBitfield<EZorroFlag> TZorroBitfield;
 
-ZORRO_OPEN_ENUM_TYPE(EStatusFlag, DWORD)
-	TRADING      = (1u<<0),  // trades have been opened
-	CHANGED      = (1u<<1),  // script or asset was changed -> init strategy sliders
-	INITRUN      = (1u<<2),  // init run before the first bar, for initialization
-	EXITRUN      = (1u<<3),  // last bar, all trades are closed, for result calculation
-	TESTMODE     = (1u<<4),  // [Test] mode
-	TRAINMODE    = (1u<<5),  // [Train] mode, for optimizing
-	TRADEMODE    = (1u<<6),  // [Trade] mode
-	DEMO         = (1u<<7),  // Running on demo account
-	LOOKBACK     = (1u<<8),  // Lookback period, no trading
-	FIRSTRUN     = (1u<<9),  // First run with valid price data, usually on bar 1
-	COMMAND      = (1u<<10), // Zorro started from the command line
-	EXE          = (1u<<11), // see above, script is executable (*.x)
-	RULES        = (1u<<12), // generate/use advise rules
-	FACTORS      = (1u<<13), // generate reinvestment factors
-	PARAMETERS   = (1u<<14), // generate/use strategy parameters
-	CONTRACTS    = (1u<<15), // contracts are traded
-	PORTFOLIO    = (1u<<16), // assetList() or loop() function called
-	ASSETS       = (1u<<17), // asset() function called
-	SELECTED     = (1u<<18), // asset is same as [Asset] Scrollbox (not in loops)
-	PLOTSTATS    = (1u<<19), // plot histogram rather than price chart
-	AFFIRMED     = (1u<<20), // [Ok] clicked on nonmodal message box
-	SPECIALBAR   = (1u<<21), // user-defined bar length
-	MARGINCALL   = (1u<<22), // Margin + Loss exceeds Capital
-	NEWDAY       = (1u<<23), // Day change after last bar 
-	PROCESS      = (1u<<24), // ReTrain or ReTest
-	SPONSORED    = (1u<<25), // Zorro S version
-	RUNNING      = (1u<<26), // Simulation is running
-	FIRSTINITRUN = (1u<<27), // Really first run
-	SHORTING     = (1u<<28), // Short trades have been opened
+ZORRO_OPEN_ENUM(EStatusFlag)
+	TRADING      = (1<<0),  // trades have been opened
+	CHANGED      = (1<<1),  // script or asset was changed -> init strategy sliders
+	INITRUN      = (1<<2),  // init run before the first bar, for initialization
+	EXITRUN      = (1<<3),  // last bar, all trades are closed, for result calculation
+	TESTMODE     = (1<<4),  // [Test] mode
+	TRAINMODE    = (1<<5),  // [Train] mode, for optimizing
+	TRADEMODE    = (1<<6),  // [Trade] mode
+	DEMO         = (1<<7),  // Running on demo account
+	LOOKBACK     = (1<<8),  // Lookback period, no trading
+	FIRSTRUN     = (1<<9),  // First run with valid price data, usually on bar 1
+	COMMAND      = (1<<10), // Zorro started from the command line
+	EXE          = (1<<11), // see above, script is executable (*.x)
+	RULES        = (1<<12), // generate/use advise rules
+	FACTORS      = (1<<13), // generate reinvestment factors
+	PARAMETERS   = (1<<14), // generate/use strategy parameters
+	CONTRACTS    = (1<<15), // contracts are traded
+	PORTFOLIO    = (1<<16), // assetList() or loop() function called
+	ASSETS       = (1<<17), // asset() function called
+	SELECTED     = (1<<18), // asset is same as [Asset] Scrollbox (not in loops)
+	PLOTSTATS    = (1<<19), // plot histogram rather than price chart
+	AFFIRMED     = (1<<20), // [Ok] clicked on nonmodal message box
+	SPECIALBAR   = (1<<21), // user-defined bar length
+	MARGINCALL   = (1<<22), // Margin + Loss exceeds Capital
+	NEWDAY       = (1<<23), // Day change after last bar 
+	PROCESS      = (1<<24), // ReTrain or ReTest
+	SPONSORED    = (1<<25), // Zorro S version
+	RUNNING      = (1<<26), // Simulation is running
+	FIRSTINITRUN = (1<<27), // Really first run
+	SHORTING     = (1<<28), // Short trades have been opened
 ZORRO_CLOSE_ENUM(EStatusFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EStatusFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EStatusFlag)
@@ -234,6 +202,7 @@ ZORRO_BUILD_ENUM_COMP_OPERATORS(EHistoryMode)
 typedef ::z::CBitfield<EHistoryMode> THistoryModeBitfield;
 
 ZORRO_OPEN_ENUM(EAssetType)
+    UNKNOWN   = 0,
 	FOREX     = 1,
 	INDEX     = 2,
 	CMDTY     = 3,
@@ -261,14 +230,16 @@ ZORRO_BUILD_ENUM_BIT_OPERATORS(ERandomizeMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ERandomizeMode)
 typedef ::z::CBitfield<ERandomizeMode> TRandomizeModeBitfield;
 
-ZORRO_OPEN_ENUM(EOptimizeMode)
-	LUCKY     = (1<<8),
+// TODO Where is macro LUCKY used? Not found in manual.
+
+ZORRO_OPEN_ENUM(ETrainFlag)
+	TRADES    = (1<<8),
 	PHANTOM   = (1<<16),
 	PEAK      = (1<<22),
-ZORRO_CLOSE_ENUM(EOptimizeMode)
-ZORRO_BUILD_ENUM_BIT_OPERATORS(EOptimizeMode)
-ZORRO_BUILD_ENUM_COMP_OPERATORS(EOptimizeMode)
-typedef ::z::CBitfield<EOptimizeMode> TOptimizeModeBitfield;
+ZORRO_CLOSE_ENUM(ETrainFlag)
+ZORRO_BUILD_ENUM_BIT_OPERATORS(ETrainFlag)
+ZORRO_BUILD_ENUM_COMP_OPERATORS(ETrainFlag)
+typedef ::z::CBitfield<ETrainFlag> TTrainFlagBitfield;
 
 ZORRO_OPEN_ENUM(ETimeZone)
 	UTC       = 24, // Coordinated Universal Time
@@ -288,6 +259,17 @@ ZORRO_OPEN_ENUM(EWeekday)
 	SATURDAY  = 6,
 	SUNDAY    = 7,
 ZORRO_CLOSE_ENUM(EWeekday)
+
+// TODO EWeekendMode nWeekend in GLOBALS struct has different value description than manual. Which one is correct?
+// http://manual.zorro-trader.com/weekend.htm
+
+ZORRO_OPEN_ENUM(EWeekendMode)
+	ALLOW_TRADE                  = 0, // Trade even during the weekend. For test purposes only.
+	UPDATE_TMF_AND_GENERATE_BARS = 1, // Don't enter trades during the weekend, but generate bars, observe exit limits (stop / takeprofit / trail), and run TMFs when price quotes arrive.
+	UPDATE_TMF                   = 2, // Don't begin or end bars during the weekend, but observe exit limits and run TMFs when price quotes arrive.
+	SLEEP                        = 3, // Don't begin or end bars, don't observe exit limits, and don't run TMFs during the weekend.
+	LOGOUT                       = 7, // Automatically log off at weekend; only recommended if the broker API tends to crash when the broker server goes offline.
+ZORRO_CLOSE_ENUM(EWeekendMode)
 
 ZORRO_OPEN_ENUM(EPlotType)
 	REGULAR   = 0,
@@ -333,25 +315,6 @@ ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
 typedef ::z::CBitfield<EPlotMode> TPlotModeBitfield;
 
-const zcolor RED       = 0xff0000ul;
-const zcolor GREEN     = 0x00ff00ul;
-const zcolor BLUE      = 0x0000fful;
-const zcolor CYAN      = 0x00fffful;
-const zcolor DARKBLUE  = 0x0000a0ul;
-const zcolor LIGHTBLUE = 0xadd8e6ul;
-const zcolor PURPLE    = 0x800080ul;
-const zcolor YELLOW    = 0xffff00ul;
-const zcolor MAGENTA   = 0xff00fful;
-const zcolor ORANGE    = 0xffa500ul;
-const zcolor DARKGREEN = 0x008000ul;
-const zcolor OLIVE     = 0x808000ul;
-const zcolor MAROON    = 0x800000ul;
-const zcolor SILVER    = 0xc0c0c0ul;
-const zcolor GREY      = 0x808080ul;
-const zcolor BLACK     = 0x010101ul;
-const zcolor LIGHT     = 0x606060ul;
-const zcolor TRANSP    = 0x80000000ul;
-
 ZORRO_OPEN_ENUM(EPrintMode)
 	TO_WINDOW =  1,
 	TO_LOG    =  2,
@@ -365,9 +328,12 @@ ZORRO_OPEN_ENUM(EPrintMode)
 	TO_TITLE  = 16,
 	TO_INFO   = 17,
 	TO_PANEL  = 18,
-	TRAINMODE = static_cast<int>(EStatusFlag::TRAINMODE),
+	TRAINMODE = 32,
 	TO_ANY    = (TO_WINDOW + TRAINMODE),
 ZORRO_CLOSE_ENUM(EPrintMode)
+ZORRO_BUILD_ENUM_BIT_OPERATORS(EPrintMode)
+ZORRO_BUILD_ENUM_COMP_OPERATORS(EPrintMode)
+typedef ::z::CBitfield<EPrintMode> TPrintModeBitfield;
 
 ZORRO_OPEN_ENUM(ESaveMode)
 	TRADES    = (1<<0),
@@ -435,6 +401,20 @@ ZORRO_OPEN_ENUM(EBrokerCmd)
 	PLOT_MOVE          = 282,
 ZORRO_CLOSE_ENUM(EBrokerCmd)
 
+// TODO Are EContractMode and EContractType correct?
+// http://manual.zorro-trader.com/contract.htm
+
+ZORRO_OPEN_ENUM(EContractMode)
+	CALL          = (1<<0),
+	PUT           = (1<<1),
+	FUTURE        = (1<<5),
+	OPTION        = (CALL|PUT),
+	FUTURE_OPTION = (CALL|PUT|FUTURE),
+ZORRO_CLOSE_ENUM(EContractMode)
+ZORRO_BUILD_ENUM_BIT_OPERATORS(EContractMode)
+ZORRO_BUILD_ENUM_COMP_OPERATORS(EContractMode)
+typedef ::z::CBitfield<EContractMode> TContractModeBitfield;
+
 ZORRO_OPEN_ENUM(EContractType)
 	CALL      = (1<<0),
 	PUT       = (1<<1),
@@ -443,13 +423,13 @@ ZORRO_OPEN_ENUM(EContractType)
 	FUTURE    = (1<<5),
 	ONLYMATCH = (1<<6), // select only contracts that exactly match the parameters 
 	ONLYW3    = (1<<7), // select only contracts in 3rd week
-	OPTION    = (CALL | PUT | EUROPEAN),
+	OPTION    = (CALL|PUT|EUROPEAN),
 ZORRO_CLOSE_ENUM(EContractType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EContractType)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EContractType)
 typedef ::z::CBitfield<EContractType> TContractTypeBitfield;
 
-ZORRO_OPEN_ENUM(EMovingAverageType)
+ZORRO_OPEN_ENUM(EMAType)
 	SMA       = 0,
 	EMA       = 1,
 	WMA       = 2,
@@ -459,14 +439,64 @@ ZORRO_OPEN_ENUM(EMovingAverageType)
 	KAMA      = 6,
 	MAMA      = 7,
 	T3        = 8,
-ZORRO_CLOSE_ENUM(EMovingAverageType)
+ZORRO_CLOSE_ENUM(EMAType)
+
+#include "litec/trading_types.h"
+
+const var PI  = 3.14159265359;
+const var NIL = 3e38;
+
+const char* const ALL = "*";
+const int NOW = -999999;
+const int UPDATE = (1<<5);
+const int SCRIPT_VERSION = 255;
+
+const var PERIOD_MS1 = 0.001/60.0;
+const var PERIOD_S1  = 1.0/60.0;
+const var PERIOD_M1  = 1.0;
+const var PERIOD_M5  = 5.0;
+const var PERIOD_M15 = 15.0;
+const var PERIOD_M30 = 30.0;
+const var PERIOD_H1  = 60.0;
+const var PERIOD_H4  = 240.0;
+const var PERIOD_D1  = 1440.0;
+const var PERIOD_W1  = 10080.0;
+const var PERIOD_MN1 = 43200.0;
+
+const zcolor RED       = 0xff0000ul;
+const zcolor GREEN     = 0x00ff00ul;
+const zcolor BLUE      = 0x0000fful;
+const zcolor CYAN      = 0x00fffful;
+const zcolor DARKBLUE  = 0x0000a0ul;
+const zcolor LIGHTBLUE = 0xadd8e6ul;
+const zcolor PURPLE    = 0x800080ul;
+const zcolor YELLOW    = 0xffff00ul;
+const zcolor MAGENTA   = 0xff00fful;
+const zcolor ORANGE    = 0xffa500ul;
+const zcolor DARKGREEN = 0x008000ul;
+const zcolor OLIVE     = 0x808000ul;
+const zcolor MAROON    = 0x800000ul;
+const zcolor SILVER    = 0xc0c0c0ul;
+const zcolor GREY      = 0x808080ul;
+const zcolor BLACK     = 0x010101ul;
+const zcolor LIGHT     = 0x606060ul;
+const zcolor TRANSP    = 0x80000000ul;
+
+inline var me(mat pMatrix, int row, int col)
+{
+	return *(pMatrix->dat + row*pMatrix->cols + col);
+}
+
+inline var ve(mat pMatrix, int n)
+{
+	return *(pMatrix->dat + n);
+}
 
 ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_OPEN_ENUM
 #undef ZORRO_OPEN_ENUM_TYPE
 #undef ZORRO_CLOSE_ENUM
-#undef ZORRO_ENUM_UNDERLYING_TYPE
 #undef ZORRO_BUILD_ENUM_BIT_OPERATORS
 #undef ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE
 #undef ZORRO_BUILD_ENUM_COMP_OPERATORS

@@ -43,7 +43,7 @@ struct SEnumBaseDef
 	typedef enum class name : type {
 #define ZORRO_CLOSE_ENUM(name) \
 	} name;
-#else
+#elif ZORRO_CPP >= 03
 #define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename enumType::TUnderlyingType
 #define ZORRO_OPEN_ENUM(name) \
 	struct S##name##Def : public ::z::SEnumBaseDef<int> { \
@@ -55,6 +55,8 @@ struct SEnumBaseDef
 		}; \
 	}; \
 	typedef ::z::CEnum<S##name##Def> name;
+#else
+#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) int
 #endif
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \

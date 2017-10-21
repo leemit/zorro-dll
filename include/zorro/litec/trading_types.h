@@ -20,6 +20,30 @@ typedef DWORD       zcolor;
 typedef const wchar_t* wstring;
 #else
 typedef const short* wstring;
+typedef int ETradeFlag;
+typedef int EZorroFlag;
+typedef int EStatusFlag;
+typedef int EOrderFillMode;
+typedef int EVerbosity;
+typedef int EAdviseMode;
+typedef int ENeuralMode;
+typedef int EPredictionType;
+typedef int EHistoryMode;
+typedef int EAssetType;
+typedef int EDetrendMode;
+typedef int ERandomizeMode;
+typedef int ETrainFlag;
+typedef int ETimeZone;
+typedef int EWeekday;
+typedef int EWeekendMode;
+typedef int EPlotType;
+typedef int EPlotMode;
+typedef int EPrintMode;
+typedef int ESaveMode;
+typedef int EBrokerCmd;
+typedef int EContractMode;
+typedef int EContractType;
+typedef int EMAType;
 #endif
 
 typedef struct T1
@@ -156,7 +180,7 @@ typedef struct STATUS {
 	DWORD  dwWin,dwLoss;           // WFO win/loss flags 
 	zcolor dwColorWin,dwColorLoss; // trade colors in chart
 								   // clear statistics until here
-	DWORD  flags;
+	EStatusFlag flags;
 	int    nModel;        // model number for prediction
 	int    nComponent;    // component number
 	DWORD  pad[1];
@@ -212,7 +236,7 @@ typedef struct TRADE
 	int   nID;          // active trade id, or 0 for pending trades; can change when trades are partially closed
 	DATE  tEntryDate;   // entry time target
 	DATE  tExitDate;    // exit time target
-	DWORD flags;        // trade flags, see below
+	ETradeFlag flags;   // trade flags, see below
 	float fArg[8];      // TMF arguments
 	var   Skill[NUM_SKILLS]; // general purpose variables for TMF
 	int   nContract;    // contract type & exchange code
@@ -282,10 +306,10 @@ typedef struct GLOBALS
 	int nExitTime;   // sell at market after this number of bars
 	int nEntryTime;  // wait this number of bars for entry limit orders
 
-	int nHedge;      // hedging mode
-	int nVerbose;    // verbosity level
-	int nBoxState;   // external message box state
-	int nLifeTime;   // trade duration in bars
+	int nHedge;          // hedging mode
+	EVerbosity nVerbose; // verbosity level
+	int nBoxState;       // external message box state
+	int nLifeTime;       // trade duration in bars
 
 	var vSlippage;   // simulated order execution delay in seconds (default = 0.5)
 	var vBarPeriod;  // bar period in minutes, fractional
@@ -307,17 +331,17 @@ typedef struct GLOBALS
 	int numCores;    // multi-core training
 	int nCore;       // current core, 1..numCores
 	var vAdvise[2];  // advise parameters
-	int nOptimize;   // optimize mode
-	int nFill;       // order fill mode
-	int nTickSize;   // T6 or THL
-	int nMinutesPerDay; // minimum trading time per day, default = 60*6*5/7 ~ 256
-	DATE tNow;          // for time/date functions
-	var vSpreadFactor;  // 0.5 = open at mid price
+	ETrainFlag nOptimize; // optimize mode
+	EOrderFillMode nFill; // order fill mode
+	int nTickSize;        // T6 or THL
+	int nMinutesPerDay;   // minimum trading time per day, default = 60*6*5/7 ~ 256
+	DATE tNow;            // for time/date functions
+	var vSpreadFactor;    // 0.5 = open at mid price
 	int nStartMarket,nEndMarket; // market hours
 	int nMaxLong,nMaxShort;      // limits to number of long/short trades
 	var vCBIScale;   // scale factor for CBI depth
 	int nLogNumber;  // append this number to log files.
-	int nTradeMode;  // TR_BROKER2,TR_PHANTOM
+	ETradeFlag nTradeMode;  // TR_BROKER2,TR_PHANTOM
 	long pad1[12];
 
 	// simulation performance (r/o)
@@ -351,8 +375,8 @@ typedef struct GLOBALS
 	int numWinning,numLosing,numEven; // # of trades winning, losing, break even
 	int numWFOWin,numWFOLoss; // number of won or lost WFO cycles
 
-							  // simulation/optimization parameters (r/w)
-	int nBarZone;        // DST zone for local time bars
+	// simulation/optimization parameters (r/w)
+	ETimeZone nBarZone;  // DST zone for local time bars
 	int nBarOffset;      // bar period offset in minutes
 	int nTimeFrame;      // time frame for price() and series() in number of bars
 	int nFrameOffset;    // timeframe offset in bars
@@ -371,8 +395,8 @@ typedef struct GLOBALS
 	int nLookBack;       // number of bars before the simulation starts (automatically adjusted)
 	int nDataSplit;      // Percentage of in sample data (f.i. 90 for 90% in sample, 10% out of sample)
 	int nDataSkip;       // Bars to skip with the SKIP1..3 flag
-	int nDetrend;        // 1 = detrend trade results; 2 = detrend price functions; 4 = detrend price curve
-	int nWeekend;        // 1 = don't trade during weekend (default); 2 = don't manage trades during weekend; 4 = log out during weekend
+	EDetrendMode nDetrend; // 1 = detrend trade results; 2 = detrend price functions; 4 = detrend price curve
+	EWeekendMode nWeekend; // 1 = don't trade during weekend (default); 2 = don't manage trades during weekend; 4 = log out during weekend
 	int nTradesPerBar;   // max trades / numbars
 	var vDataSlope;      // 1..3, bias factor for giving more weight to the last trades
 	var vDataWeight;     // automatically set, 3 or 1.5 for one-week and two-week data sets
@@ -498,11 +522,11 @@ typedef struct GLOBALS
 	zcolor dwColorBars[3];
 	zcolor dwColorPanel[6];
 	int nPlotPeriod;     // Chart update period in minutes
-	int nPlotMode;
+	EPlotMode nPlotMode;
 
 	long pad5[14];
 
-	DWORD nSaveMode;     // load/save flags
+	ESaveMode nSaveMode; // load/save flags
 	DWORD dwBrokerPatch; // work around API bugs
 	DWORD dwMode;        // mode switches
 	DWORD dwStatus;      // status flags

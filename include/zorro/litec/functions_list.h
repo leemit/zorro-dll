@@ -14,7 +14,7 @@
 #endif
 
 // system functions
-C R(int)  F(print)    A((int to,string format,...))         D({ ZORRO_VA_RET_CALL(valist, format, int, DF(print)(to, format,valist)) });
+C R(int)  F(print)    A((EPrintMode to,string format,...))  D({ ZORRO_VA_RET_CALL(valist, format, int, DF(print)(to, format,valist)) });
 C R(int)  F(msg)      A((string format,...))                D({ ZORRO_VA_RET_CALL(valist, format, int, DF(msg)  (format,valist)) });
 C R(HWND) F(window)   A((string title))                     D({ return DF(window)  (title); });
 C R(void) F(keys)     A((string format,...))                D({ ZORRO_VA_CALL(valist, format, DF(keys) (format,valist)) });
@@ -25,33 +25,37 @@ C R(var)  F0(slider)  A((int n,int pos I(0),int lower I(0),int upper I(0),string
                                                             D({ return DF0(slider) (n,pos,lower,upper,name,tooltip); });
 C R(void) F(sound)    A((string filename))                  D({        DF(sound)   (filename); });
 
-C R(int)   F(login)   A((int mode))                         D({ return DF(login)        (mode); });
-C R(int)   F(exec)    A((string name,string args,int mode)) D({ return DF(exec)         (name,args,mode); });
-C R(void)  F(quit)    A((string text,...))                  D({ ZORRO_VA_CALL(valist, text, DF(quit)(text,valist)) });
-C R(int)   F(memory)  A((int mode))                         D({ return DF(memory)       (mode); });
-C R(int)   F(wait)    A((int ms))                           D({ return DF(wait)         (ms); });
-C R(var)   F(timer)   A(())                                 D({ return DF(timer)        (); });
-C R(int)   F(lock)    A(())                                 D({ return DF(lock)         (); });
-C R(void)  F(unlock)  A(())                                 D({        DF(unlock)       (); });
-C R(var)   F(version) A(())                                 D({ return DF(version)      (); });
-C R(int)   F0(is)     A((long flag))                        D({ return DF0(is)          (flag); });
-C R(int)   F1(is)     A((long mode,long flag))              D({ return DF1(is)          (mode,flag); });
-C R(void)  F0(set)    A((long flag))                        D({        DF0(set)         (flag); });
-C R(void)  F1(set)    A((long* mode, long flag))            D({        DF1(set)         (mode,flag); });
-C R(void)  F0(reset)  A((long flag))                        D({        DF0(reset)       (flag); });
-C R(void)  F1(reset)  A((long* mode,long flag))             D({        DF1(reset)       (mode,flag); });
-C R(int)   F(mode)    A((long flag))                        D({ return DF(mode)         (flag); });
-C R(var)   F(xtest)   A((var value))                        D({ return DF(xtest)        (value); });
-C R(void*) F(ytest)   A((void* ptr,int mode))               D({ return DF(ytest)        (ptr,mode); });
-C R(long)  F(checkLookBack) A((long num))                   D({ return DF(checkLookBack)(num); });
+C R(int)   F(login)   A((int mode))                            D({ return DF(login)        (mode); });
+C R(int)   F(exec)    A((string name,string args,int mode))    D({ return DF(exec)         (name,args,mode); });
+C R(void)  F(quit)    A((string text,...))                     D({ ZORRO_VA_CALL(valist, text, DF(quit)(text,valist)) });
+C R(int)   F(memory)  A((int mode))                            D({ return DF(memory)       (mode); });
+C R(int)   F(wait)    A((int ms))                              D({ return DF(wait)         (ms); });
+C R(var)   F(timer)   A(())                                    D({ return DF(timer)        (); });
+C R(int)   F(lock)    A(())                                    D({ return DF(lock)         (); });
+C R(void)  F(unlock)  A(())                                    D({        DF(unlock)       (); });
+C R(var)   F(version) A(())                                    D({ return DF(version)      (); });
+C R(int)   F0(is)     A((EStatusFlag flag))                    D({ return DF0(is)          (flag); });
+// TODO 'mode' was of type 'int' in belows function. Is it meant to be int* ?
+C R(int)   F1(is)     A((int* mode,int flag))                  D({ return DF1(is)          (mode,flag); });
+C R(void)  F0(set)    A((EZorroFlag flag))                     D({        DF0(set)         (flag); });
+C R(void)  F1(set)    A((int* mode,int flag))                  D({        DF1(set)         (mode,flag); });
+C R(void)  F0(reset)  A((EZorroFlag flag))                     D({        DF0(reset)       (flag); });
+C R(void)  F1(reset)  A((int* mode,int flag))                  D({        DF1(reset)       (mode,flag); });
+C R(int)   F(mode)    A((EZorroFlag flag))                     D({ return DF(mode)         (flag); });
+C R(var)   F(xtest)   A((var value))                           D({ return DF(xtest)        (value); });
+C R(void*) F(ytest)   A((void* ptr,int mode))                  D({ return DF(ytest)        (ptr,mode); });
+C R(long)  F(checkLookBack) A((long num))                      D({ return DF(checkLookBack)(num); });
 
 // chart
-C R(void)   F(plot)       A((string name,var val,int type,zcolor color))                            D({        DF(plot)      (name,val,type,color); });
-C R(void)   F(plotBar)    A((string name,int num,var label,var val,int type,zcolor color))          D({        DF(plotBar)   (name,num,label,val,type,color); });
-C R(void)   F(plotGraph)  A((string name,var num,var val,int type,zcolor color))                    D({        DF(plotGraph) (name,num,val,type,color); });
+C R(void)   F(plot)       A((string name,var val,EPlotType type,zcolor color))                      D({        DF(plot)      (name,val,type,color); });
+C R(void)   F(plotBar)    A((string name,int num,var label,var val,EPlotType type,zcolor color))    D({        DF(plotBar)   (name,num,label,val,type,color); });
+C R(void)   F(plotGraph)  A((string name,var num,var val,EPlotType type,zcolor color))              D({        DF(plotGraph) (name,num,val,type,color); });
 C R(DATA*)  F(plotData)   A((string name))                                                          D({ return DF(plotData)  (name); });
 C R(zcolor) F(color)      A((var value,zcolor color1,zcolor color2,zcolor color3,zcolor color4 VA)) D({ return DF(color)     (value,color1,color2,color3,color4); });
 C R(zcolor) F(colorScale) A((zcolor color,var factor))                                              D({ return DF(colorScale)(color,factor); });
+
+// TODO one of the plot() functions is missing
+// http://manual.zorro-trader.com/plot.htm
 
 // price
 C R(var) F(price)      A((int offset I(0) VA))                             D({ return DF(price)     (offset); });
@@ -77,34 +81,38 @@ C R(TRADE*) F(forTrade)    A((int mode))                                        
 C R(TRADE*) F(findTrade)   A((string name))                                      D({ return DF(findTrade)  (name); });
 
 // options / futures
-C R(CONTRACT*) F0(contract)         A((int type,int days,var strike))    D({ return DF0(contract)        (type,days,strike); });
-C R(CONTRACT*) F1(contract)         A((CONTRACT* c))                     D({ return DF1(contract)        (c); });
-C R(CONTRACT*) F2(contract)         A((TRADE* tr))                       D({ return DF2(contract)        (tr); });
-C R(CONTRACT*) F3(contract)         A((int n))                           D({ return DF3(contract)        (n); });
-C R(int)       F(contractUpdate)    A((string name,int handle,int mode)) D({ return DF(contractUpdate)   (name,handle,mode); });
-C R(var)       F0(contractDays)     A((CONTRACT* c))                     D({ return DF0(contractDays)    (c); });
-C R(var)       F1(contractDays)     A((TRADE* tr))                       D({ return DF1(contractDays)    (tr); });
-C R(var)       F0(contractPrice)    A((CONTRACT* c))                     D({ return DF0(contractPrice)   (c); });
-C R(var)       F1(contractPrice)    A((TRADE* tr))                       D({ return DF1(contractPrice)   (tr); });
-C R(int)       F0(contractPosition) A((CONTRACT* c))                     D({ return DF0(contractPosition)(c); });
-C R(int)       F1(contractPosition) A((TRADE* tr))                       D({ return DF1(contractPosition)(tr); });
-C R(int)       F(contractCheck)     A((TRADE* tr))                       D({ return DF(contractCheck)    (tr); });
-C R(void)      F(contractExercise)  A((TRADE* tr,var price I(0) VA))     D({        DF(contractExercise) (tr,price); });
+C R(CONTRACT*) F0(contract)         A((EContractType type,int days,var strike))    D({ return DF0(contract)        (type,days,strike); });
+C R(CONTRACT*) F1(contract)         A((CONTRACT* c))                               D({ return DF1(contract)        (c); });
+C R(CONTRACT*) F2(contract)         A((TRADE* tr))                                 D({ return DF2(contract)        (tr); });
+C R(CONTRACT*) F3(contract)         A((int n))                                     D({ return DF3(contract)        (n); });
+C R(int)       F(contractUpdate)    A((string name,int handle,EContractMode mode)) D({ return DF(contractUpdate)   (name,handle,mode); });
+C R(var)       F0(contractDays)     A((CONTRACT* c))                               D({ return DF0(contractDays)    (c); });
+C R(var)       F1(contractDays)     A((TRADE* tr))                                 D({ return DF1(contractDays)    (tr); });
+C R(var)       F0(contractPrice)    A((CONTRACT* c))                               D({ return DF0(contractPrice)   (c); });
+C R(var)       F1(contractPrice)    A((TRADE* tr))                                 D({ return DF1(contractPrice)   (tr); });
+C R(int)       F0(contractPosition) A((CONTRACT* c))                               D({ return DF0(contractPosition)(c); });
+C R(int)       F1(contractPosition) A((TRADE* tr))                                 D({ return DF1(contractPosition)(tr); });
+C R(int)       F(contractCheck)     A((TRADE* tr))                                 D({ return DF(contractCheck)    (tr); });
+C R(void)      F(contractExercise)  A((TRADE* tr,var price I(0) VA))               D({        DF(contractExercise) (tr,price); });
 
 // TODO several contract functions are missing
+// TODO contract() function has 2 meanings according to manual but takes the same arguments on each version. Does this work correctly?
 // http://manual.zorro-trader.com/contract.htm
 
 // algo / asset
-C R(int)  F(algo)          A((string name))                                           D({ return DF(algo)         (name); });
-C R(int)  F(asset)         A((string name))                                           D({ return DF(asset)        (name); });
-C R(int)  F(assetType)     A((string name))                                           D({ return DF(assetType)    (name); });
-C R(void) F(assetAdd)      A((string name,var vPrice I(0),var vSpread I(0),var vRollLong I(0),var vRollShort I(0),var vPip I(0),var vPipCost I(0),
-	                                      var vMarginCost I(0),var vLeverage I(0),var vLotAmount I(0),var vCommission I(0),string sSymbol I(0)))
+C R(int)        F(algo)      A((string name))                                         D({ return DF(algo)         (name); });
+C R(int)        F(asset)     A((string name))                                         D({ return DF(asset)        (name); });
+C R(EAssetType) F(assetType) A((string name))                                         D({ return DF(assetType)    (name); });
+C R(void)       F(assetAdd)  A((string name,var vPrice I(0),var vSpread I(0),var vRollLong I(0),var vRollShort I(0),var vPip I(0),var vPipCost I(0),
+	                                        var vMarginCost I(0),var vLeverage I(0),var vLotAmount I(0),var vCommission I(0),string sSymbol I(0)))
                                                                                       D({        DF(assetAdd)     (name,vPrice,vSpread,vRollLong,vRollShort,vPip,vPipCost,vMarginCost,vLeverage,vLotAmount,vCommission,sSymbol); });
 C R(int)  F(assetList)     A((string filename))                                       D({ return DF(assetList)    (filename); });
-C R(int)  F(assetHistory)  A((string name,int mode))                                  D({ return DF(assetHistory) (name,mode); });
+C R(int)  F(assetHistory)  A((string name,EHistoryMode mode))                         D({ return DF(assetHistory) (name,mode); });
 C R(int)  F(brokerAsset)   A((string assetSymbol,var* pPrice,var* pSpread,var* pVol)) D({ return DF(brokerAsset)  (assetSymbol,pPrice,pSpread,pVol); });
-C R(var)  F(brokerCommand) A((int command,DWORD parameter))                           D({ return DF(brokerCommand)(command,parameter); });
+C R(var)  F(brokerCommand) A((EBrokerCmd command,DWORD parameter))                    D({ return DF(brokerCommand)(command,parameter); });
+
+// TODO brokerCommand has 2 other overloads
+// http://zorro-project.com/manual/en/brokercommand.htm
 
 // panel
 C R(int)    F0(panel)    A((int rows,int cols,zcolor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); });
@@ -116,40 +124,40 @@ C R(int)    F(panelSave) A((string filename))                          D({ retur
 C R(int)    F(panelLoad) A((string filename))                          D({ return DF(panelLoad)(filename); });
 
 // date/time
-C R(int) F(year)          A((int offset I(0) VA))                    D({ return DF(year)         (offset); });       // current year of the simulation
-C R(int) F(month)         A((int offset I(0) VA))                    D({ return DF(month)        (offset); });      // current month of the simulation, 1 = January
-C R(int) F(week)          A((int offset I(0) VA))                    D({ return DF(week)         (offset); });       // current week number 
-C R(int) F(day)           A((int offset I(0) VA))                    D({ return DF(day)          (offset); });        // current day (1..31)
-C R(int) F(dom)           A((int offset I(0) VA))                    D({ return DF(dom)          (offset); });        // number of days of the current month, 28..31
-C R(int) F(tdm)           A((int offset I(0) VA))                    D({ return DF(tdm)          (offset); });        // trading day of the current month, 1..23
-C R(int) F(tom)           A((int offset I(0) VA))                    D({ return DF(tom)          (offset); });        // number of trading days of the current month, 20..23
-C R(int) F(dow)           A((int offset I(0) VA))                    D({ return DF(dow)          (offset); });        // current day of the week: 1 = Monday, to 7 = Sunday.
-C R(int) F(ldow)          A((int zone, int offset I(0) VA))          D({ return DF(ldow)         (zone,offset); });  // local day of the week
-C R(int) F(hour)          A((int offset I(0) VA))                    D({ return DF(hour)         (offset); });       // current hour
-C R(int) F(lhour)         A((int zone,int offset I(0) VA))           D({ return DF(lhour)        (zone,offset); }); // local hour in the given time zone
-C R(int) F(minute)        A((int offset I(0) VA))                    D({ return DF(minute)       (offset); });     // current minute
-C R(var) F(second)        A(())                                      D({ return DF(second)       (); });           // current second
-C R(int) F(dst)           A((int zone,int offset I(0) VA))           D({ return DF(dst)          (zone,offset); });   // daylight saving (1 or 0)
-C R(int) F(workday)       A((int offset I(0) VA))                    D({ return DF(workday)      (offset); });
-C R(int) F(minutesAgo)    A((int offset I(0)))                       D({ return DF(minutesAgo)   (offset); });
-C R(var) F(minutesWithin) A((int offset I(0)))                       D({ return DF(minutesWithin)(offset); });
-C R(int) F(timeOffset)    A((int zone,int days,int hour,int minute)) D({ return DF(timeOffset)   (zone,days,hour,minute); });
-C R(int) F0(market)       A((int zone,int offset))                   D({ return DF0(market)      (zone,offset); });
-C R(int) F1(market)       A((int zone))                              D({ return DF1(market)      (zone); });
-C R(int) F0(date)         A((int offset))                            D({ return DF0(date)        (offset); });
-C R(int) F1(date)         A(())                                      D({ return DF1(date)        (); });
-C R(int) F0(tod)          A((int offset))                            D({ return DF0(tod)         (offset); });
-C R(int) F1(tod)          A(())                                      D({ return DF1(tod)         (); });
-C R(int) F0(ltod)         A((int zone,int offset))                   D({ return DF0(ltod)        (zone,offset); });
-C R(int) F1(ltod)         A((int zone))                              D({ return DF1(ltod)        (zone); });
-C R(int) F0(tow)          A((int offset))                            D({ return DF0(tow)         (offset); });
-C R(int) F1(tow)          A(())                                      D({ return DF1(tow)         (); });
-C R(int) F0(ltow)         A((int zone,int offset))                   D({ return DF0(ltow)        (zone,offset); });
-C R(int) F1(ltow)         A((int zone))                              D({ return DF1(ltow)        (zone); });
-C R(var) F0(wdate)        A((int offset))                            D({ return DF0(wdate)       (offset); });
-C R(var) F1(wdate)        A(())                                      D({ return DF1(wdate)       (); });
-C R(var) F(wdateBar)      A((int n))                                 D({ return DF(wdateBar)     (n); });
-C R(var) F(wdatef)        A((string format,string dateTime))         D({ return DF(wdatef)       (format,dateTime); });
+C R(int) F(year)          A((int offset I(0) VA))                          D({ return DF(year)         (offset); });      // current year of the simulation
+C R(int) F(month)         A((int offset I(0) VA))                          D({ return DF(month)        (offset); });      // current month of the simulation, 1 = January
+C R(int) F(week)          A((int offset I(0) VA))                          D({ return DF(week)         (offset); });      // current week number 
+C R(int) F(day)           A((int offset I(0) VA))                          D({ return DF(day)          (offset); });      // current day (1..31)
+C R(int) F(dom)           A((int offset I(0) VA))                          D({ return DF(dom)          (offset); });      // number of days of the current month, 28..31
+C R(int) F(tdm)           A((int offset I(0) VA))                          D({ return DF(tdm)          (offset); });      // trading day of the current month, 1..23
+C R(int) F(tom)           A((int offset I(0) VA))                          D({ return DF(tom)          (offset); });      // number of trading days of the current month, 20..23
+C R(EWeekday) F(dow)      A((int offset I(0) VA))                          D({ return DF(dow)          (offset); });      // current day of the week: 1 = Monday, to 7 = Sunday.
+C R(EWeekday) F(ldow)     A((ETimeZone zone, int offset I(0) VA))          D({ return DF(ldow)         (zone,offset); }); // local day of the week
+C R(int) F(hour)          A((int offset I(0) VA))                          D({ return DF(hour)         (offset); });      // current hour
+C R(int) F(lhour)         A((ETimeZone zone,int offset I(0) VA))           D({ return DF(lhour)        (zone,offset); }); // local hour in the given time zone
+C R(int) F(minute)        A((int offset I(0) VA))                          D({ return DF(minute)       (offset); });      // current minute
+C R(var) F(second)        A(())                                            D({ return DF(second)       (); });            // current second
+C R(int) F(dst)           A((ETimeZone zone,int offset I(0) VA))           D({ return DF(dst)          (zone,offset); }); // daylight saving (1 or 0)
+C R(int) F(workday)       A((int offset I(0) VA))                          D({ return DF(workday)      (offset); });
+C R(int) F(minutesAgo)    A((int offset I(0)))                             D({ return DF(minutesAgo)   (offset); });
+C R(var) F(minutesWithin) A((int offset I(0)))                             D({ return DF(minutesWithin)(offset); });
+C R(int) F(timeOffset)    A((ETimeZone zone,int days,int hour,int minute)) D({ return DF(timeOffset)   (zone,days,hour,minute); });
+C R(int) F0(market)       A((ETimeZone zone,int offset))                   D({ return DF0(market)      (zone,offset); });
+C R(int) F1(market)       A((ETimeZone zone))                              D({ return DF1(market)      (zone); });
+C R(int) F0(date)         A((int offset))                                  D({ return DF0(date)        (offset); });
+C R(int) F1(date)         A(())                                            D({ return DF1(date)        (); });
+C R(int) F0(tod)          A((int offset))                                  D({ return DF0(tod)         (offset); });
+C R(int) F1(tod)          A(())                                            D({ return DF1(tod)         (); });
+C R(int) F0(ltod)         A((ETimeZone zone,int offset))                   D({ return DF0(ltod)        (zone,offset); });
+C R(int) F1(ltod)         A((ETimeZone zone))                              D({ return DF1(ltod)        (zone); });
+C R(int) F0(tow)          A((int offset))                                  D({ return DF0(tow)         (offset); });
+C R(int) F1(tow)          A(())                                            D({ return DF1(tow)         (); });
+C R(int) F0(ltow)         A((ETimeZone zone,int offset))                   D({ return DF0(ltow)        (zone,offset); });
+C R(int) F1(ltow)         A((ETimeZone zone))                              D({ return DF1(ltow)        (zone); });
+C R(var) F0(wdate)        A((int offset))                                  D({ return DF0(wdate)       (offset); });
+C R(var) F1(wdate)        A(())                                            D({ return DF1(wdate)       (); });
+C R(var) F(wdateBar)      A((int n))                                       D({ return DF(wdateBar)     (n); });
+C R(var) F(wdatef)        A((string format,string dateTime))               D({ return DF(wdatef)       (format,dateTime); });
 
 C R(BOOL) F(frame)       A((int offset)) D({ return DF(year)(offset); });
 C R(int)  F(frameSync)   A((int period)) D({ return DF(year)(period); });
@@ -220,6 +228,12 @@ C R(var)    F(dataVar)      A((int handle,int row,int col))                     
 C R(int)    F(dataInt)      A((int handle,int row,int col))                                D({ return DF(dataInt)     (handle,row,col); });
 C R(string) F(dataStr)      A((int handle,int row,int col))                                D({ return DF(dataStr)     (handle,row,col); });
 
+// TODO optimize() function has mismatching argument names with manual. Which one is correct?
+// http://manual.zorro-project.com/optimize.htm
+
+// TODO neural() function is missing
+// http://manual.zorro-trader.com/advisor.htm
+
 // optimize
 C R(var)    F(optimize)     A((var val,var start,var end,var step,var tolerance))      D({ return DF(optimize)(val,start,end,step,tolerance); });
 C R(string) F0(loop)        A((const void* p0  I(0),const void* p1  I(0),const void* p2  I(0),const void* p3  I(0),const void* p4  I(0),const void* p5  I(0),const void* p6  I(0),const void* p7  I(0),const void* p8  I(0),const void* p9  I(0),
@@ -227,23 +241,23 @@ C R(string) F0(loop)        A((const void* p0  I(0),const void* p1  I(0),const v
                                const void* p20 I(0),const void* p21 I(0),const void* p22 I(0),const void* p23 I(0),const void* p24 I(0),const void* p25 I(0),const void* p26 I(0),const void* p27 I(0),const void* p28 I(0),const void* p29 I(0),
                                const void* p30 I(0),const void* p31 I(0),const void* p32 I(0),const void* p33 I(0),const void* p34 I(0),const void* p35 I(0),const void* p36 I(0),const void* p37 I(0),const void* p38 I(0),const void* p39 I(0) VA))
                                D({ return DF0(loop)(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32,p33,p34,p35,p36,p37,p38,p39); });
-C R(var)    F0(adviseLong)  A((int method I(0),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),var s10 I(NIL),
-                               var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
+C R(var)    F0(adviseLong)  A((EAdviseMode method I(EAdviseMode::PREVIOUS),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
+                               var s10 I(NIL),var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
                                D({ return DF0(adviseLong)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); });
-C R(var)    F1(adviseLong)  A((int method,var objective,cvars signals,long numSignals)) D({ return DF1(adviseLong)(method,objective,signals,numSignals); });
-C R(var)    F0(adviseShort) A((int method I(0),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),var s10 I(NIL),
-                               var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
+C R(var)    F1(adviseLong)  A((EAdviseMode method,var objective,cvars signals,long numSignals)) D({ return DF1(adviseLong)(method,objective,signals,numSignals); });
+C R(var)    F0(adviseShort) A((EAdviseMode method I(EAdviseMode::PREVIOUS),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
+                               var s10 I(NIL),var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
                                D({ return DF0(adviseShort)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); });
-C R(var)    F1(adviseShort) A((int method,var objective,cvars signals,long numSignals))
+C R(var)    F1(adviseShort) A((EAdviseMode method,var objective,cvars signals,long numSignals))
                                D({ return DF1(adviseShort)(method,objective,signals,numSignals); });
 
 // series
-C R(vars)       F0(series)   A((var value I(0),int length I(0) VA))       D({ return DF0(series)  (value,length); });
-C R(void)       F(shift)     A((vars data,var value,int length))          D({        DF(shift)    (data,value,length); });
-C R(vars)       F(rev)       A((cvars data,int length I(0) VA))           D({ return DF(rev)      (data,length); });
-C R(void)       F(sortData)  A((vars data,int length))                    D({        DF(sortData) (data,length); });
-C R(const int*) F(sortIdx)   A((cvars data,int length))                   D({ return DF(sortIdx)  (data,length); });
-C R(var)        F(randomize) A((int method,vars out,cvars in,int length)) D({ return DF(randomize)(method,out,in,length); });
+C R(vars)       F0(series)   A((var value I(0),int length I(0) VA))                  D({ return DF0(series)  (value,length); });
+C R(void)       F(shift)     A((vars data,var value,int length))                     D({        DF(shift)    (data,value,length); });
+C R(vars)       F(rev)       A((cvars data,int length I(0) VA))                      D({ return DF(rev)      (data,length); });
+C R(void)       F(sortData)  A((vars data,int length))                               D({        DF(sortData) (data,length); });
+C R(const int*) F(sortIdx)   A((cvars data,int length))                              D({ return DF(sortIdx)  (data,length); });
+C R(var)        F(randomize) A((ERandomizeMode method,vars out,cvars in,int length)) D({ return DF(randomize)(method,out,in,length); });
 
 // math
 C R(var)    F0(random)  A(())                         D({ return DF0(random) (); });
@@ -312,15 +326,15 @@ C R(var) F(zscore)    A((var x,int timePeriod)) D({ return DF(zscore)   (x,timeP
 C R(var) F(diff)      A((var val))              D({ return DF(diff)     (val); });
 
 // analysis
-C R(int) F(predict)           A((int type,cvars data,int timePeriod,var threshold))        D({ return DF(predict)          (type,data,timePeriod,threshold); });
-C R(var) F(polyfit)           A((cvars coeff,cvars data,int timePeriod,int n,var weight))  D({ return DF(polyfit)          (coeff,data,timePeriod,n,weight); });
-C R(var) F(polynom)           A((cvars coeff,int n))                                       D({ return DF(polynom)          (coeff,n); });
-C R(var) F(frechet)           A((cvars data,int timePeriod,var factor,cvars pattern))      D({ return DF(frechet)          (data,timePeriod,factor,pattern); });
-C R(var) F(verify)            A((cvars data,int length,var depth,int width,int horizon))   D({ return DF(verify)           (data,length,depth,width,horizon); });
-C R(var) F0(markowitz)        A((cvars covMatrix,cvars means,int n,cvars caps))            D({ return DF0(markowitz)       (covMatrix,means,n,caps); });
-C R(var) F1(markowitz)        A((cvars covMatrix,cvars means,int n,var cap))               D({ return DF1(markowitz)       (covMatrix,means,n,cap); });
-C R(var) F(markowitzReturn)   A((cvars weights,var vVariance))                             D({ return DF(markowitzReturn)  (weights,vVariance); });
-C R(var) F(markowitzVariance) A((cvars weights,var vReturn))                               D({ return DF(markowitzVariance)(weights,vReturn); });
+C R(int) F(predict)           A((EPredictionType type,cvars data,int timePeriod,var threshold)) D({ return DF(predict)          (type,data,timePeriod,threshold); });
+C R(var) F(polyfit)           A((cvars coeff,cvars data,int timePeriod,int n,var weight))       D({ return DF(polyfit)          (coeff,data,timePeriod,n,weight); });
+C R(var) F(polynom)           A((cvars coeff,int n))                                            D({ return DF(polynom)          (coeff,n); });
+C R(var) F(frechet)           A((cvars data,int timePeriod,var factor,cvars pattern))           D({ return DF(frechet)          (data,timePeriod,factor,pattern); });
+C R(var) F(verify)            A((cvars data,int length,var depth,int width,int horizon))        D({ return DF(verify)           (data,length,depth,width,horizon); });
+C R(var) F0(markowitz)        A((cvars covMatrix,cvars means,int n,cvars caps))                 D({ return DF0(markowitz)       (covMatrix,means,n,caps); });
+C R(var) F1(markowitz)        A((cvars covMatrix,cvars means,int n,var cap))                    D({ return DF1(markowitz)       (covMatrix,means,n,cap); });
+C R(var) F(markowitzReturn)   A((cvars weights,var vVariance))                                  D({ return DF(markowitzReturn)  (weights,vVariance); });
+C R(var) F(markowitzVariance) A((cvars weights,var vReturn))                                    D({ return DF(markowitzVariance)(weights,vReturn); });
 
 // filters
 C R(var) F(Gauss)          A((cvars data,int length))                      D({ return DF(Gauss)         (data,length); });
@@ -341,13 +355,14 @@ C R(var) F1(Spectrum)      A((cvars data,int timePeriod))                  D({ r
 C R(var) F(ADX)         A((int timePeriod))                                             D({ return DF(ADX)        (timePeriod); });
 C R(var) F(ADXR)        A((int timePeriod))                                             D({ return DF(ADXR)       (timePeriod); });
 C R(var) F(Amplitude)   A((cvars data,int timePeriod))                                  D({ return DF(Amplitude)  (data,timePeriod); });
-C R(var) F(APO)         A((cvars data,int fastPeriod,int slowPeriod,int MAType))        D({ return DF(APO)        (data,fastPeriod,slowPeriod,MAType); });
+C R(var) F(APO)         A((cvars data,int fastPeriod,int slowPeriod,EMAType MAType))    D({ return DF(APO)        (data,fastPeriod,slowPeriod,MAType); });
 C R(var) F(Aroon)       A((int timePeriod))                                             D({ return DF(Aroon)      (timePeriod); });
 C R(var) F(AroonOsc)    A((int timePeriod))                                             D({ return DF(AroonOsc)   (timePeriod); });
 C R(var) F0(ATR)        A((int timePeriod))                                             D({ return DF0(ATR)       (timePeriod); });
 C R(var) F1(ATR)        A((cvars open,cvars high,cvars low,cvars close,int timePeriod)) D({ return DF1(ATR)       (open,high,low,close,timePeriod); });
 C R(var) F(AvgPrice)    A(())                                                           D({ return DF(AvgPrice)   (); });
-C R(var) F(BBands)      A((cvars data,int timePeriod,var nbDevUp,var nbDevDn,int MAType)) D({ return DF(BBands)  (data,timePeriod,nbDevUp,nbDevDn,MAType); });
+C R(var) F(BBands)      A((cvars data,int timePeriod,var nbDevUp,var nbDevDn,EMAType MAType))
+                                                                                        D({ return DF(BBands)     (data,timePeriod,nbDevUp,nbDevDn,MAType); });
 C R(var) F(Beta)        A((cvars data,cvars data2,int timePeriod))                      D({ return DF(Beta)       (data,data2,timePeriod); });
 C R(var) F(BOP)         A(())                                                           D({ return DF(BOP)        (); });
 C R(var) F(CCI)         A((int timePeriod))                                             D({ return DF(CCI)        (timePeriod); });
@@ -369,13 +384,13 @@ C R(var) F(LinearReg)   A((cvars data,int timePeriod))                          
 C R(var) F(LinearRegAngle) A((cvars data,int timePeriod))                               D({ return DF(LinearRegAngle)(data,timePeriod); });
 C R(var) F(LinearRegIntercept) A((cvars data,int timePeriod))                           D({ return DF(LinearRegIntercept)(data,timePeriod); });
 C R(var) F(LinearRegSlope) A((cvars data,int timePeriod))                               D({ return DF(LinearRegSlope)(data,timePeriod); });
-C R(var) F(MovingAverage) A((cvars data,int timePeriod,int MAType))                     D({ return DF(MovingAverage)(data,timePeriod,MAType); });
+C R(var) F(MovingAverage) A((cvars data,int timePeriod,EMAType MAType))                 D({ return DF(MovingAverage)(data,timePeriod,MAType); });
 C R(var) F(MACD)        A((cvars data,int fastPeriod,int slowPeriod,int signalPeriod))  D({ return DF(MACD)       (data,fastPeriod,slowPeriod,signalPeriod); });
-C R(var) F(MACDExt)     A((cvars data,int fastPeriod,int fastMAType,int slowPeriod,int slowMAType,int signalPeriod,int signalMAType))
+C R(var) F(MACDExt)     A((cvars data,int fastPeriod,EMAType fastMAType,int slowPeriod,EMAType slowMAType,int signalPeriod,EMAType signalMAType))
                                                                                         D({ return DF(MACDExt)    (data,fastPeriod,fastMAType,slowPeriod,slowMAType,signalPeriod,signalMAType); });
 C R(var) F(MACDFix)     A((cvars data,int signalPeriod))                                D({ return DF(MACDFix)    (data,signalPeriod); });
 C R(var) F(MAMA)        A((cvars data,var fastLimit,var slowLimit))                     D({ return DF(MAMA)       (data,fastLimit,slowLimit); });
-C R(var) F(MovingAverageVariablePeriod) A((cvars data,cvars data2,int minPeriod,int maxPeriod,int MAType))
+C R(var) F(MovingAverageVariablePeriod) A((cvars data,cvars data2,int minPeriod,int maxPeriod,EMAType MAType))
                                                                                         D({ return DF(MovingAverageVariablePeriod)(data,data2,minPeriod,maxPeriod,MAType); });
 C R(var) F(MaxVal)      A((cvars data,int timePeriod))                                  D({ return DF(MaxVal)     (data,timePeriod); });
 C R(int) F(MaxIndex)    A((cvars data,int timePeriod))                                  D({ return DF(MaxIndex)   (data,timePeriod); });
@@ -396,7 +411,7 @@ C R(var) F0(PlusDI)     A((int timePeriod))                                     
 C R(var) F1(PlusDI)     A((cvars open,cvars high,cvars low,cvars close,int timePeriod)) D({ return DF1(PlusDI)    (open,high,low,close,timePeriod); });
 C R(var) F0(PlusDM)     A((int timePeriod))                                             D({ return DF0(PlusDM)    (timePeriod); });
 C R(var) F1(PlusDM)     A((cvars open,cvars high,cvars low,cvars close,int timePeriod)) D({ return DF1(PlusDM)    (open,high,low,close,timePeriod); });
-C R(var) F(PPO)         A((cvars data,int fastPeriod,int slowPeriod,int MAType))        D({ return DF(PPO)        (data,fastPeriod,slowPeriod,MAType); });
+C R(var) F(PPO)         A((cvars data,int fastPeriod,int slowPeriod,EMAType MAType))    D({ return DF(PPO)        (data,fastPeriod,slowPeriod,MAType); });
 C R(var) F(ROC)         A((cvars data,int timePeriod))                                  D({ return DF(ROC)        (data,timePeriod); });
 C R(var) F(ROCP)        A((cvars data,int timePeriod))                                  D({ return DF(ROCP)       (data,timePeriod); });
 C R(var) F(ROCR)        A((cvars data,int timePeriod))                                  D({ return DF(ROCR)       (data,timePeriod); });
@@ -405,12 +420,12 @@ C R(var) F(ROCR100)     A((cvars data,int timePeriod))                          
 C R(var) F(RSI)         A((cvars data,int timePeriod))                                  D({ return DF(RSI)        (data,timePeriod); });
 C R(var) F(SMA)         A((cvars data,int timePeriod))                                  D({ return DF(SMA)        (data,timePeriod); });
 C R(var) F(StdDev)      A((cvars data,int timePeriod))                                  D({ return DF(StdDev)     (data,timePeriod); });
-C R(var) F0(Stoch)      A((int fastK_Period,int slowK_Period,int slowK_MAType,int slowD_Period,int slowD_MAType)) 
+C R(var) F0(Stoch)      A((int fastK_Period,int slowK_Period,EMAType slowK_MAType,int slowD_Period,EMAType slowD_MAType)) 
                                                                                         D({ return DF0(Stoch)     (fastK_Period,slowK_Period,slowK_MAType,slowD_Period,slowD_MAType); });
-C R(var) F1(Stoch)      A((cvars open,cvars high,cvars low,cvars close,int fastK_Period,int slowK_Period,int slowK_MAType,int slowD_Period,int slowD_MAType))
+C R(var) F1(Stoch)      A((cvars open,cvars high,cvars low,cvars close,int fastK_Period,int slowK_Period,EMAType slowK_MAType,int slowD_Period,EMAType slowD_MAType))
                                                                                         D({ return DF1(Stoch)     (open,high,low,close,fastK_Period,slowK_Period,slowK_MAType,slowD_Period,slowD_MAType); });
-C R(var) F(StochF)      A((int fastK_Period,int fastD_Period,int fastD_MAType))         D({ return DF(StochF)     (fastK_Period,fastD_Period,fastD_MAType); });
-C R(var) F(StochRSI)    A((cvars data,int timePeriod,int fastK_Period,int fastD_Period,int fastD_MAType))
+C R(var) F(StochF)      A((int fastK_Period,int fastD_Period,EMAType fastD_MAType))     D({ return DF(StochF)     (fastK_Period,fastD_Period,fastD_MAType); });
+C R(var) F(StochRSI)    A((cvars data,int timePeriod,int fastK_Period,int fastD_Period,EMAType fastD_MAType))
                                                                                         D({ return DF(StochRSI)   (data,timePeriod,fastK_Period,fastD_Period,fastD_MAType); });
 C R(var) F(Sum)         A((cvars data,int timePeriod))                                  D({ return DF(Sum)        (data,timePeriod); });
 C R(var) F(T3)          A((cvars data,int timePeriod,var vFactor))                      D({ return DF(T3)         (data,timePeriod,vFactor); });
@@ -499,7 +514,7 @@ C R(var) F1(ALMA)            A((cvars data,int timePeriod))                     
 C R(var) F(AO)               A((cvars data))                                                   D({ return DF(AO)              (data); });
 C R(var) F(ATRS)             A((int period))                                                   D({ return DF(ATRS)            (period); });
 C R(var) F(Alligator)        A((cvars data))                                                   D({ return DF(Alligator)       (data); });
-C R(var) F(BBOsc)            A((cvars data,int period,var nbDev,int MAType))                   D({ return DF(BBOsc)           (data,period,nbDev,MAType); });
+C R(var) F(BBOsc)            A((cvars data,int period,var nbDev,EMAType MAType))               D({ return DF(BBOsc)           (data,period,nbDev,MAType); });
 C R(var) F(Butterworth)      A((cvars data,int cutoff))                                        D({ return DF(Butterworth)     (data,cutoff); });
 C R(var) F(CGOsc)            A((cvars data,int period))                                        D({ return DF(CGOsc)           (data,period); });
 C R(var) F(CI)               A((int timePeriod))                                               D({ return DF(CI)              (timePeriod); });
@@ -563,11 +578,11 @@ C R(void)   F(ccySet)      A((var strength))                                    
 C R(void)   F(ccyReset)    A(())                                                 D({        DF(ccyReset)   (); });
 C R(string) F(ccyMin)      A(())                                                 D({ return DF(ccyMin)     (); });
 C R(string) F(ccyMax)      A(())                                                 D({ return DF(ccyMax)     (); });
-C R(var)    F(dayClose)    A((int zone,int day))                                 D({ return DF(dayClose)   (zone,day); });
-C R(var)    F(dayHigh)     A((int zone,int day))                                 D({ return DF(dayHigh)    (zone,day); });
-C R(var)    F(dayLow)      A((int zone,int day))                                 D({ return DF(dayLow)     (zone,day); });
-C R(var)    F(dayOpen)     A((int zone,int day))                                 D({ return DF(dayOpen)    (zone,day); });
-C R(var)    F(dayPivot)    A((int zone,int day))                                 D({ return DF(dayPivot)   (zone,day); });
+C R(var)    F(dayClose)    A((ETimeZone zone,int day))                           D({ return DF(dayClose)   (zone,day); });
+C R(var)    F(dayHigh)     A((ETimeZone zone,int day))                           D({ return DF(dayHigh)    (zone,day); });
+C R(var)    F(dayLow)      A((ETimeZone zone,int day))                           D({ return DF(dayLow)     (zone,day); });
+C R(var)    F(dayOpen)     A((ETimeZone zone,int day))                           D({ return DF(dayOpen)    (zone,day); });
+C R(var)    F(dayPivot)    A((ETimeZone zone,int day))                           D({ return DF(dayPivot)   (zone,day); });
 C R(var)    F(genNoise)    A(())                                                 D({ return DF(genNoise)   (); });
 C R(var)    F(genSine)     A((var period1,var period2))                          D({ return DF(genSine)    (period1,period2); });
 C R(var)    F(genSquare)   A((var period1,var period2))                          D({ return DF(genSquare)  (period1,period2); });
