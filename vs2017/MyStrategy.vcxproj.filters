@@ -53,13 +53,13 @@
     <ClInclude Include="..\include\zorro\litec\trading.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\types.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\zorro\litec\variables.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
     <ClInclude Include="..\include\zorro\litec\functions_list.h">
+      <Filter>include\zorro\litec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\litec\trading_types.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
   </ItemGroup>

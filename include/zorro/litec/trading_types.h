@@ -1,6 +1,6 @@
 
-#ifndef zorro_types_h
-#define zorro_types_h
+#ifndef trading_types_h
+#define trading_types_h
 
 // convenience definitions C/C++ -> lite-C
 typedef double      var;
@@ -15,4 +15,4 @@ typedef const wchar_t* wstring;
 typedef const short* wstring;
 #endif
 
-#endif // zorro_types_h
+#endif // trading_types_h

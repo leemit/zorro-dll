@@ -6,7 +6,7 @@
 #ifndef trading_h
 #define trading_h
 
-#include "types.h"
+#include "trading_types.h"
 
 /////////////////////////////////////////////////////////////////////
 #ifndef NO_DEFINES

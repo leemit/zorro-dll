@@ -6,7 +6,7 @@
 
 ZORRO_NAMESPACE_OPEN
 
-#include "litec/types.h"
+#include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;
 const var NIL = 3e38;
