@@ -44,15 +44,15 @@ C R(zcolor) F(color)      A((var value,zcolor color1,zcolor color2,zcolor color3
 C R(zcolor) F(colorScale) A((zcolor color,var factor))                                              D({ return DF(colorScale)(color,factor); });
 
 // price
-C R(var) F(price)      A((int offset VA))                                  D({ return DF(price)     (offset); });
-C R(var) F(priceOpen)  A((int offset VA))                                  D({ return DF(priceOpen) (offset); });
-C R(var) F(priceClose) A((int offset VA))                                  D({ return DF(priceClose)(offset); });
-C R(var) F(priceHigh)  A((int offset VA))                                  D({ return DF(priceHigh) (offset); });
-C R(var) F(priceLow)   A((int offset VA))                                  D({ return DF(priceLow)  (offset); });
+C R(var) F(price)      A((int offset I(0) VA))                             D({ return DF(price)     (offset); });
+C R(var) F(priceOpen)  A((int offset I(0) VA))                             D({ return DF(priceOpen) (offset); });
+C R(var) F(priceClose) A((int offset I(0) VA))                             D({ return DF(priceClose)(offset); });
+C R(var) F(priceHigh)  A((int offset I(0) VA))                             D({ return DF(priceHigh) (offset); });
+C R(var) F(priceLow)   A((int offset I(0) VA))                             D({ return DF(priceLow)  (offset); });
 C R(int) F(priceSet)   A((int offset,var open,var high,var low,var close)) D({ return DF(priceSet)  (offset,open,high,low,close); });
 C R(int) F(priceQuote) A((var timestamp,var quote))                        D({ return DF(priceQuote)(timestamp,quote); });
-C R(var) F(marketVal)  A((int offset VA))                                  D({ return DF(marketVal) (offset); });
-C R(var) F(marketVol)  A((int offset VA))                                  D({ return DF(marketVol) (offset); });
+C R(var) F(marketVal)  A((int offset I(0) VA))                             D({ return DF(marketVal) (offset); });
+C R(var) F(marketVol)  A((int offset I(0) VA))                             D({ return DF(marketVol) (offset); });
 
 // trading
 C R(TRADE*) F0(enterLong)  A((int lots I(0),var entry I(0), var stop I(0), var takeprofit I(0), var trail I(0), var trailslope I(0), var traillock I(0), var trailstep I(0) VA))
@@ -79,13 +79,17 @@ C R(var)       F1(contractPrice)    A((TRADE* tr))                       D({ ret
 C R(int)       F0(contractPosition) A((CONTRACT* c))                     D({ return DF0(contractPosition)(c); });
 C R(int)       F1(contractPosition) A((TRADE* tr))                       D({ return DF1(contractPosition)(tr); });
 C R(int)       F(contractCheck)     A((TRADE* tr))                       D({ return DF(contractCheck)    (tr); });
-C R(void)      F(contractExercise)  A((TRADE* tr,var price VA))          D({        DF(contractExercise) (tr,price); });
+C R(void)      F(contractExercise)  A((TRADE* tr,var price I(0) VA))     D({        DF(contractExercise) (tr,price); });
+
+// TODO several contract functions are missing
+// http://manual.zorro-trader.com/contract.htm
 
 // algo / asset
 C R(int)  F(algo)          A((string name))                                           D({ return DF(algo)         (name); });
 C R(int)  F(asset)         A((string name))                                           D({ return DF(asset)        (name); });
 C R(int)  F(assetType)     A((string name))                                           D({ return DF(assetType)    (name); });
-C R(void) F(assetAdd)      A((string name,var vPrice,var vSpread,var vRollLong,var vRollShort,var vPip,var vPipCost,var vMarginCost,var vLeverage,var vLotAmount,var vCommission,string sSymbol))
+C R(void) F(assetAdd)      A((string name,var vPrice I(0),var vSpread I(0),var vRollLong I(0),var vRollShort I(0),var vPip I(0),var vPipCost I(0),
+	                                      var vMarginCost I(0),var vLeverage I(0),var vLotAmount I(0),var vCommission I(0),string sSymbol I(0)))
                                                                                       D({        DF(assetAdd)     (name,vPrice,vSpread,vRollLong,vRollShort,vPip,vPipCost,vMarginCost,vLeverage,vLotAmount,vCommission,sSymbol); });
 C R(int)  F(assetList)     A((string filename))                                       D({ return DF(assetList)    (filename); });
 C R(int)  F(assetHistory)  A((string name,int mode))                                  D({ return DF(assetHistory) (name,mode); });
@@ -93,31 +97,32 @@ C R(int)  F(brokerAsset)   A((string assetSymbol,var* pPrice,var* pSpread,var* p
 C R(var)  F(brokerCommand) A((int command,DWORD parameter))                           D({ return DF(brokerCommand)(command,parameter); });
 
 // panel
-C R(int)    F0(panel)    A((int rows,int cols,zcolor color,int size))                        D({ return DF0(panel)   (rows,cols,color,size); });
-C R(int)    F1(panel)    A((string filename,zcolor color,int size))                          D({ return DF1(panel)   (filename,color,size); });
-C R(string) F(panelGet)  A((int row,int col))                                                D({ return DF(panelGet) (row,col); });
-C R(int)    F(panelSet)  A((int row,int col,string text,zcolor color,int style,int type VA)) D({ return DF(panelSet) (row,col,text,color,style,type); });
-C R(int)    F(panelSave) A((string filename))                                                D({ return DF(panelSave)(filename); });
-C R(int)    F(panelLoad) A((string filename))                                                D({ return DF(panelLoad)(filename); });
+C R(int)    F0(panel)    A((int rows,int cols,zcolor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); });
+C R(int)    F1(panel)    A((string filename,zcolor color,int size))    D({ return DF1(panel)   (filename,color,size); });
+C R(string) F(panelGet)  A((int row,int col))                          D({ return DF(panelGet) (row,col); });
+C R(int)    F(panelSet)  A((int row,int col,string text,zcolor color I(0),int style I(0),int type I(0) VA))
+                                                                       D({ return DF(panelSet) (row,col,text,color,style,type); });
+C R(int)    F(panelSave) A((string filename))                          D({ return DF(panelSave)(filename); });
+C R(int)    F(panelLoad) A((string filename))                          D({ return DF(panelLoad)(filename); });
 
 // date/time
-C R(int) F(year)          A((int offset VA))                         D({ return DF(year)         (offset); });       // current year of the simulation
-C R(int) F(month)         A((int offset VA))                         D({ return DF(month)        (offset); });      // current month of the simulation, 1 = January
-C R(int) F(week)          A((int offset VA))                         D({ return DF(week)         (offset); });       // current week number 
-C R(int) F(day)           A((int offset VA))                         D({ return DF(day)          (offset); });        // current day (1..31)
-C R(int) F(dom)           A((int offset VA))                         D({ return DF(dom)          (offset); });        // number of days of the current month, 28..31
-C R(int) F(tdm)           A((int offset VA))                         D({ return DF(tdm)          (offset); });        // trading day of the current month, 1..23
-C R(int) F(tom)           A((int offset VA))                         D({ return DF(tom)          (offset); });        // number of trading days of the current month, 20..23
-C R(int) F(dow)           A((int offset VA))                         D({ return DF(dow)          (offset); });        // current day of the week: 1 = Monday, to 7 = Sunday.
-C R(int) F(ldow)          A((int zone, int offset VA))               D({ return DF(ldow)         (zone,offset); });  // local day of the week
-C R(int) F(hour)          A((int offset VA))                         D({ return DF(hour)         (offset); });       // current hour
-C R(int) F(lhour)         A((int zone,int offset VA))                D({ return DF(lhour)        (zone,offset); }); // local hour in the given time zone
-C R(int) F(minute)        A((int offset VA))                         D({ return DF(minute)       (offset); });     // current minute
+C R(int) F(year)          A((int offset I(0) VA))                    D({ return DF(year)         (offset); });       // current year of the simulation
+C R(int) F(month)         A((int offset I(0) VA))                    D({ return DF(month)        (offset); });      // current month of the simulation, 1 = January
+C R(int) F(week)          A((int offset I(0) VA))                    D({ return DF(week)         (offset); });       // current week number 
+C R(int) F(day)           A((int offset I(0) VA))                    D({ return DF(day)          (offset); });        // current day (1..31)
+C R(int) F(dom)           A((int offset I(0) VA))                    D({ return DF(dom)          (offset); });        // number of days of the current month, 28..31
+C R(int) F(tdm)           A((int offset I(0) VA))                    D({ return DF(tdm)          (offset); });        // trading day of the current month, 1..23
+C R(int) F(tom)           A((int offset I(0) VA))                    D({ return DF(tom)          (offset); });        // number of trading days of the current month, 20..23
+C R(int) F(dow)           A((int offset I(0) VA))                    D({ return DF(dow)          (offset); });        // current day of the week: 1 = Monday, to 7 = Sunday.
+C R(int) F(ldow)          A((int zone, int offset I(0) VA))          D({ return DF(ldow)         (zone,offset); });  // local day of the week
+C R(int) F(hour)          A((int offset I(0) VA))                    D({ return DF(hour)         (offset); });       // current hour
+C R(int) F(lhour)         A((int zone,int offset I(0) VA))           D({ return DF(lhour)        (zone,offset); }); // local hour in the given time zone
+C R(int) F(minute)        A((int offset I(0) VA))                    D({ return DF(minute)       (offset); });     // current minute
 C R(var) F(second)        A(())                                      D({ return DF(second)       (); });           // current second
-C R(int) F(dst)           A((int zone,int offset VA))                D({ return DF(dst)          (zone,offset); });   // daylight saving (1 or 0)
-C R(int) F(workday)       A((int offset VA))                         D({ return DF(workday)      (offset); });
-C R(int) F(minutesAgo)    A((int offset))                            D({ return DF(minutesAgo)   (offset); });
-C R(var) F(minutesWithin) A((int offset))                            D({ return DF(minutesWithin)(offset); });
+C R(int) F(dst)           A((int zone,int offset I(0) VA))           D({ return DF(dst)          (zone,offset); });   // daylight saving (1 or 0)
+C R(int) F(workday)       A((int offset I(0) VA))                    D({ return DF(workday)      (offset); });
+C R(int) F(minutesAgo)    A((int offset I(0)))                       D({ return DF(minutesAgo)   (offset); });
+C R(var) F(minutesWithin) A((int offset I(0)))                       D({ return DF(minutesWithin)(offset); });
 C R(int) F(timeOffset)    A((int zone,int days,int hour,int minute)) D({ return DF(timeOffset)   (zone,days,hour,minute); });
 C R(int) F0(market)       A((int zone,int offset))                   D({ return DF0(market)      (zone,offset); });
 C R(int) F1(market)       A((int zone))                              D({ return DF1(market)      (zone); });
@@ -190,13 +195,14 @@ C R(int)    F(ftp_log)       A((int mode))                                      
 // dataset
 C R(int)    F(dataDownload) A((string code,int mode,int period))                           D({ return DF(dataDownload)(code,mode,period); });
 C R(int)    F0(dataParse)   A((int handle,string format,string fileName))                  D({ return DF0(dataParse)  (handle,format,fileName); });
-C R(void)   F(dataSave)     A((int handle,string fileName,int start,int num VA))           D({        DF(dataSave)    (handle,fileName,start,num); });
-C R(void)   F(dataSaveCSV)  A((int handle,string format,string name,int start,int num VA)) D({        DF(dataSaveCSV) (handle,format,name,start,num); });
+C R(void)   F(dataSave)     A((int handle,string fileName,int start I(0),int num I(0) VA)) D({        DF(dataSave)    (handle,fileName,start,num); });
+C R(void)   F(dataSaveCSV)  A((int handle,string format,string name,int start I(0),int num I(0) VA))
+                                                                                           D({        DF(dataSaveCSV) (handle,format,name,start,num); });
 C R(int)    F(dataLoad)     A((int handle,string fileName,int fields))                     D({ return DF(dataLoad)    (handle,fileName,fields); });
 C R(float*) F(dataNew)      A((int handle,int records,int fields))                         D({ return DF(dataNew)     (handle,records,fields); });
 C R(void)   F(dataSort)     A((int handle))                                                D({        DF(dataSort)    (handle); });
 C R(int)    F(dataMerge)    A((int handle1,int handle2))                                   D({ return DF(dataMerge)   (handle1,handle2); });
-C R(int)    F(dataAppend)   A((int handle1,int handle2,int start,int num VA))              D({ return DF(dataAppend)  (handle1,handle2,start,num); });
+C R(int)    F(dataAppend)   A((int handle1,int handle2,int start I(0),int num I(0) VA))    D({ return DF(dataAppend)  (handle1,handle2,start,num); });
 C R(int)    F(dataFind)     A((int handle,var date))                                       D({ return DF(dataFind)    (handle,date); });
 C R(void)   F0(dataSet)     A((int handle,int row,int col,var value))                      D({        DF0(dataSet)    (handle,row,col,value); });
 C R(void)   F1(dataSet)     A((int handle,int row,int col,int value))                      D({        DF1(dataSet)    (handle,row,col,value); });
@@ -224,7 +230,7 @@ C R(var)    F1(adviseShort) A((int method,var objective,cvars signals,long numSi
 // series
 C R(vars)       F0(series)   A((var value I(0),int length I(0) VA))       D({ return DF0(series)  (value,length); });
 C R(void)       F(shift)     A((vars data,var value,int length))          D({        DF(shift)    (data,value,length); });
-C R(vars)       F(rev)       A((cvars data,int length VA))                D({ return DF(rev)      (data,length); });
+C R(vars)       F(rev)       A((cvars data,int length I(0) VA))           D({ return DF(rev)      (data,length); });
 C R(void)       F(sortData)  A((vars data,int length))                    D({        DF(sortData) (data,length); });
 C R(const int*) F(sortIdx)   A((cvars data,int length))                   D({ return DF(sortIdx)  (data,length); });
 C R(var)        F(randomize) A((int method,vars out,cvars in,int length)) D({ return DF(randomize)(method,out,in,length); });
@@ -277,7 +283,7 @@ C R(var)  F0(crossUnderF) A((cvars a,cvars b))   D({ return DF0(crossUnderF)(a,b
 C R(var)  F1(crossUnderF) A((cvars a,var b))     D({ return DF1(crossUnderF)(a,b); });
 
 // matrix
-C R(mat) F(matrix)   A((int rows,int cols VA))        D({ return DF(matrix)  (rows,cols); });
+C R(mat) F(matrix)   A((int rows,int cols I(0) VA))   D({ return DF(matrix)  (rows,cols); });
 C R(mat) F(matTrans) A((mat m,mat a))                 D({ return DF(matTrans)(m,a); });
 C R(mat) F0(matSet)  A((mat m,mat a))                 D({ return DF0(matSet) (m,a); });
 C R(mat) F1(matSet)  A((mat m,int row,int col,mat a)) D({ return DF1(matSet) (m,row,col,a); });
@@ -562,6 +568,10 @@ C R(int)    F(stridx)      A((string name))                                     
 C R(string) F(strxid)      A((int index))                                                  D({ return DF(strxid)    (index); });
 C R(int)    F1(dataParse)  A((int handle,string format,string fileName,int start,int num)) D({ return DF1(dataParse)(handle,format,fileName,start,num); });
 C R(int)    F2(dataParse)  A((int handle,string format,string fileName,string filter))     D({ return DF2(dataParse)(handle,format,fileName,filter); });
+
+// TODO something might be wrong with 'dataParse' setup
+// Manual shows 2 functions, but this setup has 3
+// http://zorro-project.com/manual/en/data.htm
 
 #undef F
 #undef F0

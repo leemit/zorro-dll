@@ -47,6 +47,9 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 #define VA ,...
 #include "zorro/litec/functions_list.h"
 
+	// TODO assert number of functions
+	// TODO assert names of functions
+
 	return SCRIPT_VERSION;
 }
 
