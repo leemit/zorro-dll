@@ -46,11 +46,11 @@ ZORRO_NAMESPACE_OPEN
 
 template <typename FUNCTION> 
 inline TRADE* enterLong(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
-	return enterLong0_ptr(reinterpret_cast<function>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+	return enterLong0_ptr(reinterpret_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
 template <typename FUNCTION> 
 inline TRADE* enterShort(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
-	return enterShort0_ptr(reinterpret_cast<function>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+	return enterShort0_ptr(reinterpret_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
 
 ZORRO_NAMESPACE_CLOSE
