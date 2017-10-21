@@ -75,7 +75,7 @@ ZORRO_OPEN_ENUM_TYPE(ETradeFlag, DWORD)
 ZORRO_CLOSE_ENUM(ETradeFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ETradeFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ETradeFlag)
-typedef CBitfield<ETradeFlag> TTradeBitfield;
+typedef ::z::CBitfield<ETradeFlag> TTradeBitfield;
 
 #pragma pop_macro("IGNORE")
 
@@ -112,7 +112,7 @@ ZORRO_OPEN_ENUM_TYPE(EZorroFlag, DWORD)
 ZORRO_CLOSE_ENUM(EZorroFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EZorroFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EZorroFlag)
-typedef CBitfield<EZorroFlag> TZorroBitfield;
+typedef ::z::CBitfield<EZorroFlag> TZorroBitfield;
 
 ZORRO_OPEN_ENUM_TYPE(EStatusFlag, DWORD)
 	TRADING      = (1u<<0),  // trades have been opened
@@ -147,7 +147,7 @@ ZORRO_OPEN_ENUM_TYPE(EStatusFlag, DWORD)
 ZORRO_CLOSE_ENUM(EStatusFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EStatusFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EStatusFlag)
-typedef CBitfield<EStatusFlag> TStatusBitfield;
+typedef ::z::CBitfield<EStatusFlag> TStatusBitfield;
 
 ZORRO_OPEN_ENUM(EOrderFillMode)
 	NAIVE        = 0,
@@ -168,7 +168,7 @@ ZORRO_OPEN_ENUM(EVerbosity)
 ZORRO_CLOSE_ENUM(EVerbosity)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EVerbosity)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EVerbosity)
-typedef CBitfield<EVerbosity> TVerbosityBitfield;
+typedef ::z::CBitfield<EVerbosity> TVerbosityBitfield;
 
 ZORRO_OPEN_ENUM(EAdviseMode)
 	PREVIOUS     = 0,       // use the method and signals of the last advise call
@@ -188,7 +188,7 @@ ZORRO_OPEN_ENUM(EAdviseMode)
 ZORRO_CLOSE_ENUM(EAdviseMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EAdviseMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EAdviseMode)
-typedef CBitfield<EAdviseMode> TAdviseModeBitfield;
+typedef ::z::CBitfield<EAdviseMode> TAdviseModeBitfield;
 
 ZORRO_OPEN_ENUM(ENeuralMode)
 	NEURAL_INIT    = (1<<20),
@@ -201,7 +201,7 @@ ZORRO_OPEN_ENUM(ENeuralMode)
 ZORRO_CLOSE_ENUM(ENeuralMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ENeuralMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ENeuralMode)
-typedef CBitfield<ENeuralMode> TNeuralModeBitfield;
+typedef ::z::CBitfield<ENeuralMode> TNeuralModeBitfield;
 
 ZORRO_OPEN_ENUM(EPredictionType)
 	CROSSOVER  = (1<<21),
@@ -211,7 +211,7 @@ ZORRO_OPEN_ENUM(EPredictionType)
 ZORRO_CLOSE_ENUM(EPredictionType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPredictionType)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPredictionType)
-typedef CBitfield<EPredictionType> TPredictionTypeBitfield;
+typedef ::z::CBitfield<EPredictionType> TPredictionTypeBitfield;
 
 ZORRO_OPEN_ENUM(EHistoryMode)
 	UNADJUSTED_BROKER_T1 = 0,
@@ -228,7 +228,7 @@ ZORRO_OPEN_ENUM(EHistoryMode)
 ZORRO_CLOSE_ENUM(EHistoryMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EHistoryMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EHistoryMode)
-typedef CBitfield<EHistoryMode> THistoryModeBitfield;
+typedef ::z::CBitfield<EHistoryMode> THistoryModeBitfield;
 
 ZORRO_OPEN_ENUM(EAssetType)
 	FOREX     = 1,
@@ -248,7 +248,7 @@ ZORRO_OPEN_ENUM(EDetrendMode)
 ZORRO_CLOSE_ENUM(EDetrendMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EDetrendMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EDetrendMode)
-typedef CBitfield<EDetrendMode> TDetrendModeBitfield;
+typedef ::z::CBitfield<EDetrendMode> TDetrendModeBitfield;
 
 ZORRO_OPEN_ENUM(ERandomizeMode)
 	DETREND   = (1<<2),
@@ -256,7 +256,7 @@ ZORRO_OPEN_ENUM(ERandomizeMode)
 ZORRO_CLOSE_ENUM(ERandomizeMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ERandomizeMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ERandomizeMode)
-typedef CBitfield<ERandomizeMode> TRandomizeModeBitfield;
+typedef ::z::CBitfield<ERandomizeMode> TRandomizeModeBitfield;
 
 ZORRO_OPEN_ENUM(EOptimizeMode)
 	LUCKY     = (1<<8),
@@ -265,7 +265,7 @@ ZORRO_OPEN_ENUM(EOptimizeMode)
 ZORRO_CLOSE_ENUM(EOptimizeMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EOptimizeMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EOptimizeMode)
-typedef CBitfield<EOptimizeMode> TOptimizeModeBitfield;
+typedef ::z::CBitfield<EOptimizeMode> TOptimizeModeBitfield;
 
 ZORRO_OPEN_ENUM(ETimeZone)
 	UTC       = 24, // Coordinated Universal Time
@@ -319,7 +319,7 @@ ZORRO_OPEN_ENUM(EPlotType)
 ZORRO_CLOSE_ENUM(EPlotType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotType)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotType)
-typedef CBitfield<EPlotType> TPlotTypeBitfield;
+typedef ::z::CBitfield<EPlotType> TPlotTypeBitfield;
 
 ZORRO_OPEN_ENUM(EPlotMode)
 	PL_ALL    = (1<<6),
@@ -328,7 +328,7 @@ ZORRO_OPEN_ENUM(EPlotMode)
 ZORRO_CLOSE_ENUM(EPlotMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
-typedef CBitfield<EPlotMode> TPlotModeBitfield;
+typedef ::z::CBitfield<EPlotMode> TPlotModeBitfield;
 
 const zcolor RED       = 0xff0000ul;
 const zcolor GREEN     = 0x00ff00ul;
@@ -375,7 +375,7 @@ ZORRO_OPEN_ENUM(ESaveMode)
 ZORRO_CLOSE_ENUM(ESaveMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ESaveMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ESaveMode)
-typedef CBitfield<ESaveMode> TSaveModeBitfield;
+typedef ::z::CBitfield<ESaveMode> TSaveModeBitfield;
 
 ZORRO_OPEN_ENUM(EBrokerCmd)
 	GET_TIME           =  5,  // brokerCommand, last incoming tick time
@@ -444,7 +444,7 @@ ZORRO_OPEN_ENUM(EContractType)
 ZORRO_CLOSE_ENUM(EContractType)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EContractType)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EContractType)
-typedef CBitfield<EContractType> TContractTypeBitfield;
+typedef ::z::CBitfield<EContractType> TContractTypeBitfield;
 
 ZORRO_OPEN_ENUM(EMovingAverageType)
 	SMA       = 0,

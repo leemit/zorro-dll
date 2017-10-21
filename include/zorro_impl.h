@@ -5,7 +5,7 @@
 #pragma once
 
 #define ZORRO_IMPL
-#include "zorro/zorro_common.h"
+#include "zorro.h"
 
 ////////////////////////////////////////////////////////
 // Default DllMain

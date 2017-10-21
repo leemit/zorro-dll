@@ -31,29 +31,3 @@
 #define ZORRO_NAMESPACE_OPEN
 #define ZORRO_NAMESPACE_CLOSE
 #endif
-
-#pragma pack(push, 4)
-
-#ifdef ZORRO_CPP
-#include "trading_cpp.h"
-#else
-#include "litec/trading.h"
-#endif
-
-#pragma pack(pop)
-
-ZORRO_NAMESPACE_OPEN
-#ifdef ZORRO_IMPL
-GLOBALS* g;
-#else
-extern GLOBALS* g;
-#endif
-ZORRO_NAMESPACE_CLOSE
-
-#include "functions_cpp.h"
-
-#ifdef ZORRO_CPP
-#include "variables_cpp.h"
-#else
-#include "litec/variables.h"
-#endif

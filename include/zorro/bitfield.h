@@ -1,15 +1,9 @@
 
 #pragma once
 
-#if ZORRO_CPP >= 11
-#include <type_traits>
-#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename ::std::underlying_type<enumType>::type
-#else
-#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename enumType::TUnderlyingType
-#endif
+#include "enum.h"
 
-ZORRO_NAMESPACE_OPEN
-
+namespace z {
 template <typename EnumType, typename UnderlyingType = ZORRO_ENUM_UNDERLYING_TYPE(EnumType)>
 class CBitfield
 {
@@ -59,34 +53,4 @@ private:
 
 	TUnderlyingType m_value;
 };
-
-ZORRO_NAMESPACE_CLOSE
-
-#define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \
-	inline intType operator & ( intType left, enumType right )  { return left & static_cast<intType>( right ); } \
-	inline intType operator | ( intType left, enumType right )  { return left & static_cast<intType>( right ); } \
-	inline intType operator & ( enumType left, intType right )  { return static_cast<intType>( left ) & right; } \
-	inline intType operator | ( enumType left, intType right )  { return static_cast<intType>( left ) & right; } \
-	inline intType operator & ( enumType left, enumType right ) { return static_cast<intType>( left ) & static_cast<intType>( right ); } \
-	inline intType operator | ( enumType left, enumType right ) { return static_cast<intType>( left ) | static_cast<intType>( right ); } \
-	inline intType operator ~ ( enumType value )                { return ~static_cast<intType>( value ); } \
-
-#define ZORRO_BUILD_ENUM_COMP_OPERATORS_WITH_TYPE(enumType, intType) \
-	inline bool operator <  ( enumType left, intType right ) { return static_cast<intType>( left ) <  right;                         } \
-	inline bool operator <  ( intType left, enumType right ) { return left                         <  static_cast<intType>( right ); } \
-	inline bool operator <= ( enumType left, intType right ) { return static_cast<intType>( left ) <= right;                         } \
-	inline bool operator <= ( intType left, enumType right ) { return left                         <= static_cast<intType>( right ); } \
-	inline bool operator >  ( enumType left, intType right ) { return static_cast<intType>( left ) >  right;                         } \
-	inline bool operator >  ( intType left, enumType right ) { return left                         >  static_cast<intType>( right ); } \
-	inline bool operator >= ( enumType left, intType right ) { return static_cast<intType>( left ) >= right;                         } \
-	inline bool operator >= ( intType left, enumType right ) { return left                         >= static_cast<intType>( right ); } \
-	inline bool operator == ( enumType left, intType right ) { return static_cast<intType>( left ) == right;                         } \
-	inline bool operator == ( intType left, enumType right ) { return left                         == static_cast<intType>( right ); } \
-	inline bool operator != ( enumType left, intType right ) { return static_cast<intType>( left ) != right;                         } \
-	inline bool operator != ( intType left, enumType right ) { return left                         != static_cast<intType>( right ); } \
-
-#define ZORRO_BUILD_ENUM_BIT_OPERATORS(enumType) \
-        ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, ZORRO_ENUM_UNDERLYING_TYPE(enumType))
-
-#define ZORRO_BUILD_ENUM_COMP_OPERATORS(enumType) \
-        ZORRO_BUILD_ENUM_COMP_OPERATORS_WITH_TYPE(enumType, ZORRO_ENUM_UNDERLYING_TYPE(enumType))
+} // namespace z
