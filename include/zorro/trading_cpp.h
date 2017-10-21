@@ -6,17 +6,17 @@
 
 ZORRO_NAMESPACE_OPEN
 
-#include "litec/trading_types.h"
-
-const var PI  = 3.14159265359;
-const var NIL = 3e38;
-
 const int NAMESIZE    = 16;
 const int NAMESIZE2   = 40;
 const int NUM_SKILLS  = 8;
 const int NUM_RESULTS = 20;
 const int MAX_PARAMS  = 16;
 const int MAX_STEPS   = 1000;
+
+#include "litec/trading_types.h"
+
+const var PI  = 3.14159265359;
+const var NIL = 3e38;
 
 const char* const ALL = "*";
 const int NOW = -999999;
@@ -34,6 +34,16 @@ const var PERIOD_H4  = 240.0;
 const var PERIOD_D1  = 1440.0;
 const var PERIOD_W1  = 10080.0;
 const var PERIOD_MN1 = 43200.0;
+
+inline var me(mat M, int row, int col)
+{
+	return *(M->dat + row*M->cols + col);
+}
+
+inline var ve(mat M, int n)
+{
+	return *(M->dat + n);
+}
 
 #pragma push_macro("IGNORE")
 #undef IGNORE // A windows symbol
@@ -457,20 +467,6 @@ ZORRO_OPEN_ENUM(EMovingAverageType)
 	MAMA      = 7,
 	T3        = 8,
 ZORRO_CLOSE_ENUM(EMovingAverageType)
-
-#define NO_DEFINES
-#include "litec/trading.h"
-#undef NO_DEFINES
-
-inline var me(mat M, int row, int col)
-{
-	return *(M->dat + row*M->cols + col);
-}
-
-inline var ve(mat M, int n)
-{
-	return *(M->dat + n);
-}
 
 ZORRO_NAMESPACE_CLOSE
 
