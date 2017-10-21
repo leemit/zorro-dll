@@ -18,11 +18,22 @@ const int NUM_RESULTS = 20;
 const int MAX_PARAMS  = 16;
 const int MAX_STEPS   = 1000;
 
-const char* const ALL    = "*";
-const int         NOW    = -999999;
-const int         UPDATE = (1<<5);
-
+const char* const ALL = "*";
+const int NOW = -999999;
+const int UPDATE = (1<<5);
 const int SCRIPT_VERSION = 255;
+
+const var PERIOD_MS1 = 0.001/60.0;
+const var PERIOD_S1  = 1.0/60.0;
+const var PERIOD_M1  = 1.0;
+const var PERIOD_M5  = 5.0;
+const var PERIOD_M15 = 15.0;
+const var PERIOD_M30 = 30.0;
+const var PERIOD_H1  = 60.0;
+const var PERIOD_H4  = 240.0;
+const var PERIOD_D1  = 1440.0;
+const var PERIOD_W1  = 10080.0;
+const var PERIOD_MN1 = 43200.0;
 
 #pragma push_macro("IGNORE")
 #undef IGNORE // A windows symbol

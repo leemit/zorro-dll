@@ -878,6 +878,18 @@ typedef struct GLOBALS
 #define MAType_MAMA  7
 #define MAType_T3    8
 
+#define PERIOD_MS1 0.001/60.0
+#define PERIOD_S1  1.0/60.0
+#define PERIOD_M1  1.0
+#define PERIOD_M5  5.0
+#define PERIOD_M15 15.0
+#define PERIOD_M30 30.0
+#define PERIOD_H1  60.0
+#define PERIOD_H4  240.0
+#define PERIOD_D1  1440.0
+#define PERIOD_W1  10080.0
+#define PERIOD_MN1 43200.0
+
 #endif // NO_DEFINES
 /////////////////////////////////////////////////////////
 #endif // trading_h
