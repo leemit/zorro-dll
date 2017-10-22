@@ -30,3 +30,7 @@ ZORRO_NAMESPACE_CLOSE
 #else
 #include "zorro/litec/variables.h"
 #endif
+
+ZORRO_NAMESPACE_OPEN
+#include "zorro/litec/default.h"
+ZORRO_NAMESPACE_CLOSE
