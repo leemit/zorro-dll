@@ -62,5 +62,8 @@
     <ClInclude Include="..\include\zorro\litec\trading_types.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\zorro\litec\default.h">
+      <Filter>include\zorro\litec</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

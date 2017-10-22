@@ -448,6 +448,7 @@ ZORRO_OPEN_ENUM(EHedgeMode)
 	VIRTUAL         = 4, // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
 	PARTIAL_VIRTUAL = 5, // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
 ZORRO_CLOSE_ENUM(EHedgeMode)
+ZORRO_BUILD_ENUM_COMP_OPERATORS(EHedgeMode)
 
 ZORRO_OPEN_ENUM(ETradeDir)
 	UP = 1,
