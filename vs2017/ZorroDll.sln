@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyStrategy", "MyStrategy.vcxproj", "{671AF709-5D44-416F-AA29-1DEA9D2C739F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop4", "Workshop4.vcxproj", "{344763E6-BB6D-4CC6-B28A-68B99746351E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop4_dll", "Workshop4_dll.vcxproj", "{344763E6-BB6D-4CC6-B28A-68B99746351E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop5", "Workshop5.vcxproj", "{0E848667-E65D-4E35-A902-0047323E8814}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop5_dll", "Workshop5_dll.vcxproj", "{0E848667-E65D-4E35-A902-0047323E8814}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop6", "Workshop6.vcxproj", "{E1C0F01B-C198-49CC-871A-74973ABD6CD5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop6_dll", "Workshop6_dll.vcxproj", "{E1C0F01B-C198-49CC-871A-74973ABD6CD5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop7", "Workshop7.vcxproj", "{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop7_dll", "Workshop7_dll.vcxproj", "{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

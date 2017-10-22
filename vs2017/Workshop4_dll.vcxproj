@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Workshop5.cpp" />
+    <ClCompile Include="..\src\Workshop4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{0E848667-E65D-4E35-A902-0047323E8814}</ProjectGuid>
-    <RootNamespace>Workshop5</RootNamespace>
+    <ProjectGuid>{344763E6-BB6D-4CC6-B28A-68B99746351E}</ProjectGuid>
+    <RootNamespace>Workshop4_dll</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
