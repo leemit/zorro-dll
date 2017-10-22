@@ -6,15 +6,16 @@
 
 #define ZORRO_IMPL
 #include "zorro.h"
+#include <assert.h>
 
 ////////////////////////////////////////////////////////
 // Default DllMain
 
 #ifdef ZORRO_DLLMAIN
 BOOL WINAPI DllMain(
-	_In_ HINSTANCE hinstDLL,
-	_In_ DWORD     fdwReason,
-	_In_ LPVOID    lpvReserved
+	HINSTANCE hinstDLL,
+	DWORD     fdwReason,
+	LPVOID    lpvReserved
 )
 {
 	(void)hinstDLL;
@@ -29,16 +30,17 @@ BOOL WINAPI DllMain(
 
 ZORRO_NAMESPACE_OPEN
 
-ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
+ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 {
-	g = Globals;
+	assert(pGlobals != 0);
+	g = pGlobals;
 	unsigned int n = 0;
 // Populate the list of function pointers
-#define F(x)  (DWORD&)x##_ptr  = g->Functions[n++];
-#define F0(x) (DWORD&)x##0_ptr = g->Functions[n++];
-#define F1(x) (DWORD&)x##1_ptr = g->Functions[n++];
-#define F2(x) (DWORD&)x##2_ptr = g->Functions[n++];
-#define F3(x) (DWORD&)x##3_ptr = g->Functions[n++];
+#define F(x)  assert(g->Functions[n] != 0); (DWORD&)x##_ptr  = g->Functions[n++];
+#define F0(x) assert(g->Functions[n] != 0); (DWORD&)x##0_ptr = g->Functions[n++];
+#define F1(x) assert(g->Functions[n] != 0); (DWORD&)x##1_ptr = g->Functions[n++];
+#define F2(x) assert(g->Functions[n] != 0); (DWORD&)x##2_ptr = g->Functions[n++];
+#define F3(x) assert(g->Functions[n] != 0); (DWORD&)x##3_ptr = g->Functions[n++];
 #define C
 #define R(x)
 #define A(x)
@@ -47,8 +49,12 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* Globals)
 #define VA ,...
 #include "zorro/litec/functions_list.h"
 
-	// TODO assert number of functions
 	// TODO assert names of functions
+	// TODO replace assert with proper error handling?
+
+#ifdef ZORRO_EXPECT_ALL_FUNCTIONS
+	assert(g->Functions[n] == 0);
+#endif
 
 	return SCRIPT_VERSION;
 }
