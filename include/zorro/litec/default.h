@@ -37,10 +37,10 @@ inline var DominantPhase(int Period) {
 inline void assetAdd(string Name) {
 	assetAdd(Name,50,0,0,0,0.01,0.01,0,1,1,0,Name);
 }
-inline void plot(string name,int val,EPlotType type,TColor color) {
+inline void plot(string name,int val,EPlotType type,EColor color) {
 	plot(name,(var)val,type,color);
 }
-inline void plot(string name,vars data,EPlotType type,TColor color) {
+inline void plot(string name,vars data,EPlotType type,EColor color) {
 	plot(name,data[0],type,color);
 }
 inline int memory() {

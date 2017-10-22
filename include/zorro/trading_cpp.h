@@ -315,6 +315,28 @@ ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
 typedef ::z::CBitfield<EPlotMode> TPlotModeBitfield;
 
+ZORRO_OPEN_ENUM_TYPE(EColor, DWORD)
+    DEFAULT   = 0,
+	RED       = 0xff0000ul,
+	GREEN     = 0x00ff00ul,
+	BLUE      = 0x0000fful,
+	CYAN      = 0x00fffful,
+	DARKBLUE  = 0x0000a0ul,
+	LIGHTBLUE = 0xadd8e6ul,
+	PURPLE    = 0x800080ul,
+	YELLOW    = 0xffff00ul,
+	MAGENTA   = 0xff00fful,
+	ORANGE    = 0xffa500ul,
+	DARKGREEN = 0x008000ul,
+	OLIVE     = 0x808000ul,
+	MAROON    = 0x800000ul,
+	SILVER    = 0xc0c0c0ul,
+	GREY      = 0x808080ul,
+	BLACK     = 0x010101ul,
+	LIGHT     = 0x606060ul,
+	TRANSP    = 0x80000000ul,
+ZORRO_CLOSE_ENUM(EColor)
+
 ZORRO_OPEN_ENUM(EPrintMode)
 	TO_WINDOW =  1,
 	TO_LOG    =  2,
@@ -476,25 +498,6 @@ const var PERIOD_H4  = 240.0;
 const var PERIOD_D1  = 1440.0;
 const var PERIOD_W1  = 10080.0;
 const var PERIOD_MN1 = 43200.0;
-
-const TColor RED       = 0xff0000ul;
-const TColor GREEN     = 0x00ff00ul;
-const TColor BLUE      = 0x0000fful;
-const TColor CYAN      = 0x00fffful;
-const TColor DARKBLUE  = 0x0000a0ul;
-const TColor LIGHTBLUE = 0xadd8e6ul;
-const TColor PURPLE    = 0x800080ul;
-const TColor YELLOW    = 0xffff00ul;
-const TColor MAGENTA   = 0xff00fful;
-const TColor ORANGE    = 0xffa500ul;
-const TColor DARKGREEN = 0x008000ul;
-const TColor OLIVE     = 0x808000ul;
-const TColor MAROON    = 0x800000ul;
-const TColor SILVER    = 0xc0c0c0ul;
-const TColor GREY      = 0x808080ul;
-const TColor BLACK     = 0x010101ul;
-const TColor LIGHT     = 0x606060ul;
-const TColor TRANSP    = 0x80000000ul;
 
 inline var me(mat pMatrix, int row, int col)
 {

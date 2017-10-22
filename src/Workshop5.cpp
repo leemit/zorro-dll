@@ -34,10 +34,10 @@ ZORRO_EXPORT void ZORRO_CALL run()
 		enterShort();
 
 	// plot signals and thresholds
-	plot("Filtered",Filtered, EPlotType::NEW, BLUE);
-	plot("Signal",Signal, EPlotType::NEW, RED);
-	plot("Threshold1", 1, EPlotType::REGULAR, BLACK);
-	plot("Threshold2", -1, EPlotType::REGULAR, BLACK);
+	plot("Filtered",Filtered, EPlotType::NEW, EColor::BLUE);
+	plot("Signal",Signal, EPlotType::NEW, EColor::RED);
+	plot("Threshold1", 1, EPlotType::REGULAR, EColor::BLACK);
+	plot("Threshold2", -1, EPlotType::REGULAR, EColor::BLACK);
 	PlotWidth = 600;
 	PlotHeight1 = 300;
 	set(EZorroFlag::PLOTNOW);
