@@ -44,6 +44,7 @@ typedef int EBrokerCmd;
 typedef int EContractMode;
 typedef int EContractType;
 typedef int EMAType;
+typedef int EHedgeMode;
 #endif
 
 typedef struct T1
@@ -306,7 +307,7 @@ typedef struct GLOBALS
 	int nExitTime;   // sell at market after this number of bars
 	int nEntryTime;  // wait this number of bars for entry limit orders
 
-	int nHedge;          // hedging mode
+	EHedgeMode nHedge;   // hedging mode
 	EVerbosity nVerbose; // verbosity level
 	int nBoxState;       // external message box state
 	int nLifeTime;       // trade duration in bars

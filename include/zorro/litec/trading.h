@@ -351,4 +351,10 @@
 #define PERIOD_W1  10080.0
 #define PERIOD_MN1 43200.0
 
+#define HEDGE_NONE            0 // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts).
+#define HEDGE_ALLOW_ALGO      1 // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts).
+#define HEDGE_ALLOW_ANY       2 // full hedging; long and short positions can be open at the same time.
+#define HEDGE_VIRTUAL         4 // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
+#define HEDGE_PARTIAL_VIRTUAL 5 // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
+
 #endif // trading_h

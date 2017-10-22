@@ -131,7 +131,7 @@ ZORRO_EXPORT void ZORRO_CALL run()
 
 	set(EZorroFlag::RULES); //+TESTNOW);
 
-	if(Train) Hedge = 2;	// for training, allow long + short	
+	if(Train) Hedge = EHedgeMode::ALLOW_ANY_HEDGE;
 	LifeTime = 5;  				// one week
 	MaxLong = MaxShort = 1;
 	

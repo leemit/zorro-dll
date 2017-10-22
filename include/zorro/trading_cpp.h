@@ -441,6 +441,14 @@ ZORRO_OPEN_ENUM(EMAType)
 	T3        = 8,
 ZORRO_CLOSE_ENUM(EMAType)
 
+ZORRO_OPEN_ENUM(EHedgeMode)
+	NONE             = 0, // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts).
+	ALLOW_ALGO_HEDGE = 1, // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts).
+	ALLOW_ANY_HEDGE  = 2, // full hedging; long and short positions can be open at the same time.
+	VIRTUAL          = 4, // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
+	PARTIAL_VIRTUAL  = 5, // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
+ZORRO_CLOSE_ENUM(EHedgeMode)
+
 #include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;
