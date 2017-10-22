@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ZORRO_CPP
-#define ZORRO_ENUM_SCOPE(x) x
+#define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
 #else
-#define ZORRO_ENUM_SCOPE(x)
+#define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue
 #endif
 
 // system functions
@@ -121,7 +121,7 @@ C R(var)  F(brokerCommand) A((EBrokerCmd command,DWORD parameter))              
 C R(int)    F0(panel)    A((int rows,int cols,EColor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); });
 C R(int)    F1(panel)    A((string filename,EColor color,int size))    D({ return DF1(panel)   (filename,color,size); });
 C R(string) F(panelGet)  A((int row,int col))                          D({ return DF(panelGet) (row,col); });
-C R(int)    F(panelSet)  A((int row,int col,string text,EColor color I(ZORRO_ENUM_SCOPE(EColor::)DEFAULT),int style I(0),int type I(0) VA))
+C R(int)    F(panelSet)  A((int row,int col,string text,EColor color I(ZORRO_ENUM_VALUE(EColor,DEFAULT)),int style I(0),int type I(0) VA))
                                                                        D({ return DF(panelSet) (row,col,text,color,style,type); });
 C R(int)    F(panelSave) A((string filename))                          D({ return DF(panelSave)(filename); });
 C R(int)    F(panelLoad) A((string filename))                          D({ return DF(panelLoad)(filename); });
@@ -244,11 +244,11 @@ C R(string) F0(loop)        A((const void* p0  I(0),const void* p1  I(0),const v
                                const void* p20 I(0),const void* p21 I(0),const void* p22 I(0),const void* p23 I(0),const void* p24 I(0),const void* p25 I(0),const void* p26 I(0),const void* p27 I(0),const void* p28 I(0),const void* p29 I(0),
                                const void* p30 I(0),const void* p31 I(0),const void* p32 I(0),const void* p33 I(0),const void* p34 I(0),const void* p35 I(0),const void* p36 I(0),const void* p37 I(0),const void* p38 I(0),const void* p39 I(0) VA))
                                D({ return DF0(loop)(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32,p33,p34,p35,p36,p37,p38,p39); });
-C R(var)    F0(adviseLong)  A((EAdviseMode method I(ZORRO_ENUM_SCOPE(EAdviseMode::)PREVIOUS),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
+C R(var)    F0(adviseLong)  A((EAdviseMode method I(ZORRO_ENUM_VALUE(EAdviseMode,PREVIOUS)),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
                                var s10 I(NIL),var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
                                D({ return DF0(adviseLong)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); });
 C R(var)    F1(adviseLong)  A((EAdviseMode method,var objective,cvars signals,long numSignals)) D({ return DF1(adviseLong)(method,objective,signals,numSignals); });
-C R(var)    F0(adviseShort) A((EAdviseMode method I(ZORRO_ENUM_SCOPE(EAdviseMode::)PREVIOUS),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
+C R(var)    F0(adviseShort) A((EAdviseMode method I(ZORRO_ENUM_VALUE(EAdviseMode,PREVIOUS)),var objective I(0),var s0 I(NIL),var s1 I(NIL),var s2 I(NIL),var s3 I(NIL),var s4 I(NIL),var s5 I(NIL),var s6 I(NIL),var s7 I(NIL),var s8 I(NIL),var s9 I(NIL),
                                var s10 I(NIL),var s11 I(NIL),var s12 I(NIL),var s13 I(NIL),var s14 I(NIL),var s15 I(NIL),var s16 I(NIL),var s17 I(NIL),var s18 I(NIL),var s19 I(NIL) VA))
                                D({ return DF0(adviseShort)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); });
 C R(var)    F1(adviseShort) A((EAdviseMode method,var objective,cvars signals,long numSignals))
@@ -619,4 +619,4 @@ C R(int)    F2(dataParse)  A((int handle,string format,string fileName,string fi
 #undef VA
 #undef ZORRO_VA_CALL
 #undef ZORRO_VA_RET_CALL
-#undef ZORRO_ENUM_SCOPE
+#undef ZORRO_ENUM_VALUE
