@@ -357,4 +357,7 @@
 #define HEDGE_VIRTUAL         4 // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
 #define HEDGE_PARTIAL_VIRTUAL 5 // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
 
+#define TRADE_DIR_UP    1
+#define TRADE_DIR_DOWN -1
+
 #endif // trading_h

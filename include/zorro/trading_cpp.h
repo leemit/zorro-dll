@@ -449,6 +449,11 @@ ZORRO_OPEN_ENUM(EHedgeMode)
 	PARTIAL_VIRTUAL  = 5, // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
 ZORRO_CLOSE_ENUM(EHedgeMode)
 
+ZORRO_OPEN_ENUM(ETradeDir)
+	UP = 1,
+	DOWN = -1,
+ZORRO_CLOSE_ENUM(ETradeDir)
+
 #include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;

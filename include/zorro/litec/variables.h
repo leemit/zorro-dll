@@ -320,7 +320,7 @@
 #define TradeUnderlying  ((var)g->tr->fUnl)
 #define TradeVar         (g->tr->Skill)
 #define TradeParameter   (g->tr->fArg)
-#define TradeDir         ifelse(TradeIsShort,-1,1)
+#define TradeDir         ifelse(TradeIsShort,TRADE_DIR_DOWN,TRADE_DIR_UP)
 #define TradeStatus      ((STATUS*)(g->tr->status))
 #define TradeAlgo        TradeStatus->sAlgo
 #define TradeAsset       TradeStatus->asset->sName

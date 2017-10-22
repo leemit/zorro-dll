@@ -45,6 +45,7 @@ typedef int EContractMode;
 typedef int EContractType;
 typedef int EMAType;
 typedef int EHedgeMode;
+typedef int ETradeDir;
 #endif
 
 typedef struct T1
@@ -240,7 +241,7 @@ typedef struct TRADE
 	ETradeFlag flags;   // trade flags, see below
 	float fArg[8];      // TMF arguments
 	var   Skill[NUM_SKILLS]; // general purpose variables for TMF
-	int   nContract;    // contract type & exchange code
+	EContractType nContract; // contract type & exchange code
 	float fStrike;      // contract strike price
 	float fUnl;         // contract underlying price, needed for futures
 	char  sInfo[8];     // contract class
