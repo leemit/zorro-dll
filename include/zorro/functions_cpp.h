@@ -52,6 +52,14 @@ template <typename FUNCTION>
 inline TRADE* enterShort(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
 	return enterShort0_ptr(reinterpret_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
+template <> 
+inline TRADE* enterLong(long f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7) {
+	return enterLong0_ptr(static_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+}
+template <> 
+inline TRADE* enterShort(long f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7) {
+	return enterShort0_ptr(static_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
+}
 inline int is(ETrainFlag* mode,int flag) {
 	return is1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETrainFlag)*>(mode),flag);
 }
