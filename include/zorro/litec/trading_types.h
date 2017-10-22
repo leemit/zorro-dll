@@ -15,7 +15,7 @@ typedef var*        vars;
 typedef const var*  cvars;
 typedef const char* string;
 typedef long        function;
-typedef DWORD       zcolor;
+typedef DWORD       TColor;
 #ifdef ZORRO_CPP
 typedef const wchar_t* wstring;
 #else
@@ -179,7 +179,7 @@ typedef struct STATUS {
 	int    nWinStreak,nLossStreak; // length of current win and loss streak
 	int    numWinning,numLosing;   // number of winning and losing open trades, test/trade mode only
 	DWORD  dwWin,dwLoss;           // WFO win/loss flags 
-	zcolor dwColorWin,dwColorLoss; // trade colors in chart
+	TColor dwColorWin,dwColorLoss; // trade colors in chart
 								   // clear statistics until here
 	EStatusFlag flags;
 	int    nModel;        // model number for prediction
@@ -514,14 +514,14 @@ typedef struct GLOBALS
 	int nPlotHeight1,nPlotHeight2; // Main chart and additional chart height in pixels
 	int nPlotDate;       // start date of the plot (default = 0 = plot all)
 	int nPlotBars;       // number of bars to plot (default = 0 = all)
-	zcolor dwColorCandle;
-	zcolor dwColorUp,dwColorDn; // color of white / black candles
-	zcolor dwColorEquity,dwColorDD;
-	zcolor dwColorWin,dwColorLoss;
+	TColor dwColorCandle;
+	TColor dwColorUp,dwColorDn; // color of white / black candles
+	TColor dwColorEquity,dwColorDD;
+	TColor dwColorWin,dwColorLoss;
 	string sPlotLabelFormat;
 	int nPlotTrade;
-	zcolor dwColorBars[3];
-	zcolor dwColorPanel[6];
+	TColor dwColorBars[3];
+	TColor dwColorPanel[6];
 	int nPlotPeriod;     // Chart update period in minutes
 	EPlotMode nPlotMode;
 

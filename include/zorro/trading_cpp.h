@@ -471,24 +471,24 @@ const var PERIOD_D1  = 1440.0;
 const var PERIOD_W1  = 10080.0;
 const var PERIOD_MN1 = 43200.0;
 
-const zcolor RED       = 0xff0000ul;
-const zcolor GREEN     = 0x00ff00ul;
-const zcolor BLUE      = 0x0000fful;
-const zcolor CYAN      = 0x00fffful;
-const zcolor DARKBLUE  = 0x0000a0ul;
-const zcolor LIGHTBLUE = 0xadd8e6ul;
-const zcolor PURPLE    = 0x800080ul;
-const zcolor YELLOW    = 0xffff00ul;
-const zcolor MAGENTA   = 0xff00fful;
-const zcolor ORANGE    = 0xffa500ul;
-const zcolor DARKGREEN = 0x008000ul;
-const zcolor OLIVE     = 0x808000ul;
-const zcolor MAROON    = 0x800000ul;
-const zcolor SILVER    = 0xc0c0c0ul;
-const zcolor GREY      = 0x808080ul;
-const zcolor BLACK     = 0x010101ul;
-const zcolor LIGHT     = 0x606060ul;
-const zcolor TRANSP    = 0x80000000ul;
+const TColor RED       = 0xff0000ul;
+const TColor GREEN     = 0x00ff00ul;
+const TColor BLUE      = 0x0000fful;
+const TColor CYAN      = 0x00fffful;
+const TColor DARKBLUE  = 0x0000a0ul;
+const TColor LIGHTBLUE = 0xadd8e6ul;
+const TColor PURPLE    = 0x800080ul;
+const TColor YELLOW    = 0xffff00ul;
+const TColor MAGENTA   = 0xff00fful;
+const TColor ORANGE    = 0xffa500ul;
+const TColor DARKGREEN = 0x008000ul;
+const TColor OLIVE     = 0x808000ul;
+const TColor MAROON    = 0x800000ul;
+const TColor SILVER    = 0xc0c0c0ul;
+const TColor GREY      = 0x808080ul;
+const TColor BLACK     = 0x010101ul;
+const TColor LIGHT     = 0x606060ul;
+const TColor TRANSP    = 0x80000000ul;
 
 inline var me(mat pMatrix, int row, int col)
 {

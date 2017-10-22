@@ -47,12 +47,12 @@ C R(void*) F(ytest)   A((void* ptr,int mode))                  D({ return DF(yte
 C R(long)  F(checkLookBack) A((long num))                      D({ return DF(checkLookBack)(num); });
 
 // chart
-C R(void)   F(plot)       A((string name,var val,EPlotType type,zcolor color))                      D({        DF(plot)      (name,val,type,color); });
-C R(void)   F(plotBar)    A((string name,int num,var label,var val,EPlotType type,zcolor color))    D({        DF(plotBar)   (name,num,label,val,type,color); });
-C R(void)   F(plotGraph)  A((string name,var num,var val,EPlotType type,zcolor color))              D({        DF(plotGraph) (name,num,val,type,color); });
+C R(void)   F(plot)       A((string name,var val,EPlotType type,TColor color))                      D({        DF(plot)      (name,val,type,color); });
+C R(void)   F(plotBar)    A((string name,int num,var label,var val,EPlotType type,TColor color))    D({        DF(plotBar)   (name,num,label,val,type,color); });
+C R(void)   F(plotGraph)  A((string name,var num,var val,EPlotType type,TColor color))              D({        DF(plotGraph) (name,num,val,type,color); });
 C R(DATA*)  F(plotData)   A((string name))                                                          D({ return DF(plotData)  (name); });
-C R(zcolor) F(color)      A((var value,zcolor color1,zcolor color2,zcolor color3,zcolor color4 VA)) D({ return DF(color)     (value,color1,color2,color3,color4); });
-C R(zcolor) F(colorScale) A((zcolor color,var factor))                                              D({ return DF(colorScale)(color,factor); });
+C R(TColor) F(color)      A((var value,TColor color1,TColor color2,TColor color3,TColor color4 VA)) D({ return DF(color)     (value,color1,color2,color3,color4); });
+C R(TColor) F(colorScale) A((TColor color,var factor))                                              D({ return DF(colorScale)(color,factor); });
 
 // TODO one of the plot() functions is missing
 // http://manual.zorro-trader.com/plot.htm
@@ -115,10 +115,10 @@ C R(var)  F(brokerCommand) A((EBrokerCmd command,DWORD parameter))              
 // http://zorro-project.com/manual/en/brokercommand.htm
 
 // panel
-C R(int)    F0(panel)    A((int rows,int cols,zcolor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); });
-C R(int)    F1(panel)    A((string filename,zcolor color,int size))    D({ return DF1(panel)   (filename,color,size); });
+C R(int)    F0(panel)    A((int rows,int cols,TColor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); });
+C R(int)    F1(panel)    A((string filename,TColor color,int size))    D({ return DF1(panel)   (filename,color,size); });
 C R(string) F(panelGet)  A((int row,int col))                          D({ return DF(panelGet) (row,col); });
-C R(int)    F(panelSet)  A((int row,int col,string text,zcolor color I(0),int style I(0),int type I(0) VA))
+C R(int)    F(panelSet)  A((int row,int col,string text,TColor color I(0),int style I(0),int type I(0) VA))
                                                                        D({ return DF(panelSet) (row,col,text,color,style,type); });
 C R(int)    F(panelSave) A((string filename))                          D({ return DF(panelSave)(filename); });
 C R(int)    F(panelLoad) A((string filename))                          D({ return DF(panelLoad)(filename); });
@@ -571,7 +571,7 @@ C R(var) F(Volatility)       A((cvars data,int period))                         
 C R(var) F(VolatilityC)      A((int timePeriod,int EMAPeriod))                                 D({ return DF(VolatilityC)     (timePeriod,EMAPeriod); });
 C R(var) F(VolatilityMM)     A((cvars data,int timePeriod,int EMAPeriod))                      D({ return DF(VolatilityMM)    (data,timePeriod,EMAPeriod); });
 C R(var) F(ZMA)              A((cvars data,int period))                                        D({ return DF(ZMA)             (data,period); });
-C R(var) F(ZigZag)           A((cvars data,var depth,int length,zcolor color))                 D({ return DF(ZigZag)          (data,depth,length,color); });
+C R(var) F(ZigZag)           A((cvars data,var depth,int length,TColor color))                 D({ return DF(ZigZag)          (data,depth,length,color); });
 
 C R(var)    F(ccyStrength) A((string currency))                                  D({ return DF(ccyStrength)(currency); });
 C R(void)   F(ccySet)      A((var strength))                                     D({        DF(ccySet)     (strength); });
