@@ -31,7 +31,7 @@ typedef int EWeekday;
 typedef int EWeekendMode;
 typedef int EPlotType;
 typedef int EPlotMode;
-typedef DWORD EColor;
+typedef unsigned long EColor;
 typedef int EPrintMode;
 typedef int ESaveMode;
 typedef int EBrokerCmd;

@@ -315,7 +315,7 @@ ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
 typedef ::z::CBitfield<EPlotMode> TPlotModeBitfield;
 
-ZORRO_OPEN_ENUM_TYPE(EColor, DWORD)
+ZORRO_OPEN_ENUM_TYPE(EColor, unsigned long)
     DEFAULT   = 0,
 	RED       = 0xff0000ul,
 	GREEN     = 0x00ff00ul,
