@@ -477,6 +477,13 @@ ZORRO_OPEN_ENUM(ETradeDir)
 	DOWN = -1,
 ZORRO_CLOSE_ENUM(ETradeDir)
 
+const int NAMESIZE    = 16;
+const int NAMESIZE2   = 40;
+const int NUM_SKILLS  = 8;
+const int NUM_RESULTS = 20;
+const int MAX_PARAMS  = 16;   // max optimize() calls
+const int MAX_STEPS   = 1000; // max optimize() steps
+
 #include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;

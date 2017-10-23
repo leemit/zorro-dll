@@ -3,6 +3,7 @@
 // Function Format:
 // C R(ReturnType) F(FunctionName) A((Arguments)) D({ return DF(FunctionName)(Arguments); });
 
+#ifdef ZORRO_CPP
 #ifdef D
 #define ZORRO_VA_CALL(valist, start, call) \
 	va_list valist; va_start(valist, start); \
@@ -12,8 +13,6 @@
 	ret _ret = call; va_end(valist); \
 	return _ret;
 #endif
-
-#ifdef ZORRO_CPP
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
 #else
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue
