@@ -7,7 +7,7 @@
 
 #pragma pack(push, 4)
 
-#ifdef ZORRO_CPP
+#ifdef ZORRO_CPP_PURE
 #include "zorro/trading_cpp.h"
 #else
 #include "zorro/litec/trading.h"
@@ -25,7 +25,7 @@ ZORRO_NAMESPACE_CLOSE
 
 #include "zorro/functions_cpp.h"
 
-#ifdef ZORRO_CPP
+#ifdef ZORRO_CPP_PURE
 #include "zorro/variables_cpp.h"
 #else
 #include "zorro/litec/variables.h"

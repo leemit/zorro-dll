@@ -3,6 +3,16 @@
 
 #include "zorro_common.h"
 
+#if ZORRO_CPP >= 11
+#include <type_traits>
+#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename ::std::underlying_type<enumType>::type
+#define ZORRO_OPEN_ENUM(name) \
+	typedef enum class name {
+#define ZORRO_OPEN_ENUM_TYPE(name, type) \
+	typedef enum class name : type {
+#define ZORRO_CLOSE_ENUM(name) \
+	} name;
+#else
 namespace z {
 template<typename EnumDef, typename UnderlyingType = typename EnumDef::TUnderlyingType>
 class CEnum : public EnumDef
@@ -33,17 +43,6 @@ struct SEnumBaseDef
 	typedef UnderlyingType TUnderlyingType;
 };
 } // namespace z
-
-#if ZORRO_CPP >= 11
-#include <type_traits>
-#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename ::std::underlying_type<enumType>::type
-#define ZORRO_OPEN_ENUM(name) \
-	typedef enum class name {
-#define ZORRO_OPEN_ENUM_TYPE(name, type) \
-	typedef enum class name : type {
-#define ZORRO_CLOSE_ENUM(name) \
-	} name;
-#elif ZORRO_CPP >= 03
 #define ZORRO_ENUM_UNDERLYING_TYPE(enumType) enumType::TUnderlyingType
 #define ZORRO_OPEN_ENUM(name) \
 	struct S##name##Def : public ::z::SEnumBaseDef<int> { \
@@ -55,8 +54,6 @@ struct SEnumBaseDef
 		}; \
 	}; \
 	typedef ::z::CEnum<S##name##Def> name;
-#else
-#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) int
 #endif
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \

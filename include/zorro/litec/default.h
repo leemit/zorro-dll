@@ -2,7 +2,7 @@
 #ifndef default_h
 #define default_h
 
-#ifdef ZORRO_CPP
+#ifdef ZORRO_CPP_PURE
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
 #else
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue

@@ -13,7 +13,11 @@
 #define MAX_PARAMS  16   // max optimize() calls
 #define MAX_STEPS   1000 // max optimize() steps
 
+#ifdef ZORRO_CPP
+#include "trading_types.h"
+#else
 #include <trading_types.h>
+#endif
 
 #define SCRIPT_VERSION	255
 
@@ -137,6 +141,7 @@
 #define ALERT     (1<<4)
 #define LOGMSG    (1<<9) // show log in message window
 
+#define PREVIOUS   0
 #define NEURAL     (1<<20) // use external AI
 #define DTREE      (1<<21) // use a decision tree
 #define PERCEPTRON (1<<22) // use a perceptron
@@ -235,6 +240,7 @@
 #define PL_LONG (1<<7)
 #define PL_FINE (1<<8)
 
+#define DEFAULT   0
 #define RED       0xff0000ul
 #define GREEN     0x00ff00ul
 #define BLUE      0x0000fful

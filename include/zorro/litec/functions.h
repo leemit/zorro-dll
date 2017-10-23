@@ -17,6 +17,10 @@
 #define I(param,value) param
 #define VA ,...
 
+#ifdef ZORRO_CPP
+#include "functions_list.h"
+#else
 #include <functions_list.h>
+#endif
 
 #endif // functions_h

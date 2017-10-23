@@ -11,6 +11,8 @@ typedef long        function;
 typedef const wchar_t* wstring;
 #else
 typedef const short* wstring;
+#endif
+#ifndef ZORRO_CPP_PURE
 typedef int ETradeFlag;
 typedef int EZorroFlag;
 typedef int EStatusFlag;

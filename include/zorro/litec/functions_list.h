@@ -21,6 +21,8 @@
 	va_list valist; va_start(valist, start); \
 	ret _ret = call; va_end(valist); \
 	return _ret;
+#endif
+#ifdef ZORRO_CPP_PURE
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
 #else
 #define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue

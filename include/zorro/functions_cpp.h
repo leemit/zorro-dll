@@ -60,6 +60,9 @@ template <>
 inline TRADE* enterShort(long f,var v0,var v1,var v2,var v3,var v4,var v5,var v6,var v7) {
 	return enterShort0_ptr(static_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
+
+#ifdef ZORRO_CPP_PURE
+
 inline int is(ETrainFlag* mode,int flag) {
 	return is1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(ETrainFlag)*>(mode),flag);
 }
@@ -87,5 +90,6 @@ inline void reset(ETradeFlag* mode,int flag) {
 inline void reset(EPlotMode* mode,int flag) {
 	reset1_ptr(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
 }
+#endif // ZORRO_CPP_PURE
 
 ZORRO_NAMESPACE_CLOSE
