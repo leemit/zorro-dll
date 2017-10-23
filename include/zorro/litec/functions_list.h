@@ -1,7 +1,17 @@
 // This file contains all Zorro function definitions
 // Add new functions to the end
+
 // Function Format:
 // C R(ReturnType) F(FunctionName) A((Arguments)) D({ return DF(FunctionName)(Arguments); })
+// [C] for function modifier like extern or inline
+// [R] for function return type
+// [F] for function names
+// [F0]-[F3] for overloaded function names
+// [A] for function arguments
+// [D] for c++ function definitions used by inline functions wrapping the function pointers
+// [DF],[DF0]-[DF3] same function name as for [F]
+// [I] for default arguments in c++ functions
+// [VA] for variable arguments which are meant to be omitted in c++ inline functions
 
 #ifdef ZORRO_CPP
 #define ZORRO_VA_CALL(valist, start, call) \
