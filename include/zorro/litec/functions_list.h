@@ -123,9 +123,6 @@ C R(int)  F(assetHistory)  A((string name,EHistoryMode mode))                   
 C R(int)  F(brokerAsset)   A((string assetSymbol,var* pPrice,var* pSpread,var* pVol)) D({ return DF(brokerAsset)  (assetSymbol,pPrice,pSpread,pVol); })
 C R(var)  F(brokerCommand) A((EBrokerCmd command,DWORD parameter))                    D({ return DF(brokerCommand)(command,parameter); })
 
-// TODO brokerCommand has 2 other overloads
-// http://zorro-project.com/manual/en/brokercommand.htm
-
 // panel
 C R(int)    F0(panel)    A((int rows,int cols,EColor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); })
 C R(int)    F1(panel)    A((string filename,EColor color,int size))    D({ return DF1(panel)   (filename,color,size); })

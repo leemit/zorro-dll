@@ -61,6 +61,16 @@ inline TRADE* enterShort(long f,var v0,var v1,var v2,var v3,var v4,var v5,var v6
 	return enterShort0_ptr(static_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
 }
 
+inline var brokerCommand(EBrokerCmd command, int parameter) {
+	return brokerCommand(command, static_cast<DWORD>(parameter));
+}
+inline var brokerCommand(EBrokerCmd command, string text) {
+	return brokerCommand(command, reinterpret_cast<DWORD>(text));
+}
+inline var brokerCommand(EBrokerCmd command, cvars parameters) {
+	return brokerCommand(command, reinterpret_cast<DWORD>(parameters));
+}
+
 #ifdef ZORRO_CPP_PURE
 
 inline int is(ETrainFlag* mode,int flag) {
