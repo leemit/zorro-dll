@@ -13,8 +13,8 @@
 #define C
 #define R(x) x
 #define A(x) x
-#define D(x)
-#define I(x)
+#define D(x) ;
+#define I(param,value) param
 #define VA ,...
 
 #include <functions_list.h>

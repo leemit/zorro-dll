@@ -14,8 +14,8 @@ ZORRO_NAMESPACE_OPEN
 #define F3(x) (ZORRO_CALL* x##3_ptr)
 #define R(x) x
 #define A(x) x
-#define D(x)
-#define I(x)
+#define D(x) ;
+#define I(param,value) param
 #define VA ,...
 #ifdef ZORRO_IMPL
 #define C
@@ -40,7 +40,7 @@ ZORRO_NAMESPACE_OPEN
 #define DF1(x) x##1_ptr
 #define DF2(x) x##2_ptr
 #define DF3(x) x##3_ptr
-#define I(x) =x
+#define I(param,value) param=value
 #define VA
 #include "litec/functions_list.h"
 
