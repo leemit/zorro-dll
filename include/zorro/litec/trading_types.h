@@ -35,7 +35,6 @@ typedef DWORD EColor;
 typedef int EPrintMode;
 typedef int ESaveMode;
 typedef int EBrokerCmd;
-typedef int EContractMode;
 typedef int EContractType;
 typedef int EMAType;
 typedef int EHedgeMode;

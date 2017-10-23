@@ -423,20 +423,6 @@ ZORRO_OPEN_ENUM(EBrokerCmd)
 	PLOT_MOVE          = 282,
 ZORRO_CLOSE_ENUM(EBrokerCmd)
 
-// TODO Are EContractMode and EContractType correct?
-// http://manual.zorro-trader.com/contract.htm
-
-ZORRO_OPEN_ENUM(EContractMode)
-	CALL          = (1<<0),
-	PUT           = (1<<1),
-	FUTURE        = (1<<5),
-	OPTION        = (CALL|PUT),
-	FUTURE_OPTION = (CALL|PUT|FUTURE),
-ZORRO_CLOSE_ENUM(EContractMode)
-ZORRO_BUILD_ENUM_BIT_OPERATORS(EContractMode)
-ZORRO_BUILD_ENUM_COMP_OPERATORS(EContractMode)
-typedef ::z::CBitfield<EContractMode> TContractModeBitfield;
-
 ZORRO_OPEN_ENUM(EContractType)
 	CALL      = (1<<0),
 	PUT       = (1<<1),
