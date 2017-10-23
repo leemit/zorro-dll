@@ -3,3 +3,5 @@
 
 *.VC.db
 *.user
+*.suo
+*.ncb

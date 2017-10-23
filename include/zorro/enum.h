@@ -14,7 +14,7 @@ public:
 	CEnum() {}
 	CEnum(TUnderlyingType value) : m_value(value) {}
 
-	explicit operator TUnderlyingType() const { return m_value; }
+	operator TUnderlyingType() const { return m_value; }
 
 	friend bool operator == (const TThis& left, const TThis& right) { return left.m_value == right.m_value; }
 	friend bool operator != (const TThis& left, const TThis& right) { return left.m_value != right.m_value; }
@@ -44,7 +44,7 @@ struct SEnumBaseDef
 #define ZORRO_CLOSE_ENUM(name) \
 	} name;
 #elif ZORRO_CPP >= 03
-#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) typename enumType::TUnderlyingType
+#define ZORRO_ENUM_UNDERLYING_TYPE(enumType) enumType::TUnderlyingType
 #define ZORRO_OPEN_ENUM(name) \
 	struct S##name##Def : public ::z::SEnumBaseDef<int> { \
 		enum EnumType {
