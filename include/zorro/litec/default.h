@@ -75,7 +75,7 @@ inline var genSquare(var period) {
 // user functions
 
 // optimizing objective based on PRR
-inline var objective()
+inline var objectivePRR()
 {
 	if(!NumWinTotal && !NumLossTotal) return 0.;
 	var wFac = 1./sqrt(1.+NumWinTotal); 

@@ -47,4 +47,9 @@ void watch(string text,...);
 
 #include <default.h>
 
+var objective()
+{
+	return objectivePRR();
+}
+
 #endif // default_c

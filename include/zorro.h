@@ -47,3 +47,28 @@ ZORRO_NAMESPACE_CLOSE
 ZORRO_NAMESPACE_OPEN
 #include "zorro/litec/default.h"
 ZORRO_NAMESPACE_CLOSE
+
+#ifdef ZORRO_USE_EVENT_CLASS
+ZORRO_NAMESPACE_OPEN
+class CZorroEvents
+{
+private:
+	CZorroEvents() {};
+	CZorroEvents(const CZorroEvents&) {};
+
+public:
+	void main();
+	void run();
+	void tick();
+	void tock();
+	void click(int row, int col);
+	void evaluate(const PERFORMANCE* pPerformance);
+	var objective();
+	EOrderResult order(EOrderAction type);
+	var neural(ENeuralMode mode, int model, int numSignals, const void* pData);
+	EBarAction bar(cvars open, cvars high, cvars low, vars close, vars price, DATE start, DATE time);
+
+	static CZorroEvents getInstance() { static CZorroEvents instance; return instance; }
+};
+ZORRO_NAMESPACE_CLOSE
+#endif // ZORRO_USE_EVENT_CLASS

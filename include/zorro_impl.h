@@ -59,6 +59,60 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 	return SCRIPT_VERSION;
 }
 
+#ifdef ZORRO_USE_EVENT_CLASS
+
+ZORRO_EXPORT void ZORRO_CALL main()
+{
+	CZorroEvents::getInstance().main();
+}
+
+ZORRO_EXPORT void ZORRO_CALL run()
+{
+	CZorroEvents::getInstance().run();
+}
+
+ZORRO_EXPORT void ZORRO_CALL tick()
+{
+	CZorroEvents::getInstance().tick();
+}
+
+ZORRO_EXPORT void ZORRO_CALL tock()
+{
+	CZorroEvents::getInstance().tock();
+}
+
+ZORRO_EXPORT void ZORRO_CALL click(int row, int col)
+{
+	CZorroEvents::getInstance().click(row, col);
+}
+
+ZORRO_EXPORT void ZORRO_CALL evaluate(const PERFORMANCE* pPerformance)
+{
+	CZorroEvents::getInstance().evaluate(pPerformance);
+}
+
+ZORRO_EXPORT var ZORRO_CALL objective()
+{
+	return CZorroEvents::getInstance().objective();
+}
+
+ZORRO_EXPORT EOrderResult ZORRO_CALL order(EOrderAction type)
+{
+	return CZorroEvents::getInstance().order(type);
+}
+
+ZORRO_EXPORT var ZORRO_CALL neural(ENeuralMode mode, int model, int numSignals, const void* pData)
+{
+	return CZorroEvents::getInstance().neural(mode, model, numSignals, pData);
+}
+
+ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, vars close, vars price, DATE start, DATE time)
+{
+	return CZorroEvents::getInstance().bar(open, high, low, close, price, start, time);
+}
+
+#endif // ZORRO_USE_EVENT_CLASS
+
 ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_IMPL
