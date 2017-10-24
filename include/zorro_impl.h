@@ -36,11 +36,11 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 	g = pGlobals;
 	unsigned int n = 0;
 // Populate the list of function pointers
-#define F(x)  assert(g->Functions[n] != 0); (DWORD&)x##_ptr  = g->Functions[n++];
-#define F0(x) assert(g->Functions[n] != 0); (DWORD&)x##0_ptr = g->Functions[n++];
-#define F1(x) assert(g->Functions[n] != 0); (DWORD&)x##1_ptr = g->Functions[n++];
-#define F2(x) assert(g->Functions[n] != 0); (DWORD&)x##2_ptr = g->Functions[n++];
-#define F3(x) assert(g->Functions[n] != 0); (DWORD&)x##3_ptr = g->Functions[n++];
+#define F(x)  assert(g->Functions[n] != 0); (DWORD&)zptr::x    = g->Functions[n++];
+#define F0(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##0 = g->Functions[n++];
+#define F1(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##1 = g->Functions[n++];
+#define F2(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##2 = g->Functions[n++];
+#define F3(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##3 = g->Functions[n++];
 #define C
 #define R(x)
 #define A(x)
