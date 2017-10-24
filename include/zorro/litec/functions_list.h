@@ -23,9 +23,9 @@
 	return _ret;
 #endif
 #ifdef ZORRO_CPP_PURE
-#define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
+#define ZORRO_ENUM_VALUE(enumValue, macroName) enumValue
 #else
-#define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue
+#define ZORRO_ENUM_VALUE(enumValue, macroName) macroName
 #endif
 
 // system functions
@@ -127,7 +127,7 @@ C R(var)  F(brokerCommand) A((EBrokerCmd command,DWORD parameter))              
 C R(int)    F0(panel)    A((int rows,int cols,EColor color,int size))  D({ return DF0(panel)   (rows,cols,color,size); })
 C R(int)    F1(panel)    A((string filename,EColor color,int size))    D({ return DF1(panel)   (filename,color,size); })
 C R(string) F(panelGet)  A((int row,int col))                          D({ return DF(panelGet) (row,col); })
-C R(int)    F(panelSet)  A((int row,int col,string text,I(EColor color,ZORRO_ENUM_VALUE(EColor,DEFAULT)),I(int style,0),I(int type,0) VA))
+C R(int)    F(panelSet)  A((int row,int col,string text,I(EColor color,ZORRO_ENUM_VALUE(EColor::DEFAULT,0)),I(int style,0),I(int type,0) VA))
                                                                        D({ return DF(panelSet) (row,col,text,color,style,type); })
 C R(int)    F(panelSave) A((string filename))                          D({ return DF(panelSave)(filename); })
 C R(int)    F(panelLoad) A((string filename))                          D({ return DF(panelLoad)(filename); })
@@ -250,11 +250,11 @@ C R(string) F0(loop)        A((I(const void* p0 ,0),I(const void* p1 ,0),I(const
                                I(const void* p20,0),I(const void* p21,0),I(const void* p22,0),I(const void* p23,0),I(const void* p24,0),I(const void* p25,0),I(const void* p26,0),I(const void* p27,0),I(const void* p28,0),I(const void* p29,0),
                                I(const void* p30,0),I(const void* p31,0),I(const void* p32,0),I(const void* p33,0),I(const void* p34,0),I(const void* p35,0),I(const void* p36,0),I(const void* p37,0),I(const void* p38,0),I(const void* p39,0) VA))
                                D({ return DF0(loop)(p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32,p33,p34,p35,p36,p37,p38,p39); })
-C R(var)    F0(adviseLong)  A((I(EAdviseMode method,ZORRO_ENUM_VALUE(EAdviseMode,PREVIOUS)),I(var objective,0),I(var s0,NIL),I(var s1,NIL),I(var s2,NIL),I(var s3,NIL),I(var s4,NIL),I(var s5,NIL),I(var s6,NIL),I(var s7,NIL),I(var s8,NIL),I(var s9,NIL),
+C R(var)    F0(adviseLong)  A((I(EAdviseMode method,ZORRO_ENUM_VALUE(EAdviseMode::PREVIOUS,0)),I(var objective,0),I(var s0,NIL),I(var s1,NIL),I(var s2,NIL),I(var s3,NIL),I(var s4,NIL),I(var s5,NIL),I(var s6,NIL),I(var s7,NIL),I(var s8,NIL),I(var s9,NIL),
                                I(var s10,NIL),I(var s11,NIL),I(var s12,NIL),I(var s13,NIL),I(var s14,NIL),I(var s15,NIL),I(var s16,NIL),I(var s17,NIL),I(var s18,NIL),I(var s19,NIL) VA))
                                D({ return DF0(adviseLong)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); })
 C R(var)    F1(adviseLong)  A((EAdviseMode method,var objective,cvars signals,long numSignals)) D({ return DF1(adviseLong)(method,objective,signals,numSignals); })
-C R(var)    F0(adviseShort) A((I(EAdviseMode method,ZORRO_ENUM_VALUE(EAdviseMode,PREVIOUS)),I(var objective,0),I(var s0,NIL),I(var s1,NIL),I(var s2,NIL),I(var s3,NIL),I(var s4,NIL),I(var s5,NIL),I(var s6,NIL),I(var s7,NIL),I(var s8,NIL),I(var s9,NIL),
+C R(var)    F0(adviseShort) A((I(EAdviseMode method,ZORRO_ENUM_VALUE(EAdviseMode::PREVIOUS,0)),I(var objective,0),I(var s0,NIL),I(var s1,NIL),I(var s2,NIL),I(var s3,NIL),I(var s4,NIL),I(var s5,NIL),I(var s6,NIL),I(var s7,NIL),I(var s8,NIL),I(var s9,NIL),
                                I(var s10,NIL),I(var s11,NIL),I(var s12,NIL),I(var s13,NIL),I(var s14,NIL),I(var s15,NIL),I(var s16,NIL),I(var s17,NIL),I(var s18,NIL),I(var s19,NIL) VA))
                                D({ return DF0(adviseShort)(method,objective,s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19); })
 C R(var)    F1(adviseShort) A((EAdviseMode method,var objective,cvars signals,long numSignals))

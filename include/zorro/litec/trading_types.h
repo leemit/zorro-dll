@@ -2,6 +2,13 @@
 #ifndef trading_types_h
 #define trading_types_h
 
+#define NAMESIZE    16
+#define NAMESIZE2   40
+#define NUM_SKILLS  8
+#define NUM_RESULTS 20
+#define MAX_PARAMS  16   // max optimize() calls
+#define MAX_STEPS   1000 // max optimize() steps
+
 typedef double      var;
 typedef var*        vars;
 typedef const var*  cvars;

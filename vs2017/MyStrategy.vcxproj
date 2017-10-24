@@ -22,6 +22,7 @@
     <ClInclude Include="..\include\zorro\litec\functions.h" />
     <ClInclude Include="..\include\zorro\litec\functions_list.h" />
     <ClInclude Include="..\include\zorro\litec\trading.h" />
+    <ClInclude Include="..\include\zorro\litec\trading_defines.h" />
     <ClInclude Include="..\include\zorro\litec\trading_types.h" />
     <ClInclude Include="..\include\zorro\litec\variables.h" />
     <ClInclude Include="..\include\zorro\trading_cpp.h" />

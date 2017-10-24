@@ -6,49 +6,44 @@
 
 ZORRO_NAMESPACE_OPEN
 
-#pragma push_macro("IGNORE")
-#undef IGNORE // A windows symbol
-
 ZORRO_OPEN_ENUM(ETradeFlag)
-	SHORT       = (1<<0),  // short position
-	BID         = (1<<0),
-	OPEN        = (1<<1),  // position is open
-	NOTFOUND    = (1<<2),  // trade disappeared from the broker list
-	EXPIRED     = (1<<3),  // option or future expired
-	WAITSELL    = (1<<4),  // close position at the next tick
-	WAITBUY     = (1<<5),  // open position at the next tick
-	DETREND     = (1<<6),  // detrend the trade result
-	SUSPEND     = (1<<7),  // suspend trade function
-	EVENT       = (1<<8),  // trade function was called by enter/exit event
-	IGNORE      = (1<<9),  // don't automatically enter/exit
-	MISSEDENTRY = (1<<10), // missed the entry limit or stop, or sell price in the last bar
-	MISSEDEXIT  = (1<<11), // missed the exit for some reason
-	NOSIZE      = (1<<12), // Trade not executed, not enough lots or balance
-	RECYCLE     = (1<<13), // Trade struct can be reused
-	NONET       = (1<<14), // Don't open a net trade yet
-	NET         = (1<<15), // Pool trade
-	PHANTOM     = (1<<16), // Phantom trade 
-	EXERCISE    = (1<<17), // exercise an option contract
-	STOPPED     = (1<<18), // closed due to stop loss in the last bar, or a margin call
-	PROFIT      = (1<<19), // closed due to profit target in the last bar
-	TIME        = (1<<20), // closed due to timeout in the last bar
-	SOLD        = (1<<21), // closed due to exit at market in the last bar
-	CANCELLED   = (1<<22), // removed from trade list
-	MISSEDOPEN  = (1<<23), // could not be opened by the broker
-	ACCOUNT     = (1<<24), // trade with the main account
-	ENTRYSTOP   = (1<<25), // entry stop, rather than limit
-	ENTER       = (1<<26), // entered by TMF return value
-	EXIT        = (1<<27), // exit by TMF return value
-	REMOVED     = (1<<28), // removed from the online trade list (f.i. margin call or manually closed)
-	BAR         = (1<<29), // run TMF on any bar only, not any tick
-	REVERSED    = (1<<30), // indicate exit by reversal (shared with TR_EXIT)
-	NEW         = (1<<31), // just created in a TMF 
+	SHORT        = (1<<0),  // short position
+	BID          = (1<<0),
+	OPEN         = (1<<1),  // position is open
+	NOTFOUND     = (1<<2),  // trade disappeared from the broker list
+	EXPIRED      = (1<<3),  // option or future expired
+	WAITSELL     = (1<<4),  // close position at the next tick
+	WAITBUY      = (1<<5),  // open position at the next tick
+	DETREND      = (1<<6),  // detrend the trade result
+	SUSPEND      = (1<<7),  // suspend trade function
+	EVENT        = (1<<8),  // trade function was called by enter/exit event
+	IGNOREENTRY  = (1<<9),  // don't automatically enter/exit
+	MISSEDENTRY  = (1<<10), // missed the entry limit or stop, or sell price in the last bar
+	MISSEDEXIT   = (1<<11), // missed the exit for some reason
+	NOSIZE       = (1<<12), // Trade not executed, not enough lots or balance
+	RECYCLE      = (1<<13), // Trade struct can be reused
+	NONET        = (1<<14), // Don't open a net trade yet
+	NET          = (1<<15), // Pool trade
+	PHANTOM      = (1<<16), // Phantom trade 
+	EXERCISE     = (1<<17), // exercise an option contract
+	STOPPED      = (1<<18), // closed due to stop loss in the last bar, or a margin call
+	PROFIT       = (1<<19), // closed due to profit target in the last bar
+	TIME         = (1<<20), // closed due to timeout in the last bar
+	SOLD         = (1<<21), // closed due to exit at market in the last bar
+	CANCELLED    = (1<<22), // removed from trade list
+	MISSEDOPEN   = (1<<23), // could not be opened by the broker
+	ACCOUNT      = (1<<24), // trade with the main account
+	ENTRYSTOP    = (1<<25), // entry stop, rather than limit
+	ENTER        = (1<<26), // entered by TMF return value
+	EXIT         = (1<<27), // exit by TMF return value
+	REMOVED      = (1<<28), // removed from the online trade list (f.i. margin call or manually closed)
+	BAR          = (1<<29), // run TMF on any bar only, not any tick
+	REVERSED     = (1<<30), // indicate exit by reversal (shared with EXIT)
+	NEW          = (1<<31), // just created in a TMF 
 ZORRO_CLOSE_ENUM(ETradeFlag)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ETradeFlag)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ETradeFlag)
 typedef ::z::CBitfield<ETradeFlag> TTradeBitfield;
-
-#pragma pop_macro("IGNORE")
 
 ZORRO_OPEN_ENUM(EZorroFlag)
 	SKIP1        = (1<<0),  // skip 1st of every 3 weeks
@@ -162,13 +157,13 @@ ZORRO_BUILD_ENUM_COMP_OPERATORS(EAdviseMode)
 typedef ::z::CBitfield<EAdviseMode> TAdviseModeBitfield;
 
 ZORRO_OPEN_ENUM(ENeuralMode)
-	NEURAL_INIT    = (1<<20),
-	NEURAL_EXIT    = (2<<20),
-	NEURAL_LEARN   = (4<<20),
-	NEURAL_TRAIN   = (5<<20),
-	NEURAL_PREDICT = (8<<20),
-	NEURAL_SAVE    = (16<<20),
-	NEURAL_LOAD    = (17<<20),
+	INIT    = (1<<20),
+	EXIT    = (2<<20),
+	LEARN   = (4<<20),
+	TRAIN   = (5<<20),
+	PREDICT = (8<<20),
+	SAVE    = (16<<20),
+	LOAD    = (17<<20),
 ZORRO_CLOSE_ENUM(ENeuralMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(ENeuralMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(ENeuralMode)
@@ -307,9 +302,9 @@ ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotType)
 typedef ::z::CBitfield<EPlotType> TPlotTypeBitfield;
 
 ZORRO_OPEN_ENUM(EPlotMode)
-	PL_ALL    = (1<<6),
-	PL_LONG   = (1<<7),
-	PL_FINE   = (1<<8),
+	ALL       = (1<<6),
+	LONG      = (1<<7),
+	FINE      = (1<<8),
 ZORRO_CLOSE_ENUM(EPlotMode)
 ZORRO_BUILD_ENUM_BIT_OPERATORS(EPlotMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EPlotMode)
@@ -462,13 +457,6 @@ ZORRO_OPEN_ENUM(ETradeDir)
 	UP = 1,
 	DOWN = -1,
 ZORRO_CLOSE_ENUM(ETradeDir)
-
-const int NAMESIZE    = 16;
-const int NAMESIZE2   = 40;
-const int NUM_SKILLS  = 8;
-const int NUM_RESULTS = 20;
-const int MAX_PARAMS  = 16;   // max optimize() calls
-const int MAX_STEPS   = 1000; // max optimize() steps
 
 #include "litec/trading_types.h"
 

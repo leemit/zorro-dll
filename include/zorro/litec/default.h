@@ -3,9 +3,9 @@
 #define default_h
 
 #ifdef ZORRO_CPP_PURE
-#define ZORRO_ENUM_VALUE(enumType, enumValue) enumType::enumValue
+#define ZORRO_ENUM_VALUE(enumValue, macroName) enumValue
 #else
-#define ZORRO_ENUM_VALUE(enumType, enumValue) enumValue
+#define ZORRO_ENUM_VALUE(enumValue, macroName) macroName
 #endif
 
 /////////////////////////////////////////////////////////////////////
@@ -109,7 +109,7 @@ inline TRADE* reverseLong(int MaxTrades)
 				TradeExitTime = TradeTime+ExitTime;
 
 	// if MaxTrades is not reached, open a new trade
-	if(NumOpenLong < MaxTrades || is(ZORRO_ENUM_VALUE(EStatusFlag,TRAINMODE)))
+	if(NumOpenLong < MaxTrades || is(ZORRO_ENUM_VALUE(EStatusFlag::TRAINMODE,TRAINMODE)))
 		return enterLong();
 	// otherwise, close any opposite trades
 	else if(Hedge <= 1)
@@ -134,7 +134,7 @@ inline TRADE* reverseShort(int MaxTrades)
 			if(TradeIsOpen && !(ThisTrade->dSignals))
 				TradeExitTime = TradeTime+ExitTime;
 
-	if(NumOpenShort < MaxTrades || is(ZORRO_ENUM_VALUE(EStatusFlag,TRAINMODE)))
+	if(NumOpenShort < MaxTrades || is(ZORRO_ENUM_VALUE(EStatusFlag::TRAINMODE,TRAINMODE)))
 		return enterShort();
 	else if(Hedge <= 1)
 		exitLong();
