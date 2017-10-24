@@ -255,15 +255,12 @@ ZORRO_OPEN_ENUM(EWeekday)
 	SUNDAY    = 7,
 ZORRO_CLOSE_ENUM(EWeekday)
 
-// TODO EWeekendMode nWeekend in GLOBALS struct has different value description than manual. Which one is correct?
-// http://manual.zorro-trader.com/weekend.htm
-
 ZORRO_OPEN_ENUM(EWeekendMode)
-	ALLOW_TRADE                  = 0, // Trade even during the weekend. For test purposes only.
-	UPDATE_TMF_AND_GENERATE_BARS = 1, // Don't enter trades during the weekend, but generate bars, observe exit limits (stop / takeprofit / trail), and run TMFs when price quotes arrive.
-	UPDATE_TMF                   = 2, // Don't begin or end bars during the weekend, but observe exit limits and run TMFs when price quotes arrive.
-	SLEEP                        = 3, // Don't begin or end bars, don't observe exit limits, and don't run TMFs during the weekend.
-	LOGOUT                       = 7, // Automatically log off at weekend; only recommended if the broker API tends to crash when the broker server goes offline.
+	ALLOW_TRADE                  = 0, // Trade even during the weekend. For test purposes only
+	UPDATE_TMF_AND_GENERATE_BARS = 1, // Don't enter trades during the weekend, but generate bars, observe exit limits (stop / takeprofit / trail), and run TMFs when price quotes arrive
+	UPDATE_TMF                   = 2, // Don't begin or end bars during the weekend, but observe exit limits and run TMFs when price quotes arrive
+	SLEEP                        = 3, // Don't begin or end bars, don't observe exit limits, and don't run TMFs during the weekend
+	LOGOUT                       = 7, // Automatically log off at weekend; only recommended if the broker API tends to crash when the broker server goes offline
 ZORRO_CLOSE_ENUM(EWeekendMode)
 
 ZORRO_OPEN_ENUM(EPlotType)
@@ -364,23 +361,23 @@ ZORRO_BUILD_ENUM_COMP_OPERATORS(ESaveMode)
 typedef ::z::CBitfield<ESaveMode> TSaveModeBitfield;
 
 ZORRO_OPEN_ENUM(EBrokerCmd)
-	GET_TIME           =  5,  // brokerCommand, last incoming tick time
+	GET_TIME           =  5, // brokerCommand, last incoming tick time
 	GET_DIGITS         = 12, // Count of digits after decimal point 
-	GET_STOPLEVEL      = 14, // Stop level in points.
-	GET_STARTING       = 20, // Market starting date (usually used for futures).
-	GET_EXPIRATION     = 21, // Market expiration date (usually used for futures).
-	GET_TRADEALLOWED   = 22, // Trade is allowed for the symbol.
-	GET_MINLOT         = 23, // Minimum permitted amount of a lot.
-	GET_LOTSTEP        = 24, // Step for changing lots.
-	GET_MAXLOT         = 25, // Maximum permitted amount of a lot.
-	GET_MARGININIT     = 29, // Initial margin requirements for 1 lot.
-	GET_MARGINMAINTAIN = 30, // Margin to maintain open positions calculated for 1 lot.
-	GET_MARGINHEDGED   = 31, // Hedged margin calculated for 1 lot.
-	GET_MARGINREQUIRED = 32, // Free margin required to open 1 lot for buying.
+	GET_STOPLEVEL      = 14, // Stop level in points
+	GET_STARTING       = 20, // Market starting date (usually used for futures)
+	GET_EXPIRATION     = 21, // Market expiration date (usually used for futures)
+	GET_TRADEALLOWED   = 22, // Trade is allowed for the symbol
+	GET_MINLOT         = 23, // Minimum permitted amount of a lot
+	GET_LOTSTEP        = 24, // Step for changing lots
+	GET_MAXLOT         = 25, // Maximum permitted amount of a lot
+	GET_MARGININIT     = 29, // Initial margin requirements for 1 lot
+	GET_MARGINMAINTAIN = 30, // Margin to maintain open positions calculated for 1 lot
+	GET_MARGINHEDGED   = 31, // Hedged margin calculated for 1 lot
+	GET_MARGINREQUIRED = 32, // Free margin required to open 1 lot for buying
 	GET_DELAY          = 41,
 	GET_WAIT           = 42,
-	GET_TYPE           = 50, // Asset type. 
-	GET_COMPLIANCE     = 51, // NFA compliance.
+	GET_TYPE           = 50, // Asset type
+	GET_COMPLIANCE     = 51, // NFA compliance
 	GET_NTRADES        = 52, // Number of open trades
 	GET_POSITION       = 53, // Open net lots per asset 
 	GET_ACCOUNT        = 54, // Account number (string)
@@ -445,18 +442,35 @@ ZORRO_OPEN_ENUM(EMAType)
 ZORRO_CLOSE_ENUM(EMAType)
 
 ZORRO_OPEN_ENUM(EHedgeMode)
-	NONE            = 0, // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts).
-	ALLOW_ALGO      = 1, // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts).
-	ALLOW_ANY       = 2, // full hedging; long and short positions can be open at the same time.
-	VIRTUAL         = 4, // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
-	PARTIAL_VIRTUAL = 5, // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
+	NONE            = 0, // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts)
+	ALLOW_ALGO      = 1, // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts)
+	ALLOW_ANY       = 2, // full hedging; long and short positions can be open at the same time
+	VIRTUAL         = 4, // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker
+	PARTIAL_VIRTUAL = 5, // virtual hedging with partial closing; open positions are partially closed to match the net amount
 ZORRO_CLOSE_ENUM(EHedgeMode)
 ZORRO_BUILD_ENUM_COMP_OPERATORS(EHedgeMode)
 
 ZORRO_OPEN_ENUM(ETradeDir)
-	UP = 1,
+	UP   =  1,
 	DOWN = -1,
 ZORRO_CLOSE_ENUM(ETradeDir)
+
+ZORRO_OPEN_ENUM(EBarAction)
+	CLOSE_NORMALLY        = 0, // close the bar at the normal end of the BarPeriod
+	CLOSE_NOW             = 1, // close the bar now
+	POSTPONE_TO_NEXT_TICK = 4, // keep the bar open until closed by returning 1, and call the bar function at every price tick
+	POSTPONE_TO_NEXT_BAR  = 8, // call the bar function only once at the end of every bar
+ZORRO_CLOSE_ENUM(EBarAction)
+
+ZORRO_OPEN_ENUM(EOrderAction)
+	ENTERING = 1,
+	EXITING  = 2,
+ZORRO_CLOSE_ENUM(EOrderAction)
+
+ZORRO_OPEN_ENUM(EOrderResult)
+	ERR      = 0, // trade could not be opened or closed
+	OK       = 1,
+ZORRO_CLOSE_ENUM(EOrderResult)
 
 #include "litec/trading_types.h"
 

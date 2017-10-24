@@ -193,6 +193,12 @@
 #define SATURDAY  6
 #define SUNDAY    7
 
+#define WEEKEND_ALLOW_TRADE                  = 0, // Trade even during the weekend. For test purposes only
+#define WEEKEND_UPDATE_TMF_AND_GENERATE_BARS = 1, // Don't enter trades during the weekend, but generate bars, observe exit limits (stop / takeprofit / trail), and run TMFs when price quotes arrive
+#define WEEKEND_UPDATE_TMF                   = 2, // Don't begin or end bars during the weekend, but observe exit limits and run TMFs when price quotes arrive
+#define WEEKEND_SLEEP                        = 3, // Don't begin or end bars, don't observe exit limits, and don't run TMFs during the weekend
+#define WEEKEND_LOGOUT                       = 7, // Automatically log off at weekend; only recommended if the broker API tends to crash when the broker server goes offline
+
 #define NEW       (1<<0)  // begin new chart
 #define BARS      (1<<1)  // bars instead of curves
 #define BAND1     (1<<2)  // upper band
@@ -267,17 +273,17 @@
 
 #define GET_TIME            5 // brokerCommand, last incoming tick time
 #define GET_DIGITS         12 // Count of digits after decimal point 
-#define GET_STOPLEVEL      14 // Stop level in points.
-#define GET_STARTING       20 // Market starting date (usually used for futures).
-#define GET_EXPIRATION     21 // Market expiration date (usually used for futures).
-#define GET_TRADEALLOWED   22 // Trade is allowed for the symbol.
-#define GET_MINLOT         23 // Minimum permitted amount of a lot.
-#define GET_LOTSTEP        24 // Step for changing lots.
-#define GET_MAXLOT         25 // Maximum permitted amount of a lot.
-#define GET_MARGININIT     29 // Initial margin requirements for 1 lot.
-#define GET_MARGINMAINTAIN 30 // Margin to maintain open positions calculated for 1 lot.
-#define GET_MARGINHEDGED   31 // Hedged margin calculated for 1 lot.
-#define GET_MARGINREQUIRED 32 // Free margin required to open 1 lot for buying.
+#define GET_STOPLEVEL      14 // Stop level in points
+#define GET_STARTING       20 // Market starting date (usually used for futures)
+#define GET_EXPIRATION     21 // Market expiration date (usually used for futures)
+#define GET_TRADEALLOWED   22 // Trade is allowed for the symbol
+#define GET_MINLOT         23 // Minimum permitted amount of a lot
+#define GET_LOTSTEP        24 // Step for changing lots
+#define GET_MAXLOT         25 // Maximum permitted amount of a lot
+#define GET_MARGININIT     29 // Initial margin requirements for 1 lot
+#define GET_MARGINMAINTAIN 30 // Margin to maintain open positions calculated for 1 lot
+#define GET_MARGINHEDGED   31 // Hedged margin calculated for 1 lot
+#define GET_MARGINREQUIRED 32 // Free margin required to open 1 lot for buying
 #define GET_DELAY          41
 #define GET_WAIT           42
 #define GET_TYPE           50 // Asset type. 
@@ -349,13 +355,24 @@
 #define PERIOD_W1  10080.0
 #define PERIOD_MN1 43200.0
 
-#define HEDGE_NONE            0 // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts).
-#define HEDGE_ALLOW_ALGO      1 // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts).
-#define HEDGE_ALLOW_ANY       2 // full hedging; long and short positions can be open at the same time.
-#define HEDGE_VIRTUAL         4 // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker.
-#define HEDGE_PARTIAL_VIRTUAL 5 // virtual hedging with partial closing; open positions are partially closed to match the net amount. 
+#define HEDGE_NONE            0 // no hedging; automatically close opposite positions with the same asset when a new position is opened (default for NFA accounts)
+#define HEDGE_ALLOW_ALGO      1 // hedging across algos; automatically close opposite positions with the same algo when a new position is opened (default for unspecified accounts)
+#define HEDGE_ALLOW_ANY       2 // full hedging; long and short positions can be open at the same time
+#define HEDGE_VIRTUAL         4 // virtual hedging without partial closing; enter long and short positions simultaneously, but send only the net amount to the broker
+#define HEDGE_PARTIAL_VIRTUAL 5 // virtual hedging with partial closing; open positions are partially closed to match the net amount
 
 #define TRADE_DIR_UP    1
 #define TRADE_DIR_DOWN -1
+
+#define BAR_CLOSE_NORMALLY        0 // close the bar at the normal end of the BarPeriod
+#define BAR_CLOSE_NOW             1 // close the bar now
+#define BAR_POSTPONE_TO_NEXT_TICK 4 // keep the bar open until closed by returning 1, and call the bar function at every price tick
+#define BAR_POSTPONE_TO_NEXT_BAR  8 // call the bar function only once at the end of every bar
+
+#define ORDER_ENTERING 1
+#define ORDER_EXITING  2
+
+#define ORDER_ERR      0 // trade could not be opened or closed
+#define ORDER_OK       1
 
 #endif // trading_defines_h

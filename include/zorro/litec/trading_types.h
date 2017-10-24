@@ -46,6 +46,9 @@ typedef int EContractType;
 typedef int EMAType;
 typedef int EHedgeMode;
 typedef int ETradeDir;
+typedef int EBarAction;
+typedef int EOrderAction;
+typedef int EOrderResult;
 #endif
 
 typedef struct T1
