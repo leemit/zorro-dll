@@ -16,9 +16,9 @@ class CVariable : public VariableDef
 public:
 	typedef typename VariableDef::TType TType;
 
-	inline operator TType&() const { return VariableDef::get(); }
-	inline TType* operator&() const { return &VariableDef::get(); }
-	inline TThis& operator=(const TType& value) { VariableDef::set(value); return *this; }
+	inline operator TType&() const { return TVariableDef::get(); }
+	inline TType* operator&() const { return &TVariableDef::get(); }
+	inline TThis& operator=(const TType& value) { TVariableDef::set(value); return *this; }
 	static TThis& getInstance() { static TThis instance; return instance; }
 };
 
@@ -35,7 +35,7 @@ class CExpression : public VariableDef
 public:
 	typedef typename VariableDef::TType TType;
 
-	inline operator TType() const { return VariableDef::get(); }
+	inline operator TType() const { return TVariableDef::get(); }
 	static TThis& getInstance() { static TThis instance; return instance; }
 };
 
@@ -52,14 +52,14 @@ class CVarPointer : public VariableDef
 public:
 	typedef typename VariableDef::TType TType;
 
-	inline TType operator ->() const { return VariableDef::get(); }
-	inline operator TType() const { return VariableDef::get(); }
+	inline TType operator ->() const { return TVariableDef::get(); }
+	inline operator TType() const { return TVariableDef::get(); }
 	static TThis& getInstance() { static TThis instance; return instance; }
 };
 
-template<typename T>
+template<typename VariableType>
 struct SVariableBaseDef
 {
-	typedef T TType;
+	typedef VariableType TType;
 };
 } // namespace z
