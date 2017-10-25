@@ -472,6 +472,18 @@ ZORRO_OPEN_ENUM(EOrderResult)
 	OK       = 1,
 ZORRO_CLOSE_ENUM(EOrderResult)
 
+ZORRO_OPEN_ENUM(ETmfResult)
+	PROCEED            = 0,    // check the trade's Entry, Stop, TakeProfit, and Trail parameters, and exit or enter accordingly
+	EXIT               = 1<<0, // if the trade is open or pending, exit or cancel it now
+	ENTER_PENDING      = 1<<1, // if the trade is pending, enter it now
+	ENTER_MANUAL       = 1<<2, // Don't use Entry, Stop, or TakeProfit for automatically entering or exiting. Exit or enter only when the TMF returns 1 or 2
+	CALL_BY_BAR_ONLY   = 1<<3, // call the TMF only once per bar, just before the run function call
+	CALL_BY_EVENT_ONLY = 1<<4, // call the TMF only at events (entering or exiting due to Entry, Stop, or TakeProfit, and after the trade was closed)
+ZORRO_CLOSE_ENUM(ETmfResult)
+ZORRO_BUILD_ENUM_BIT_OPERATORS(ETmfResult)
+ZORRO_BUILD_ENUM_COMP_OPERATORS(ETmfResult)
+typedef ::z::CBitfield<ETmfResult> TTmfResultBitfield;
+
 #include "litec/trading_types.h"
 
 const var PI  = 3.14159265359;

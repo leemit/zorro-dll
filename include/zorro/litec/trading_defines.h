@@ -375,4 +375,11 @@
 #define ORDER_ERR      0 // trade could not be opened or closed
 #define ORDER_OK       1
 
+#define TMF_PROCEED            0    // check the trade's Entry, Stop, TakeProfit, and Trail parameters, and exit or enter accordingly
+#define TMF_EXIT               1<<0 // if the trade is open or pending, exit or cancel it now
+#define TMF_ENTER_PENDING      1<<1 // if the trade is pending, enter it now
+#define TMF_ENTER_MANUAL       1<<2 // Don't use Entry, Stop, or TakeProfit for automatically entering or exiting. Exit or enter only when the TMF returns 1 or 2
+#define TMF_CALL_BY_BAR_ONLY   1<<3 // call the TMF only once per bar, just before the run function call
+#define TMF_CALL_BY_EVENT_ONLY 1<<4 // call the TMF only at events (entering or exiting due to Entry, Stop, or TakeProfit, and after the trade was closed)
+
 #endif // trading_defines_h
