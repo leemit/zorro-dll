@@ -68,5 +68,8 @@
     <ClInclude Include="..\include\zorro\litec\trading_defines.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\zorro\variables_list.h">
+      <Filter>include\zorro</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

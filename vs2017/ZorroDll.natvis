@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="::z::CVariable&lt;*&gt;">
+    <Intrinsic Name="get" Expression="TVariableDef::get">
+    </Intrinsic>
+    <DisplayString>{ TVariableDef::get() }</DisplayString>
+  </Type>
+  <Type Name="::z::CExpression&lt;*&gt;">
+    <Intrinsic Name="get" Expression="TVariableDef::get">
+    </Intrinsic>
+    <DisplayString>{ TVariableDef::get() }</DisplayString>
+  </Type>
+  <Type Name="::z::CVarPointer&lt;*&gt;">
+    <Intrinsic Name="get" Expression="TVariableDef::get">
+    </Intrinsic>
+    <DisplayString>{ TVariableDef::get() }</DisplayString>
+  </Type>
+</AutoVisualizer> 
