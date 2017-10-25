@@ -63,7 +63,7 @@ var CZorroEvents::neural(ENeuralMode mode, int model, int numSignals, const void
 	return 0.0;
 }
 
-EBarAction CZorroEvents::bar(cvars open, cvars high, cvars low, vars close, vars price, DATE start, DATE time)
+EBarAction CZorroEvents::bar(cvars open, cvars high, cvars low, cvars close, cvars price, DATE start, DATE time)
 {
 	return BAR_CLOSE_NORMALLY;
 }

@@ -106,7 +106,7 @@ ZORRO_EXPORT var ZORRO_CALL neural(ENeuralMode mode, int model, int numSignals, 
 	return CZorroEvents::getInstance().neural(mode, model, numSignals, pData);
 }
 
-ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, vars close, vars price, DATE start, DATE time)
+ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, cvars close, cvars price, DATE start, DATE time)
 {
 	return CZorroEvents::getInstance().bar(open, high, low, close, price, start, time);
 }

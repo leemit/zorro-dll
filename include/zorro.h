@@ -66,7 +66,7 @@ public:
 	var objective();
 	EOrderResult order(EOrderAction type);
 	var neural(ENeuralMode mode, int model, int numSignals, const void* pData);
-	EBarAction bar(cvars open, cvars high, cvars low, vars close, vars price, DATE start, DATE time);
+	EBarAction bar(cvars open, cvars high, cvars low, cvars close, cvars price, DATE start, DATE time);
 
 	static CZorroEvents getInstance() { static CZorroEvents instance; return instance; }
 };
