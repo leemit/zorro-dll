@@ -30,9 +30,9 @@
 
 ZORRO_NAMESPACE_OPEN
 #ifdef ZORRO_IMPL
-GLOBALS* g;
+GLOBALS* const g = 0;
 #else
-extern GLOBALS* g;
+extern GLOBALS* const g;
 #endif
 ZORRO_NAMESPACE_CLOSE
 
