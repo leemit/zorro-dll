@@ -4,15 +4,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{daeb2cae-7796-460c-9f71-1a1fd5bfdf27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{3459c127-fe61-4fd5-8a4b-5b6225d8497d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\zorro">
-      <UniqueIdentifier>{152680ba-dd59-42e5-8cbc-7a09425cc594}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\zorro\litec">
-      <UniqueIdentifier>{c3ea5fe4-bd58-495f-a29f-dc79961990ff}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\MyStrategy.cpp">
@@ -20,56 +11,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\zorro.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro_impl.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\trading_cpp.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\zorro_common.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\bitfield.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\variables_cpp.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\var.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\enum.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\functions_cpp.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\functions.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\trading.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\variables.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\functions_list.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\trading_types.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\default.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\litec\trading_defines.h">
-      <Filter>include\zorro\litec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\zorro\variables_list.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
+    <Natvis Include="ZorroDll.natvis" />
   </ItemGroup>
 </Project>

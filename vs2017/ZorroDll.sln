@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop6_dll", "Workshop6_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workshop7_dll", "Workshop7_dll.vcxproj", "{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZorroDll", "ZorroDll.vcxproj", "{D2A8C562-5CC1-4C79-B498-65BCD65C219E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -39,6 +41,10 @@ Global
 		{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}.Debug|x86.Build.0 = Debug|Win32
 		{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}.Release|x86.ActiveCfg = Release|Win32
 		{C8BAF7AF-3307-4B57-B20A-8E5A0A7693FC}.Release|x86.Build.0 = Release|Win32
+		{D2A8C562-5CC1-4C79-B498-65BCD65C219E}.Debug|x86.ActiveCfg = Debug|Win32
+		{D2A8C562-5CC1-4C79-B498-65BCD65C219E}.Debug|x86.Build.0 = Debug|Win32
+		{D2A8C562-5CC1-4C79-B498-65BCD65C219E}.Release|x86.ActiveCfg = Release|Win32
+		{D2A8C562-5CC1-4C79-B498-65BCD65C219E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
