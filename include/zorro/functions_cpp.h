@@ -6,7 +6,7 @@
 ZORRO_NAMESPACE_OPEN
 
 ///////////////////////////////////////////////////////
-// Declare function pointers
+// Declare or define function pointers
 #define F(x)  (ZORRO_CALL* x)
 #define F0(x) (ZORRO_CALL* x##0)
 #define F1(x) (ZORRO_CALL* x##1)
@@ -14,13 +14,14 @@ ZORRO_NAMESPACE_OPEN
 #define F3(x) (ZORRO_CALL* x##3)
 #define R(x) x
 #define A(x) x
-#define D(x) ;
 #define I(param,value) param
 #define VA ,...
 #ifdef ZORRO_IMPL
 #define C
+#define D(x) = 0;
 #else
 #define C extern
+#define D(x) ;
 #endif
 namespace zptr {
 #include "litec/functions_list.h"

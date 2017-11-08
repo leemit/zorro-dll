@@ -164,7 +164,7 @@ inline string datetime()
 		day(),month(),year()-2000,hour(),minute(),(int)second());
 }
 
-int scriptVersion()
+inline int scriptVersion()
 {
 	return SCRIPT_VERSION;
 }

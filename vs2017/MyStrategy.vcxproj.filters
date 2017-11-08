@@ -9,6 +9,9 @@
     <ClCompile Include="..\src\MyStrategy.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="SomeOtherSource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="ZorroDll.natvis" />

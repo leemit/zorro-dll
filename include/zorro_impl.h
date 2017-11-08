@@ -33,8 +33,11 @@ ZORRO_NAMESPACE_OPEN
 ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 {
 	assert(pGlobals != 0);
+	assert(g == 0);
+
 	g = pGlobals;
 	unsigned int n = 0;
+
 // Populate the list of function pointers
 #define F(x)  assert(g->Functions[n] != 0); (DWORD&)zptr::x    = g->Functions[n++];
 #define F0(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##0 = g->Functions[n++];
