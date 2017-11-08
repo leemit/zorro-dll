@@ -15,11 +15,3 @@
 #if defined(ZORRO_CPP) && !defined(ZORRO_FORCE_LITEC)
 #define ZORRO_CPP_PURE
 #endif
-
-#ifdef ZORRO_NAMESPACE
-#define ZORRO_NAMESPACE_OPEN namespace ZORRO_NAMESPACE {
-#define ZORRO_NAMESPACE_CLOSE };
-#else
-#define ZORRO_NAMESPACE_OPEN
-#define ZORRO_NAMESPACE_CLOSE
-#endif

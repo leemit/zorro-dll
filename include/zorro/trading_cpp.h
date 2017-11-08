@@ -4,8 +4,6 @@
 #include "bitfield.h"
 #include "enum.h"
 
-ZORRO_NAMESPACE_OPEN
-
 ZORRO_OPEN_ENUM(ETradeFlag)
 	SHORT        = (1<<0),  // short position
 	BID          = (1<<0),
@@ -515,8 +513,6 @@ inline var ve(mat pMatrix, int n)
 {
 	return *(pMatrix->dat + n);
 }
-
-ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_OPEN_ENUM
 #undef ZORRO_OPEN_ENUM_TYPE

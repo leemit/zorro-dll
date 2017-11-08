@@ -28,13 +28,11 @@
 
 #pragma pack(pop)
 
-ZORRO_NAMESPACE_OPEN
 #ifdef ZORRO_IMPL
 GLOBALS* g = 0;
 #else
 extern GLOBALS* g;
 #endif
-ZORRO_NAMESPACE_CLOSE
 
 #include "zorro/functions_cpp.h"
 
@@ -44,12 +42,9 @@ ZORRO_NAMESPACE_CLOSE
 #include "zorro/litec/variables.h"
 #endif
 
-ZORRO_NAMESPACE_OPEN
 #include "zorro/litec/default.h"
-ZORRO_NAMESPACE_CLOSE
 
 #ifdef ZORRO_USE_EVENT_CLASS
-ZORRO_NAMESPACE_OPEN
 class CZorroEvents
 {
 private:
@@ -70,5 +65,4 @@ public:
 
 	static CZorroEvents getInstance() { static CZorroEvents instance; return instance; }
 };
-ZORRO_NAMESPACE_CLOSE
 #endif // ZORRO_USE_EVENT_CLASS

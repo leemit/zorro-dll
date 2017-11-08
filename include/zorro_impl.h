@@ -28,8 +28,6 @@ BOOL WINAPI DllMain(
 
 ////////////////////////////////////////////////////////
 
-ZORRO_NAMESPACE_OPEN
-
 ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 {
 	assert(pGlobals != 0);
@@ -115,7 +113,5 @@ ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, cvars 
 }
 
 #endif // ZORRO_USE_EVENT_CLASS
-
-ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_IMPL

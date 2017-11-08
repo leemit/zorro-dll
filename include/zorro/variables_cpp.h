@@ -3,8 +3,6 @@
 
 #include "zorro/var.h"
 
-ZORRO_NAMESPACE_OPEN
-
 #define long_trades     forTrade(4); g->bFor; forTrade(5) // asset/algo trades only
 #define short_trades    forTrade(12); g->bFor; forTrade(13) // asset/algo trades only
 #define current_trades  forTrade(20); g->bFor; forTrade(21) // asset/algo trades only
@@ -59,8 +57,6 @@ void ZorroForceCompileVariableMethods()
 #include "zorro/variables_list.h"
 }
 #endif
-
-ZORRO_NAMESPACE_CLOSE
 
 #undef ZORRO_BUILD_VARIABLE_TYPE
 #undef ZORRO_BUILD_EXPRESSION_TYPE

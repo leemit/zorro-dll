@@ -3,8 +3,6 @@
 
 #include <stdarg.h>
 
-ZORRO_NAMESPACE_OPEN
-
 ///////////////////////////////////////////////////////
 // Declare or define function pointers
 #define F(x)  (ZORRO_CALL* x)
@@ -107,5 +105,3 @@ inline void reset(EPlotMode* mode,int flag) {
 	zptr::reset1(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
 }
 #endif // ZORRO_CPP_PURE
-
-ZORRO_NAMESPACE_CLOSE
