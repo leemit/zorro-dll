@@ -57,13 +57,13 @@ struct SEnumBaseDef
 #endif
 
 #define ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE(enumType, intType) \
-	inline intType operator & ( intType left, enumType right )  { return left & static_cast<intType>( right ); } \
-	inline intType operator | ( intType left, enumType right )  { return left & static_cast<intType>( right ); } \
-	inline intType operator & ( enumType left, intType right )  { return static_cast<intType>( left ) & right; } \
-	inline intType operator | ( enumType left, intType right )  { return static_cast<intType>( left ) & right; } \
-	inline intType operator & ( enumType left, enumType right ) { return static_cast<intType>( left ) & static_cast<intType>( right ); } \
-	inline intType operator | ( enumType left, enumType right ) { return static_cast<intType>( left ) | static_cast<intType>( right ); } \
-	inline intType operator ~ ( enumType value )                { return ~static_cast<intType>( value ); } \
+	inline enumType operator & ( intType left, enumType right )  { return enumType(left & static_cast<intType>( right )); } \
+	inline enumType operator | ( intType left, enumType right )  { return enumType(left & static_cast<intType>( right )); } \
+	inline enumType operator & ( enumType left, intType right )  { return enumType(static_cast<intType>( left ) & right); } \
+	inline enumType operator | ( enumType left, intType right )  { return enumType(static_cast<intType>( left ) & right); } \
+	inline enumType operator & ( enumType left, enumType right ) { return enumType(static_cast<intType>( left ) & static_cast<intType>( right )); } \
+	inline enumType operator | ( enumType left, enumType right ) { return enumType(static_cast<intType>( left ) | static_cast<intType>( right )); } \
+	inline enumType operator ~ ( enumType value )                { return enumType(~static_cast<intType>( value )); } \
 
 #define ZORRO_BUILD_ENUM_COMP_OPERATORS_WITH_TYPE(enumType, intType) \
 	inline bool operator <  ( enumType left, intType right ) { return static_cast<intType>( left ) <  right;                         } \
