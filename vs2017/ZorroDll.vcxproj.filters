@@ -33,9 +33,6 @@
     <ClInclude Include="..\include\zorro\litec\variables.h">
       <Filter>include\zorro\litec</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\zorro\bitfield.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\zorro\enum.h">
       <Filter>include\zorro</Filter>
     </ClInclude>

@@ -47,7 +47,6 @@
   <PropertyGroup />
   <ItemGroup>
     <ClInclude Include="..\include\zorro.h" />
-    <ClInclude Include="..\include\zorro\bitfield.h" />
     <ClInclude Include="..\include\zorro\enum.h" />
     <ClInclude Include="..\include\zorro\functions_cpp.h" />
     <ClInclude Include="..\include\zorro\litec\default.h" />
