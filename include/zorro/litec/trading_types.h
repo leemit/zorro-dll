@@ -29,6 +29,7 @@ typedef int EAdviseMode;
 typedef int ENeuralMode;
 typedef int EPredictionType;
 typedef int EHistoryMode;
+typedef int EDownloadMode;
 typedef int EAssetType;
 typedef int EDetrendMode;
 typedef int ERandomizeMode;

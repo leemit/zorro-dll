@@ -29,7 +29,7 @@
 #endif
 
 // system functions
-C R(int)  F(print)    A((EPrintMode to,string format,...))  D({ ZORRO_VA_RET_CALL(valist, format, int, DF(print)(to, format,valist)) })
+C R(int)  F(print)    A((EPrintMode to,string format,...))  D({ ZORRO_VA_RET_CALL(valist, format, int, DF(print)(to,format,valist)) })
 C R(int)  F(msg)      A((string format,...))                D({ ZORRO_VA_RET_CALL(valist, format, int, DF(msg)  (format,valist)) })
 C R(HWND) F(window)   A((string title))                     D({ return DF(window)  (title); })
 C R(void) F(keys)     A((string format,...))                D({ ZORRO_VA_CALL(valist, format, DF(keys) (format,valist)) })
@@ -220,7 +220,7 @@ C R(int)    F(ftp_status)    A(())                                              
 C R(int)    F(ftp_log)       A((int mode))                                               D({ return DF(ftp_log)      (mode); })
 
 // dataset
-C R(int)    F(dataDownload) A((string code,int mode,int period))                           D({ return DF(dataDownload)(code,mode,period); })
+C R(int)    F(dataDownload) A((string code,EDownloadMode mode,int period))                 D({ return DF(dataDownload)(code,mode,period); })
 C R(int)    F0(dataParse)   A((int handle,string format,string fileName))                  D({ return DF0(dataParse)  (handle,format,fileName); })
 C R(void)   F(dataSave)     A((int handle,string fileName,I(int start,0),I(int num,0) VA)) D({        DF(dataSave)    (handle,fileName,start,num); })
 C R(void)   F(dataSaveCSV)  A((int handle,string format,string name,I(int start,0),I(int num,0) VA))
