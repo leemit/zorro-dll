@@ -10,12 +10,15 @@
 
 /////////////////////////////////////////////////////////////////////
 // overloaded functions
+
 inline var round(var val,var step) {
 	return roundto(val,step);
 }
+#ifndef ZORRO_CPP
 inline var round(var val) {
 	return roundto(val,1.);
 }
+#endif
 inline string strdate(string format) {
 	return strdate(format,0);
 }
