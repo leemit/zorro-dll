@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef ZORRO_TRADING_CPP_H_
+#define ZORRO_TRADING_CPP_H_
 
 #include "enum.h"
 
@@ -510,3 +511,5 @@ inline var ve(mat pMatrix, int n)
 #undef ZORRO_BUILD_ENUM_BIT_OPERATORS_WITH_TYPE
 #undef ZORRO_BUILD_ENUM_COMP_OPERATORS
 #undef ZORRO_BUILD_ENUM_COMP_OPERATORS_WITH_TYPE
+
+#endif // ZORRO_TRADING_CPP_H_

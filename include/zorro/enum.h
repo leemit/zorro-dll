@@ -1,7 +1,8 @@
 
-#pragma once
+#ifndef ZORRO_ENUM_H_
+#define ZORRO_ENUM_H_
 
-#include "zorro_common.h"
+#include <zorro/common.h>
 
 #if ZORRO_CPP >= 11
 #include <type_traits>
@@ -84,3 +85,5 @@ struct SEnumBaseDef
 
 #define ZORRO_BUILD_ENUM_COMP_OPERATORS(enumType) \
         ZORRO_BUILD_ENUM_COMP_OPERATORS_WITH_TYPE(enumType, ZORRO_ENUM_UNDERLYING_TYPE(enumType))
+
+#endif // ZORRO_ENUM_H_

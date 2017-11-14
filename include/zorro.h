@@ -1,9 +1,11 @@
 ///////////////////////////////////////////////////////
 // Header for DLL-based Zorro strategies
 ///////////////////////////////////////////////////////
-#pragma once
 
-#include "zorro/zorro_common.h"
+#ifndef ZORRO_H_
+#define ZORRO_H_
+
+#include "zorro/common.h"
 
 #include <wtypes.h>
 #include <Windows.h>
@@ -35,7 +37,9 @@ extern GLOBALS* g;
 #include "zorro/litec/variables.h"
 #endif
 
+#ifdef ZORRO_CPP
 #include "zorro/litec/default.h"
+#endif
 
 #ifdef ZORRO_USE_EVENT_CLASS
 class CZorroEvents
@@ -59,3 +63,5 @@ public:
 	static CZorroEvents getInstance() { static CZorroEvents instance; return instance; }
 };
 #endif // ZORRO_USE_EVENT_CLASS
+
+#endif // ZORRO_H_

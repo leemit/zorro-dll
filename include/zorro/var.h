@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef ZORRO_VAR_H_
+#define ZORRO_VAR_H_
 
 namespace z
 {
@@ -63,3 +64,5 @@ struct SVariableBaseDef
 	typedef VariableType TType;
 };
 } // namespace z
+
+#endif ZORRO_VAR_H_

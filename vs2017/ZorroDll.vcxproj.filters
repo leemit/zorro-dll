@@ -51,14 +51,14 @@
     <ClInclude Include="..\include\zorro\variables_list.h">
       <Filter>include\zorro</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\zorro\zorro_common.h">
-      <Filter>include\zorro</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\zorro.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\zorro_impl.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\zorro\common.h">
+      <Filter>include\zorro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

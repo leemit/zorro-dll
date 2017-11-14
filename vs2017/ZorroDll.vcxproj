@@ -60,7 +60,7 @@
     <ClInclude Include="..\include\zorro\var.h" />
     <ClInclude Include="..\include\zorro\variables_cpp.h" />
     <ClInclude Include="..\include\zorro\variables_list.h" />
-    <ClInclude Include="..\include\zorro\zorro_common.h" />
+    <ClInclude Include="..\include\zorro\common.h" />
     <ClInclude Include="..\include\zorro_impl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

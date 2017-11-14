@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef ZORRO_VARIABLES_CPP_H_
+#define ZORRO_VARIABLES_CPP_H_
 
 #include "zorro/var.h"
 
@@ -60,3 +61,5 @@ void ZorroForceCompileVariableMethods()
 
 #undef ZORRO_BUILD_VARIABLE_TYPE
 #undef ZORRO_BUILD_EXPRESSION_TYPE
+
+#endif // ZORRO_VARIABLES_CPP_H_

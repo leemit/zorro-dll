@@ -2,7 +2,9 @@
 // Common code for DLL-based Zorro strategies
 // Include this file once in a cpp file
 ///////////////////////////////////////////////////////
-#pragma once
+
+#ifndef ZORRO_IMPL_H_
+#define ZORRO_IMPL_H_
 
 #define ZORRO_IMPL
 #include "zorro.h"
@@ -37,11 +39,11 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 	unsigned int n = 0;
 
 // Populate the list of function pointers
-#define F(x)  assert(g->Functions[n] != 0); (DWORD&)zptr::x    = g->Functions[n++];
-#define F0(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##0 = g->Functions[n++];
-#define F1(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##1 = g->Functions[n++];
-#define F2(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##2 = g->Functions[n++];
-#define F3(x) assert(g->Functions[n] != 0); (DWORD&)zptr::x##3 = g->Functions[n++];
+#define F(x)  assert(g->Functions[n] != 0); (DWORD&) ZORRO_NAMESPACE x    = g->Functions[n++];
+#define F0(x) assert(g->Functions[n] != 0); (DWORD&) ZORRO_NAMESPACE x##0 = g->Functions[n++];
+#define F1(x) assert(g->Functions[n] != 0); (DWORD&) ZORRO_NAMESPACE x##1 = g->Functions[n++];
+#define F2(x) assert(g->Functions[n] != 0); (DWORD&) ZORRO_NAMESPACE x##2 = g->Functions[n++];
+#define F3(x) assert(g->Functions[n] != 0); (DWORD&) ZORRO_NAMESPACE x##3 = g->Functions[n++];
 #define C
 #define R(x)
 #define A(x)
@@ -115,3 +117,5 @@ ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, cvars 
 #endif // ZORRO_USE_EVENT_CLASS
 
 #undef ZORRO_IMPL
+
+#endif // ZORRO_IMPL_H_
