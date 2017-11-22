@@ -2,7 +2,7 @@
 #ifndef ZORRO_ENUM_H_
 #define ZORRO_ENUM_H_
 
-#include <zorro/common.h>
+#include "common.h"
 
 #if ZORRO_CPP >= 11
 #include <type_traits>

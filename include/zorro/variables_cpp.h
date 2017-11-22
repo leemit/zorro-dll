@@ -55,7 +55,7 @@ void ZorroForceCompileVariableMethods()
 #define ZORRO_BUILD_VARIABLE(type, name, link) name.get();
 #define ZORRO_BUILD_EXPRESSION(type, name, link) name.get();
 #define ZORRO_BUILD_VARPOINTER(type, name, link) name.get();
-#include "zorro/variables_list.h"
+#include "variables_list.h"
 }
 #endif
 
