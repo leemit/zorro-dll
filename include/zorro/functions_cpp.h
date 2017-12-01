@@ -52,6 +52,9 @@ ZORRO_NAMESPACE_CLOSE
 ///////////////////////////////////////////////////////
 // Special function overloads
 
+#pragma warning(push)
+#pragma warning(disable: 4311 4302)
+
 template <typename FUNCTION> 
 inline TRADE* enterLong(FUNCTION f=0,var v0=0,var v1=0,var v2=0,var v3=0,var v4=0,var v5=0,var v6=0,var v7=0) {
 	return ZORRO_NAMESPACE enterLong0(reinterpret_cast<int>(f),v0,v1,v2,v3,v4,v5,v6,v7);
@@ -109,6 +112,9 @@ inline void reset(EPlotMode* mode,int flag) {
 	ZORRO_NAMESPACE reset1(reinterpret_cast<ZORRO_ENUM_UNDERLYING_TYPE(EPlotMode)*>(mode),flag);
 }
 #endif // ZORRO_CPP_PURE
+
+#pragma warning(pop)
+
 #endif // ZORRO_CPP
 
 #endif // ZORRO_FUNCTIONS_CPP_H_
