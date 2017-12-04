@@ -4,11 +4,46 @@
 
 #include "zorro/var.h"
 
-#define long_trades     forTrade(4); g->bFor; forTrade(5) // asset/algo trades only
-#define short_trades    forTrade(12); g->bFor; forTrade(13) // asset/algo trades only
-#define current_trades  forTrade(20); g->bFor; forTrade(21) // asset/algo trades only
-#define open_trades     forTrade(0); g->bFor; forTrade(1) // open trades only
-#define all_trades      forTrade(2); g->bFor; forTrade(3) // all trades
+#define long_trades    forTrade(4);  g->bFor; forTrade(5)  // asset/algo trades only
+#define short_trades   forTrade(12); g->bFor; forTrade(13) // asset/algo trades only
+#define current_trades forTrade(20); g->bFor; forTrade(21) // asset/algo trades only
+#define open_trades    forTrade(0);  g->bFor; forTrade(1)  // open trades only
+#define all_trades     forTrade(2);  g->bFor; forTrade(3)  // all trades
+
+template <typename Functor>
+inline void forLongTrades(Functor functor) {
+	for (long_trades) {
+		functor();
+	}
+}
+
+template <typename Functor>
+inline void forShortTrades(Functor functor) {
+	for (short_trades) {
+		functor();
+	}
+}
+
+template <typename Functor>
+inline void forCurrentTrades(Functor functor) {
+	for (current_trades) {
+		functor();
+	}
+}
+
+template <typename Functor>
+inline void forOpenTrades(Functor functor) {
+	for (open_trades) {
+		functor();
+	}
+}
+
+template <typename Functor>
+inline void forAllTrades(Functor functor) {
+	for (all_trades) {
+		functor();
+	}
+}
 
 inline bool TradeFlag(ETradeFlag flag) { return ((g->tr->flags & flag) != 0); }
 inline bool TradeIs  (ETradeFlag flag) { return ((g->tr->flags & flag) == flag); }
