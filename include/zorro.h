@@ -23,11 +23,7 @@
 
 #pragma pack(pop)
 
-#ifdef ZORRO_IMPL
-GLOBALS* g = 0;
-#else
-extern GLOBALS* g;
-#endif
+ZORRO_DEFINE_GLOBAL_A(GLOBALS*, g, =0)
 
 #include "zorro/functions_cpp.h"
 
@@ -45,10 +41,12 @@ extern GLOBALS* g;
 class CZorroEvents
 {
 private:
-	CZorroEvents() {};
 	CZorroEvents(const CZorroEvents&) {};
+	CZorroEvents& operator=(const CZorroEvents&) {}
 
 public:
+	CZorroEvents() {};
+
 	void main();
 	void run();
 	void tick();
@@ -59,9 +57,10 @@ public:
 	EOrderResult order(EOrderAction type);
 	var neural(ENeuralMode mode, int model, int numSignals, const void* pData);
 	EBarAction bar(cvars open, cvars high, cvars low, cvars close, cvars price, DATE start, DATE time);
-
-	static CZorroEvents getInstance() { static CZorroEvents instance; return instance; }
 };
+ZORRO_NAMESPACE_OPEN
+ZORRO_DEFINE_GLOBAL(CZorroEvents, g_zevents)
+ZORRO_NAMESPACE_CLOSE
 #endif // ZORRO_USE_EVENT_CLASS
 
 #endif // ZORRO_H_

@@ -10,56 +10,53 @@
 #define open_trades     forTrade(0); g->bFor; forTrade(1) // open trades only
 #define all_trades      forTrade(2); g->bFor; forTrade(3) // all trades
 
-#define ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
-struct S##name##Variable : ::z::SVariableBaseDef<type> { \
-	inline type& get() const { return (link); } \
-	inline void set(const type& value) { (link) = value; } \
-};
-#define ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-struct S##name##Expression : ::z::SVariableBaseDef<type> { \
-	inline type get() const { return (link); } \
-};
-
-#ifdef ZORRO_IMPL
-#define ZORRO_BUILD_VARIABLE(type, name, link) \
-	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
-	::z::CVariable<S##name##Variable>& name = ::z::CVariable<S##name##Variable>::getInstance();
-#define ZORRO_BUILD_EXPRESSION(type, name, link) \
-	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-	::z::CExpression<S##name##Expression>& name = ::z::CExpression<S##name##Expression>::getInstance();
-#define ZORRO_BUILD_VARPOINTER(type, name, link) \
-	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-	::z::CVarPointer<S##name##Expression>& name = ::z::CVarPointer<S##name##Expression>::getInstance();
-#else
-#define ZORRO_BUILD_VARIABLE(type, name, link) \
-	ZORRO_BUILD_VARIABLE_TYPE(type, name, link) \
-	extern ::z::CVariable<S##name##Variable>& name;
-#define ZORRO_BUILD_EXPRESSION(type, name, link) \
-	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-	extern ::z::CExpression<S##name##Expression>& name;
-#define ZORRO_BUILD_VARPOINTER(type, name, link) \
-	ZORRO_BUILD_EXPRESSION_TYPE(type, name, link) \
-	extern ::z::CVarPointer<S##name##Expression>& name;
-#endif
-
 inline bool TradeFlag(ETradeFlag flag) { return ((g->tr->flags & flag) != 0); }
 inline bool TradeIs  (ETradeFlag flag) { return ((g->tr->flags & flag) == flag); }
+
+#define ZORRO_VARIABLE_TYPE(type, name, link) \
+namespace z { \
+struct S##name##Variable : SVariableBaseDef<type> { \
+	inline type& get() const { return (link); } \
+	inline void set(const type& value) { (link) = value; } \
+}; \
+}
+
+#define ZORRO_EXPRESSION_TYPE(type, name, link) \
+namespace z { \
+struct S##name##Expression : SVariableBaseDef<type> { \
+	inline type get() const { return (link); } \
+}; \
+}
+
+#define ZORRO_VARIABLE(type, name, link) \
+	ZORRO_VARIABLE_TYPE(type, name, link) \
+	ZORRO_DEFINE_GLOBAL(::z::CVariable<::z::S##name##Variable>, name)
+
+#define ZORRO_EXPRESSION(type, name, link) \
+	ZORRO_EXPRESSION_TYPE(type, name, link) \
+	ZORRO_DEFINE_GLOBAL(::z::CExpression<::z::S##name##Expression>, name)
+
+#define ZORRO_VARPOINTER(type, name, link) \
+	ZORRO_EXPRESSION_TYPE(type, name, link) \
+	ZORRO_DEFINE_GLOBAL(::z::CVarPointer<::z::S##name##Expression>, name)
 
 #include "variables_list.h"
 
 #if defined ZORRO_IMPL && defined _DEBUG
-void ZorroForceCompileVariableMethods()
+namespace z {
+void ForceCompileVariableMethods()
 {
 	// This piece just forces the compiler to not optimize away the variable get method,
 	// which is needed to inspect the variable if we want to see it in a debugger's watch
-#define ZORRO_BUILD_VARIABLE(type, name, link) name.get();
-#define ZORRO_BUILD_EXPRESSION(type, name, link) name.get();
-#define ZORRO_BUILD_VARPOINTER(type, name, link) name.get();
+#define ZORRO_VARIABLE(type, name, link) name.get();
+#define ZORRO_EXPRESSION(type, name, link) name.get();
+#define ZORRO_VARPOINTER(type, name, link) name.get();
 #include "variables_list.h"
 }
+} // namespace z
 #endif
 
-#undef ZORRO_BUILD_VARIABLE_TYPE
-#undef ZORRO_BUILD_EXPRESSION_TYPE
+#undef ZORRO_VARIABLE_TYPE
+#undef ZORRO_EXPRESSION_TYPE
 
 #endif // ZORRO_VARIABLES_CPP_H_

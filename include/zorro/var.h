@@ -7,55 +7,49 @@ namespace z
 template <class VariableDef>
 class CVariable : public VariableDef
 {
-	typedef CVariable<VariableDef> TThis;
 	typedef VariableDef TVariableDef;
 
-	inline CVariable() {}
-	inline CVariable(const TThis&) {}
-	inline TThis& operator=(const TThis&) {}
+	inline CVariable(const CVariable&) {}
+	inline CVariable& operator=(const CVariable&) {}
 
 public:
 	typedef typename VariableDef::TType TType;
 
+	inline CVariable() {}
 	inline operator TType&() const { return TVariableDef::get(); }
 	inline TType* operator&() const { return &TVariableDef::get(); }
-	inline TThis& operator=(const TType& value) { TVariableDef::set(value); return *this; }
-	static TThis& getInstance() { static TThis instance; return instance; }
+	inline CVariable& operator=(const TType& value) { TVariableDef::set(value); return *this; }
 };
 
 template <class VariableDef>
 class CExpression : public VariableDef
 {
-	typedef CExpression<VariableDef> TThis;
 	typedef VariableDef TVariableDef;
 
-	inline CExpression() {}
-	inline CExpression(const TThis&) {}
-	inline TThis& operator=(const TThis&) {}
+	inline CExpression(const CExpression&) {}
+	inline CExpression& operator=(const CExpression&) {}
 
 public:
 	typedef typename VariableDef::TType TType;
 
+	inline CExpression() {}
 	inline operator TType() const { return TVariableDef::get(); }
-	static TThis& getInstance() { static TThis instance; return instance; }
 };
 
 template <class VariableDef>
 class CVarPointer : public VariableDef
 {
-	typedef CVarPointer<VariableDef> TThis;
 	typedef VariableDef TVariableDef;
 
-	inline CVarPointer() {}
-	inline CVarPointer(const TThis&) {}
-	inline TThis& operator=(const TThis&) {}
+	inline CVarPointer(const CVarPointer&) {}
+	inline CVarPointer& operator=(const CVarPointer&) {}
 
 public:
 	typedef typename VariableDef::TType TType;
 
-	inline TType operator ->() const { return TVariableDef::get(); }
+	inline CVarPointer() {}
+	inline TType operator->() const { return TVariableDef::get(); }
 	inline operator TType() const { return TVariableDef::get(); }
-	static TThis& getInstance() { static TThis instance; return instance; }
 };
 
 template<typename VariableType>

@@ -66,52 +66,52 @@ ZORRO_EXPORT int ZORRO_CALL zorro(GLOBALS* pGlobals)
 
 ZORRO_EXPORT void ZORRO_CALL main()
 {
-	CZorroEvents::getInstance().main();
+	ZORRO_NAMESPACE g_zevents.main();
 }
 
 ZORRO_EXPORT void ZORRO_CALL run()
 {
-	CZorroEvents::getInstance().run();
+	ZORRO_NAMESPACE g_zevents.run();
 }
 
 ZORRO_EXPORT void ZORRO_CALL tick()
 {
-	CZorroEvents::getInstance().tick();
+	ZORRO_NAMESPACE g_zevents.tick();
 }
 
 ZORRO_EXPORT void ZORRO_CALL tock()
 {
-	CZorroEvents::getInstance().tock();
+	ZORRO_NAMESPACE g_zevents.tock();
 }
 
 ZORRO_EXPORT void ZORRO_CALL click(int row, int col)
 {
-	CZorroEvents::getInstance().click(row, col);
+	ZORRO_NAMESPACE g_zevents.click(row, col);
 }
 
 ZORRO_EXPORT void ZORRO_CALL evaluate(const PERFORMANCE* pPerformance)
 {
-	CZorroEvents::getInstance().evaluate(pPerformance);
+	ZORRO_NAMESPACE g_zevents.evaluate(pPerformance);
 }
 
 ZORRO_EXPORT var ZORRO_CALL objective()
 {
-	return CZorroEvents::getInstance().objective();
+	return ZORRO_NAMESPACE g_zevents.objective();
 }
 
 ZORRO_EXPORT EOrderResult ZORRO_CALL order(EOrderAction type)
 {
-	return CZorroEvents::getInstance().order(type);
+	return ZORRO_NAMESPACE g_zevents.order(type);
 }
 
 ZORRO_EXPORT var ZORRO_CALL neural(ENeuralMode mode, int model, int numSignals, const void* pData)
 {
-	return CZorroEvents::getInstance().neural(mode, model, numSignals, pData);
+	return ZORRO_NAMESPACE g_zevents.neural(mode, model, numSignals, pData);
 }
 
 ZORRO_EXPORT EBarAction ZORRO_CALL bar(cvars open, cvars high, cvars low, cvars close, cvars price, DATE start, DATE time)
 {
-	return CZorroEvents::getInstance().bar(open, high, low, close, price, start, time);
+	return ZORRO_NAMESPACE g_zevents.bar(open, high, low, close, price, start, time);
 }
 
 #endif // ZORRO_USE_EVENT_CLASS

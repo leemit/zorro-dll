@@ -5,23 +5,35 @@
 #include <stdarg.h>
 
 ///////////////////////////////////////////////////////
-// Declare or define function pointers
-#define F(x)  (ZORRO_CALL* x)
-#define F0(x) (ZORRO_CALL* x##0)
-#define F1(x) (ZORRO_CALL* x##1)
-#define F2(x) (ZORRO_CALL* x##2)
-#define F3(x) (ZORRO_CALL* x##3)
+// Typedef function pointers
+#define F(x)  (ZORRO_CALL* x##_t)
+#define F0(x) (ZORRO_CALL* x##0_t)
+#define F1(x) (ZORRO_CALL* x##1_t)
+#define F2(x) (ZORRO_CALL* x##2_t)
+#define F3(x) (ZORRO_CALL* x##3_t)
 #define R(x) x
 #define A(x) x
 #define I(param,value) param
 #define VA ,...
-#ifdef ZORRO_IMPL
-#define C
-#define D(x) = 0;
-#else
-#define C extern
+#define C typedef
 #define D(x) ;
-#endif
+ZORRO_NAMESPACE_OPEN
+#include "litec/functions_list.h"
+ZORRO_NAMESPACE_CLOSE
+
+///////////////////////////////////////////////////////
+// Define global function pointers
+#define F(x)  ZORRO_DEFINE_GLOBAL_A(x##_t , x   , =0)
+#define F0(x) ZORRO_DEFINE_GLOBAL_A(x##0_t, x##0, =0)
+#define F1(x) ZORRO_DEFINE_GLOBAL_A(x##1_t, x##1, =0)
+#define F2(x) ZORRO_DEFINE_GLOBAL_A(x##2_t, x##2, =0)
+#define F3(x) ZORRO_DEFINE_GLOBAL_A(x##3_t, x##3, =0)
+#define R(x) 
+#define A(x) 
+#define I(param,value) 
+#define VA 
+#define C 
+#define D(x) ;
 ZORRO_NAMESPACE_OPEN
 #include "litec/functions_list.h"
 ZORRO_NAMESPACE_CLOSE
@@ -30,7 +42,6 @@ ZORRO_NAMESPACE_CLOSE
 #ifdef ZORRO_CPP
 ///////////////////////////////////////////////////////
 // Define inline functions to wrap the function pointers
-
 #define F(x) x
 #define F0(x) x
 #define F1(x) x
