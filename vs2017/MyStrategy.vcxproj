@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\MyStrategy.cpp" />
-    <ClCompile Include="SomeOtherSource.cpp" />
+    <ClCompile Include="..\src\SomeOtherSource.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

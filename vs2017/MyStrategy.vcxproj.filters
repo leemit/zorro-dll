@@ -9,7 +9,7 @@
     <ClCompile Include="..\src\MyStrategy.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="SomeOtherSource.cpp">
+    <ClCompile Include="..\src\SomeOtherSource.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
