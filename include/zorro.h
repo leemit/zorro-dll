@@ -7,6 +7,9 @@
 
 #include "zorro/common.h"
 
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
 #include <wtypes.h>
 #include <Windows.h>
 #include <stdio.h>
